@@ -1,6 +1,8 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
-module.exports = {
+const createConfig = isDevelopment => ({
+  target: isDevelopment ? 'web' : 'browserslist',
   module: {
     rules: [
       {
@@ -8,6 +10,11 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            plugins: [
+              isDevelopment && require.resolve('react-refresh/babel'),
+            ].filter(Boolean),
+          },
         },
       },
       {
@@ -24,5 +31,8 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: './src/index.html',
     }),
-  ],
-};
+    isDevelopment && new ReactRefreshWebpackPlugin(),
+  ].filter(Boolean),
+})
+
+module.exports = (env, argv) => createConfig(argv.mode === 'development');
