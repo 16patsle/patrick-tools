@@ -12,3 +12,11 @@ test('handles simple binary number', t => {
 test('handles a longer binary number', t => {
   t.is(convertBinaryToDecimal('1110111010'), 512 + 256 + 128 + 32 + 16 + 8 + 2)
 })
+
+test('handles binary number using two\'s complement', t => {
+  t.is(convertBinaryToDecimal('01101100', true), 108)
+})
+
+test('handles negative binary number using two\'s complement', t => {
+  t.is(convertBinaryToDecimal('10010100', true), -108)
+})
