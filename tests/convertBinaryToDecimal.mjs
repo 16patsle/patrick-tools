@@ -1,5 +1,5 @@
 import test from 'ava'
-import convertBinaryToDecimal from '../src/utils/convertBinaryToDecimal.js'
+import convertBinaryToDecimal from '../src/utils/convertBinaryToDecimal.mjs'
 
 test('only accepts binary numbers written as strings', t => {
   t.is(convertBinaryToDecimal('11a'), false)
@@ -13,10 +13,10 @@ test('handles a longer binary number', t => {
   t.is(convertBinaryToDecimal('1110111010'), 512 + 256 + 128 + 32 + 16 + 8 + 2)
 })
 
-test('handles binary number using two\'s complement', t => {
+test("handles binary number using two's complement", t => {
   t.is(convertBinaryToDecimal('01101100', true), 108)
 })
 
-test('handles negative binary number using two\'s complement', t => {
+test("handles negative binary number using two's complement", t => {
   t.is(convertBinaryToDecimal('10010100', true), -108)
 })

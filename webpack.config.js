@@ -6,7 +6,7 @@ const createConfig = isDevelopment => ({
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|mjs)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',

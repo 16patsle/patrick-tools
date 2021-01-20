@@ -15,8 +15,7 @@ const getDecimal = digits => {
 /**
  * @param {string[]} digits
  */
-const getComplement = 
- digits => digits.map(val => val == '1' ? '0' : '1')
+const getComplement = digits => digits.map(val => (val == '1' ? '0' : '1'))
 
 /**
  * Convert binary to decimal number
