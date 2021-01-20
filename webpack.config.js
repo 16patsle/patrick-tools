@@ -1,5 +1,5 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const createConfig = isDevelopment => ({
   target: isDevelopment ? 'web' : 'browserslist',
@@ -19,11 +19,7 @@ const createConfig = isDevelopment => ({
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'postcss-loader',
-        ],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
     ],
   },
@@ -35,4 +31,4 @@ const createConfig = isDevelopment => ({
   ].filter(Boolean),
 })
 
-module.exports = (env, argv) => createConfig(argv.mode === 'development');
+module.exports = (env, argv) => createConfig(argv.mode === 'development')

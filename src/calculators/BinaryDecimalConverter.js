@@ -1,9 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 const BinaryDecimalConverter = () => {
-  return (
-      <h2>Convert to binary</h2>
-  );
-};
+  return <h2>Convert to binary</h2>
+}
 
-export default BinaryDecimalConverter;
+export default BinaryDecimalConverter
