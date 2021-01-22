@@ -23,3 +23,7 @@ test("handles convert to binary number using two's complement", t => {
 test("handles convert to negative binary number using two's complement", t => {
   t.is(convertDecimalToBinary('-108', true), '10010100')
 })
+
+test('handles simple negative number to binary with sign', t => {
+  t.is(convertDecimalToBinary('-108'), '-1101100')
+})

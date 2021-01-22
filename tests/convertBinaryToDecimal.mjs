@@ -5,6 +5,10 @@ test('only accepts binary numbers written as strings', t => {
   t.is(convertBinaryToDecimal('11a'), false)
 })
 
+test("does not accept minus sign in two's complement mode", t => {
+  t.is(convertBinaryToDecimal('-11', true), false)
+})
+
 test('handles simple binary number', t => {
   t.is(convertBinaryToDecimal('110'), 6)
 })
@@ -19,4 +23,8 @@ test("handles binary number using two's complement", t => {
 
 test("handles negative binary number using two's complement", t => {
   t.is(convertBinaryToDecimal('10010100', true), -108)
+})
+
+test('handles negative binary number using minus sign', t => {
+  t.is(convertBinaryToDecimal('-1101100'), -108)
 })
