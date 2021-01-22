@@ -1,28 +1,12 @@
-/**
- * @param {string[]} digits
- */
-const getDecimal = digits => {
-  let sum = 0
-  let factor = 1
-
-  for (let i = digits.length - 1; i >= 0; i--) {
-    sum += Number(digits[i]) * factor
-    factor *= 2
-  }
-  return sum
-}
-
-/**
- * @param {string[]} digits
- */
-const getComplement = digits => digits.map(val => (val == '1' ? '0' : '1'))
+import getDecimalFromNegativeBinary from "./getDecimalFromNegativeBinary.mjs"
+import getDecimal from './getDecimal.mjs'
 
 /**
  * Convert binary to decimal number
  * @param {string} binaryStr - The string representation of the binary number.
  * @param {boolean} twosComplement - Whether to treat the first bit as a sign and use two's complement.
  */
-export default function convertBinartToDecimal(
+export default function convertBinaryToDecimal(
   binaryStr,
   twosComplement = false
 ) {
@@ -33,10 +17,9 @@ export default function convertBinartToDecimal(
   const digits = binaryStr.split('')
 
   if (twosComplement) {
-    const sign = digits.shift()
-    const k = getComplement(digits)
-    if (sign === '1') {
-      return -(getDecimal(k) + 1)
+    const negative = getDecimalFromNegativeBinary(digits)
+    if (negative !== false) {
+      return negative
     }
   }
 
