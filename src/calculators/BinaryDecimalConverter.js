@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import convertBinaryToDecimal from '../utils/convertBinaryToDecimal.mjs';
+import convertDecimalToBinary from '../utils/convertDecimalToBinary.mjs';
 
 const BinaryDecimalConverter = () => {
   const [binary, setBinary] = useState('')
@@ -11,6 +12,13 @@ const BinaryDecimalConverter = () => {
 
     setBinary(value);
     setDecimal(convertBinaryToDecimal(value) || '')
+  }
+
+  const updateDecimal = e => {
+    const value = e.target.value
+
+    setDecimal(value);
+    setBinary(convertDecimalToBinary(value) || '')
   }
 
   return <div>
@@ -26,7 +34,7 @@ const BinaryDecimalConverter = () => {
     <label className="block m-2">
       Decimal:
       
-      <input type="number" value={decimal} onChange={e=>setDecimal(e.target.value)} className="shadow-md bg-gray-50 border-gray-200 border-2 rounded-md mx-2 p-1" />
+      <input type="number" value={decimal} onChange={updateDecimal} className="shadow-md bg-gray-50 border-gray-200 border-2 rounded-md mx-2 p-1" />
     </label>
   </div>
 }
