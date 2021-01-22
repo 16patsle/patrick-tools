@@ -26,7 +26,7 @@ const BinaryDecimalConverter = () => {
     <label className="block m-2">
       Binary: 
       <input type="text" pattern="[01]+" value={binary} onChange={updateBinary} onKeyPress={e=>{
-        if(e.key !== "1" && e.key !== "0") {
+        if(e.key !== "1" && e.key !== "0" && e.key !== "-") {
           e.preventDefault()
         }
       }} className="shadow-md bg-gray-50 border-gray-200 border-2 rounded-md mx-2 p-1" />
@@ -34,7 +34,11 @@ const BinaryDecimalConverter = () => {
     <label className="block m-2">
       Decimal:
       
-      <input type="number" value={decimal} onChange={updateDecimal} className="shadow-md bg-gray-50 border-gray-200 border-2 rounded-md mx-2 p-1" />
+      <input type="number" value={decimal} onChange={updateDecimal} onKeyPress={e=>{
+        if(e.key === "." || e.key === ",") {
+          e.preventDefault()
+        }
+      }} className="shadow-md bg-gray-50 border-gray-200 border-2 rounded-md mx-2 p-1" />
     </label>
   </div>
 }
