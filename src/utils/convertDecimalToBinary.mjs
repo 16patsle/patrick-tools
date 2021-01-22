@@ -1,3 +1,6 @@
+import convertBinaryToDecimal from './convertBinaryToDecimal.mjs'
+import { getComplement } from './getDecimalFromNegativeBinary.mjs'
+
 const findLargestFittingPowerOfTwo = number => {
   let factor = 1
   while (factor * 2 <= number) {
@@ -11,13 +14,26 @@ const findLargestFittingPowerOfTwo = number => {
  * @param {string} decimalStr - The string representation of the decimal number.
  * @param {boolean} twosComplement - Whether to convert negative numbers using two's complement
  */
-export default function convertDecimalToBinary(decimalStr, twosComplement) {
-  if (!/^[0-9]+$/.test(decimalStr)) {
+export default function convertDecimalToBinary(
+  decimalStr,
+  twosComplement = false
+) {
+  if (!/^[-0-9]+$/.test(decimalStr)) {
     return false
   }
 
   let number = parseInt(decimalStr, 10)
   let binary = ''
+  let negative = false
+
+  if (twosComplement) {
+    binary += '0'
+    if (number < 0) {
+      negative = true
+      number = Math.abs(number)
+    }
+  }
+
   let factor = findLargestFittingPowerOfTwo(number)
 
   while (factor >= 1) {
@@ -28,6 +44,13 @@ export default function convertDecimalToBinary(decimalStr, twosComplement) {
       binary += '0'
     }
     factor /= 2
+  }
+
+  if (twosComplement && negative) {
+    const digits = binary.split('')
+    binary = convertDecimalToBinary(
+      convertBinaryToDecimal(getComplement(digits).join('')) + 1
+    )
   }
 
   return binary
