@@ -28,10 +28,11 @@ export default function convertDecimalToBinary(
 
   if (twosComplement) {
     binary += '0'
-    if (number < 0) {
-      negative = true
-      number = Math.abs(number)
-    }
+  }
+
+  if (number < 0) {
+    negative = true
+    number = Math.abs(number)
   }
 
   let factor = findLargestFittingPowerOfTwo(number)
@@ -48,10 +49,10 @@ export default function convertDecimalToBinary(
 
   if (twosComplement && negative) {
     const digits = binary.split('')
-    binary = convertDecimalToBinary(
+    return convertDecimalToBinary(
       convertBinaryToDecimal(getComplement(digits).join('')) + 1
     )
   }
 
-  return binary
+  return (negative ? '-' : '') + binary
 }

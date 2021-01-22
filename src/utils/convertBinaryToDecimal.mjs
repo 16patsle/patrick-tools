@@ -1,4 +1,4 @@
-import getDecimalFromNegativeBinary from "./getDecimalFromNegativeBinary.mjs"
+import getDecimalFromNegativeBinary from './getDecimalFromNegativeBinary.mjs'
 import getDecimal from './getDecimal.mjs'
 
 /**
@@ -10,11 +10,20 @@ export default function convertBinaryToDecimal(
   binaryStr,
   twosComplement = false
 ) {
-  if (!/^[01]+$/.test(binaryStr)) {
+  if (
+    (twosComplement && binaryStr.includes('-')) ||
+    !/^[-01]+$/.test(binaryStr)
+  ) {
     return false
   }
 
   const digits = binaryStr.split('')
+
+  let negative = false
+  if (digits[0] === '-') {
+    negative = true
+    digits.shift()
+  }
 
   if (twosComplement) {
     const negative = getDecimalFromNegativeBinary(digits)
@@ -23,5 +32,5 @@ export default function convertBinaryToDecimal(
     }
   }
 
-  return getDecimal(digits)
+  return (negative ? -1 : 1) * getDecimal(digits)
 }
