@@ -13,6 +13,7 @@
   "author": "Patrick Sletvold <patricksletvold@hotmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
+    "@tailwindcss/forms": "^0.2.1",
     "core-js": "^3.8.3",
     "lodash.debounce": "^4.0.8",
     "react": "^17.0.1",
