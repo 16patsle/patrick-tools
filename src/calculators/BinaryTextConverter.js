@@ -5,6 +5,7 @@ import Checkbox from '../components/Checkbox'
 import convertBinaryToDecimal from '../utils/convertBinaryToDecimal'
 import convertDecimalToBinary from '../utils/convertDecimalToBinary'
 import Radio from '../components/Radio'
+import convertASCIIBinaryToText from '../utils/convertASCIIBinaryToText'
 
 let delayedSetBinary
 let delayedSetText
@@ -31,7 +32,7 @@ const BinaryTextConverter = () => {
   }, [text])
 
   useEffect(() => {
-    const newText = false // TODO: Implement conversion
+    const newText = convertASCIIBinaryToText(binary)
     if (newText !== false) {
       delayedSetText(String(newText))
     }
@@ -43,11 +44,11 @@ const BinaryTextConverter = () => {
     <div className="max-w-md">
       <h2 className="text-2xl mt-2 mb-3">Convert text to and from binary</h2>
       <Input
-        pattern="[01]+"
+        pattern="[01 ]+"
         value={binary}
         onChange={setBinary}
         onKeyPress={e => {
-          if (e.key !== '1' && e.key !== '0' && e.key !== '-') {
+          if (e.key !== '1' && e.key !== '0' && e.key !== ' ') {
             e.preventDefault()
           }
         }}
