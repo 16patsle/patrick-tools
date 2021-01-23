@@ -5,6 +5,7 @@ import getDecimal from './getDecimal.js'
  * Convert binary to decimal number
  * @param {string} binaryStr - The string representation of the binary number.
  * @param {boolean} twosComplement - Whether to treat the first bit as a sign and use two's complement.
+ * @returns {number|false} The converted number, or false if failed.
  */
 export default function convertBinaryToDecimal(
   binaryStr,

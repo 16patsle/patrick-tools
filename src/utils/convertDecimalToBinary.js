@@ -13,6 +13,7 @@ const findLargestFittingPowerOfTwo = number => {
  * Convert decimal to binary number
  * @param {string} decimalStr - The string representation of the decimal number.
  * @param {boolean} twosComplement - Whether to convert negative numbers using two's complement
+ * @returns {string|false} The converted binary number as string, or false if failed.
  */
 export default function convertDecimalToBinary(
   decimalStr,
@@ -49,9 +50,11 @@ export default function convertDecimalToBinary(
 
   if (twosComplement && negative) {
     const digits = binary.split('')
-    return convertDecimalToBinary(
-      convertBinaryToDecimal(getComplement(digits).join('')) + 1
-    )
+    const decimal = convertBinaryToDecimal(getComplement(digits).join(''))
+    if (decimal === false) {
+      return false
+    }
+    return convertDecimalToBinary(String(decimal + 1))
   }
 
   return (negative ? '-' : '') + binary

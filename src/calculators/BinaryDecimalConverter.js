@@ -11,7 +11,7 @@ const BinaryDecimalConverter = () => {
     const value = e.target.value
 
     setBinary(value)
-    setDecimal(convertBinaryToDecimal(value) || '')
+    setDecimal(String(convertBinaryToDecimal(value)) || '')
   }
 
   const updateDecimal = e => {
