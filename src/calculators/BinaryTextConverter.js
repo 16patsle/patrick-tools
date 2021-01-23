@@ -4,6 +4,7 @@ import Input from '../components/Input'
 import Checkbox from '../components/Checkbox'
 import convertBinaryToDecimal from '../utils/convertBinaryToDecimal'
 import convertDecimalToBinary from '../utils/convertDecimalToBinary'
+import Radio from '../components/Radio'
 
 let delayedSetBinary
 let delayedSetText
@@ -11,6 +12,7 @@ let delayedSetText
 const BinaryTextConverter = () => {
   const [binary, setBinary] = useState('')
   const [text, setText] = useState('')
+  const [charset, setCharset] = useState('ascii')
 
   if (!delayedSetBinary) {
     delayedSetBinary = debounce(setBinary, 200)
@@ -21,16 +23,16 @@ const BinaryTextConverter = () => {
 
   useEffect(() => {
     const newBinary = false // TODO: Implement conversion
-    if(newBinary !== false) {
+    if (newBinary !== false) {
       delayedSetBinary(newBinary)
     }
-    
+
     return delayedSetBinary.cancel
   }, [text])
 
   useEffect(() => {
     const newText = false // TODO: Implement conversion
-    if(newText !== false) {
+    if (newText !== false) {
       delayedSetText(String(newText))
     }
 
@@ -52,12 +54,25 @@ const BinaryTextConverter = () => {
       >
         Binary
       </Input>
-      <Input
-        value={text}
-        onChange={setText}
-      >
+      <Input value={text} onChange={setText}>
         Text
       </Input>
+      <Radio
+        name="binary_text_charset"
+        value="ascii"
+        checkedValue={charset}
+        onChange={setCharset}
+      >
+        ASCII
+      </Radio>
+      <Radio
+        name="binary_text_charset"
+        value="unicode"
+        checkedValue={charset}
+        onChange={setCharset}
+      >
+        Unicode (UTF-16)
+      </Radio>
     </div>
   )
 }
