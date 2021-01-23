@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-import convertBinaryToDecimal from '../utils/convertBinaryToDecimal.mjs'
-import convertDecimalToBinary from '../utils/convertDecimalToBinary.mjs'
+import convertBinaryToDecimal from '../utils/convertBinaryToDecimal'
+import convertDecimalToBinary from '../utils/convertDecimalToBinary'
 
 const BinaryDecimalConverter = () => {
   const [binary, setBinary] = useState('')

@@ -1,4 +1,4 @@
-import getDecimal from './getDecimal.mjs'
+import getDecimal from './getDecimal.js'
 
 /**
  * @param {string[]} digits
