@@ -1,20 +1,27 @@
+const path = require("path");
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const createConfig = isDevelopment => ({
-  target: isDevelopment ? 'web' : 'browserslist',
+  entry: path.resolve(__dirname, 'src/index.js'),
+  //target: isDevelopment ? 'web' : 'browserslist',
+  output: {
+    path: path.resolve(__dirname, "dist"),
+  },
   module: {
     rules: [
       {
-        test: /\.(js|mjs)$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          /*
           options: {
             plugins: [
               isDevelopment && require.resolve('react-refresh/babel'),
             ].filter(Boolean),
           },
+          */
         },
       },
       {
@@ -27,7 +34,7 @@ const createConfig = isDevelopment => ({
     new HtmlWebPackPlugin({
       template: './src/index.html',
     }),
-    isDevelopment && new ReactRefreshWebpackPlugin(),
+    //isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
 })
 
