@@ -5,7 +5,7 @@ import BinaryDecimalConverter from './calculators/BinaryDecimalConverter'
 const App = () => {
   return (
     <div className="m-2">
-      <h1 className="text-3xl mb-2">Patrick's Tools</h1>
+      <h1 className="text-3xl mt-1 mb-2">Patrick's Tools</h1>
       <BinaryDecimalConverter />
     </div>
   )

@@ -46,8 +46,8 @@ const BinaryDecimalConverter = () => {
   }, [twosComplement])
 
   return (
-    <div>
-      <h2 className="text-2xl">Convert to and from binary</h2>
+    <div className="max-w-md">
+      <h2 className="text-2xl mt-2 mb-3">Convert to and from binary</h2>
       <Input
         pattern="[01]+"
         value={binary}
@@ -58,7 +58,7 @@ const BinaryDecimalConverter = () => {
           }
         }}
       >
-        Binary:
+        Binary
       </Input>
       <Input
         type="number"
@@ -70,10 +70,10 @@ const BinaryDecimalConverter = () => {
           }
         }}
       >
-        Decimal:
+        Decimal
       </Input>
       <Checkbox checked={twosComplement} onChange={setTwosComplement}>
-        Use two's complement:
+        Use two's complement
       </Checkbox>
     </div>
   )

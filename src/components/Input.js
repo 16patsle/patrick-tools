@@ -36,18 +36,23 @@ const Input = ({
   className = '',
 }) => {
   return (
-    <label className="block my-2">
-      {children}
+    <label
+      className="grid my-2 gap-x-2 items-center"
+      style={{ gridTemplateColumns: '6.5rem minmax(0, 1fr)' }}
+    >
+      <div className="col-span-1 text-gray-500 uppercase text-sm font-semibold">
+        {children}
+      </div>
       <input
-        type={type}
-        pattern={pattern}
-        value={value}
-        onChange={onChange && (e => onChange(e.target.value, e))}
-        onKeyPress={onKeyPress}
-        className={`shadow-md bg-gray-50 border-gray-200 border-2 rounded-md mx-2 p-1${
-          className ? ` ${className}` : ''
-        }`}
-      />
+          type={type}
+          pattern={pattern}
+          value={value}
+          onChange={onChange && (e => onChange(e.target.value, e))}
+          onKeyPress={onKeyPress}
+          className={`w-full h-9 shadow-md bg-gray-50 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 border-gray-200 focus:border-gray-200 border-2 rounded-md p-1${
+            className ? ` ${className}` : ''
+          }`}
+        />
     </label>
   )
 }
