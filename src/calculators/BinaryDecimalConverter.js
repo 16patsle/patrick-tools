@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Input from '../components/Input'
 
 import convertBinaryToDecimal from '../utils/convertBinaryToDecimal'
 import convertDecimalToBinary from '../utils/convertDecimalToBinary'
@@ -7,16 +8,18 @@ const BinaryDecimalConverter = () => {
   const [binary, setBinary] = useState('')
   const [decimal, setDecimal] = useState('')
 
-  const updateBinary = e => {
-    const value = e.target.value
-
+  /**
+   * @param {string} value
+   */
+  const updateBinary = value => {
     setBinary(value)
     setDecimal(String(convertBinaryToDecimal(value)) || '')
   }
 
-  const updateDecimal = e => {
-    const value = e.target.value
-
+  /**
+   * @param {string} value
+   */
+  const updateDecimal = value => {
     setDecimal(value)
     setBinary(convertDecimalToBinary(value) || '')
   }
@@ -24,35 +27,30 @@ const BinaryDecimalConverter = () => {
   return (
     <div>
       <h2 className="text-2xl">Convert to and from binary</h2>
-      <label className="block">
+      <Input
+        pattern="[01]+"
+        value={binary}
+        onChange={updateBinary}
+        onKeyPress={e => {
+          if (e.key !== '1' && e.key !== '0' && e.key !== '-') {
+            e.preventDefault()
+          }
+        }}
+      >
         Binary:
-        <input
-          type="text"
-          pattern="[01]+"
-          value={binary}
-          onChange={updateBinary}
-          onKeyPress={e => {
-            if (e.key !== '1' && e.key !== '0' && e.key !== '-') {
-              e.preventDefault()
-            }
-          }}
-          className="shadow-md bg-gray-50 border-gray-200 border-2 rounded-md mx-2 p-1"
-        />
-      </label>
-      <label className="block">
+      </Input>
+      <Input
+        type="number"
+        value={decimal}
+        onChange={updateDecimal}
+        onKeyPress={e => {
+          if (e.key === '.' || e.key === ',') {
+            e.preventDefault()
+          }
+        }}
+      >
         Decimal:
-        <input
-          type="number"
-          value={decimal}
-          onChange={updateDecimal}
-          onKeyPress={e => {
-            if (e.key === '.' || e.key === ',') {
-              e.preventDefault()
-            }
-          }}
-          className="shadow-md bg-gray-50 border-gray-200 border-2 rounded-md mx-2 p-1"
-        />
-      </label>
+      </Input>
     </div>
   )
 }
