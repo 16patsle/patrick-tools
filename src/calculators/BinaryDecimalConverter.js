@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import debounce from 'lodash.debounce'
 import Input from '../components/Input'
-
+import Checkbox from '../components/Checkbox'
 import convertBinaryToDecimal from '../utils/convertBinaryToDecimal'
 import convertDecimalToBinary from '../utils/convertDecimalToBinary'
 
@@ -11,6 +11,7 @@ let delayedSetDecimal
 const BinaryDecimalConverter = () => {
   const [binary, setBinary] = useState('')
   const [decimal, setDecimal] = useState('')
+  const [twosComplement, setTwosComplement] = useState(false)
 
   if (!delayedSetBinary) {
     delayedSetBinary = debounce(setBinary, 200)
@@ -24,7 +25,7 @@ const BinaryDecimalConverter = () => {
    */
   const updateBinary = value => {
     setBinary(value)
-    delayedSetDecimal(String(convertBinaryToDecimal(value)) || '')
+    delayedSetDecimal(String(convertBinaryToDecimal(value, twosComplement)) || '')
   }
 
   /**
@@ -32,7 +33,7 @@ const BinaryDecimalConverter = () => {
    */
   const updateDecimal = value => {
     setDecimal(value)
-    delayedSetBinary(convertDecimalToBinary(value) || '')
+    delayedSetBinary(convertDecimalToBinary(value, twosComplement) || '')
   }
 
   return (
@@ -62,6 +63,9 @@ const BinaryDecimalConverter = () => {
       >
         Decimal:
       </Input>
+      <Checkbox checked={twosComplement} onChange={setTwosComplement}>
+        Use two's complement:
+      </Checkbox>
     </div>
   )
 }
