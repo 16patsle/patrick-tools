@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import debounce from 'lodash.debounce'
 import Input from '../components/Input'
 import Checkbox from '../components/Checkbox'
@@ -20,21 +20,30 @@ const BinaryDecimalConverter = () => {
     delayedSetDecimal = debounce(setDecimal, 200)
   }
 
-  /**
-   * @param {string} value
-   */
-  const updateBinary = value => {
-    setBinary(value)
-    delayedSetDecimal(String(convertBinaryToDecimal(value, twosComplement)) || '')
-  }
+  useEffect(() => {
+    const newBinary = decimal === '' ? '' : convertDecimalToBinary(decimal, twosComplement)
+    if(newBinary !== false) {
+      delayedSetBinary(newBinary)
+    }
+    
+    return delayedSetBinary.cancel
+  }, [decimal])
 
-  /**
-   * @param {string} value
-   */
-  const updateDecimal = value => {
-    setDecimal(value)
-    delayedSetBinary(convertDecimalToBinary(value, twosComplement) || '')
-  }
+  useEffect(() => {
+    const newDecimal = binary === '' ? '' : convertBinaryToDecimal(binary, twosComplement)
+    if(newDecimal !== false) {
+      delayedSetDecimal(String(newDecimal))
+    }
+
+    return delayedSetBinary.cancel
+  }, [binary])
+
+  useEffect(() => {
+    const newBinary = decimal === '' ? '' : convertDecimalToBinary(decimal, twosComplement)
+    if(newBinary !== false) {
+      setBinary(newBinary)
+    }
+  }, [twosComplement])
 
   return (
     <div>
@@ -42,7 +51,7 @@ const BinaryDecimalConverter = () => {
       <Input
         pattern="[01]+"
         value={binary}
-        onChange={updateBinary}
+        onChange={setBinary}
         onKeyPress={e => {
           if (e.key !== '1' && e.key !== '0' && e.key !== '-') {
             e.preventDefault()
@@ -54,7 +63,7 @@ const BinaryDecimalConverter = () => {
       <Input
         type="number"
         value={decimal}
-        onChange={updateDecimal}
+        onChange={setDecimal}
         onKeyPress={e => {
           if (e.key === '.' || e.key === ',') {
             e.preventDefault()
