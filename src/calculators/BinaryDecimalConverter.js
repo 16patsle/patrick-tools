@@ -24,7 +24,7 @@ const BinaryDecimalConverter = () => {
   return (
     <div>
       <h2 className="text-2xl">Convert to and from binary</h2>
-      <label className="block m-2">
+      <label className="block">
         Binary:
         <input
           type="text"
@@ -39,7 +39,7 @@ const BinaryDecimalConverter = () => {
           className="shadow-md bg-gray-50 border-gray-200 border-2 rounded-md mx-2 p-1"
         />
       </label>
-      <label className="block m-2">
+      <label className="block">
         Decimal:
         <input
           type="number"
