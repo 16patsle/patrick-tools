@@ -36,7 +36,7 @@ const Input = ({
   className = '',
 }) => {
   return (
-    <label className="block">
+    <label className="block my-2">
       {children}
       <input
         type={type}
