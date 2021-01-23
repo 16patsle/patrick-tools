@@ -49,7 +49,7 @@ const BinaryDecimalConverter = () => {
     <div className="max-w-md">
       <h2 className="text-2xl mt-2 mb-3">Convert numbers to and from binary</h2>
       <Input
-        pattern="[01]+"
+        pattern="[-01]+"
         value={binary}
         onChange={setBinary}
         onKeyPress={e => {
