@@ -1,7 +1,7 @@
 const path = require('path')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const createConfig = isDevelopment => ({
@@ -38,10 +38,7 @@ const createConfig = isDevelopment => ({
   },
   optimization: {
     minimize: !isDevelopment,
-    minimizer: [
-      `...`,
-      new CssMinimizerPlugin(),
-    ]
+    minimizer: [`...`, new CssMinimizerPlugin()],
   },
   plugins: [
     new HtmlWebPackPlugin({
@@ -51,9 +48,10 @@ const createConfig = isDevelopment => ({
       new MiniCssExtractPlugin({
         filename: '[name].[contenthash].css',
         chunkFilename: '[id].[contenthash].css',
-    }),
+      }),
     //isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
 })
 
-module.exports = (env, argv) => createConfig(!env.production || argv.mode === 'development')
+module.exports = (env, argv) =>
+  createConfig(!env.production || argv.mode === 'development')
