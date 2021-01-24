@@ -23,8 +23,7 @@ import React from 'react'
 const Radio = ({ children, value, checkedValue, onChange, className = '' }) => {
   return (
     <label
-      className="h-9 grid my-2 gap-x-2 items-center"
-      style={{ gridTemplateColumns: '6.5rem minmax(0, 1fr)' }}
+      className="label-grid radio-checkbox w-max h-9 grid my-2 gap-x-2 items-center"
     >
       <div className="text-gray-500 uppercase text-sm font-semibold">
         {children}

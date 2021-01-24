@@ -37,8 +37,7 @@ const Input = ({
 }) => {
   return (
     <label
-      className="grid my-2 gap-x-2 items-center"
-      style={{ gridTemplateColumns: '6.5rem minmax(0, 1fr)' }}
+      className="label-grid grid my-2 gap-x-2 items-center"
     >
       <div className="col-span-1 text-gray-500 uppercase text-sm font-semibold">
         {children}

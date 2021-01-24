@@ -1,0 +1,7 @@
+.label-grid {
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+}
+
+.label-grid.radio-checkbox {
+  grid-template-columns: 6.5rem minmax(0, theme('spacing.9'));
+}
