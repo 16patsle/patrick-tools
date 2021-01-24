@@ -21,7 +21,7 @@ import React from 'react'
 const Checkbox = ({ children, checked, onChange, className = '' }) => {
   return (
     <label
-      className="grid my-2 gap-x-2 items-center"
+      className="h-9 grid my-2 gap-x-2 items-center"
       style={{ gridTemplateColumns: '6.5rem minmax(0, 1fr)' }}
     >
       <div className="text-gray-500 uppercase text-sm font-semibold">
@@ -31,7 +31,7 @@ const Checkbox = ({ children, checked, onChange, className = '' }) => {
           type="checkbox"
           checked={checked}
           onChange={onChange && (e => onChange(e.target.checked, e))}
-          className={`w-9 h-9 shadow-md bg-gray-50 text-yellow-500 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 border-gray-200 focus:border-gray-200 border-2 rounded-md p-1${
+          className={`w-6 h-6 shadow-md bg-gray-50 text-yellow-500 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 border-gray-200 focus:border-gray-200 border-2 rounded-md p-1${
             className ? ` ${className}` : ''
           }`}
         />
