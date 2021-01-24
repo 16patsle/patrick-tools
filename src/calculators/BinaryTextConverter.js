@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react'
 import debounce from 'lodash.debounce'
 import Input from '../components/Input'
 import Checkbox from '../components/Checkbox'
-import convertBinaryToDecimal from '../utils/convertBinaryToDecimal'
-import convertDecimalToBinary from '../utils/convertDecimalToBinary'
 import Radio from '../components/Radio'
 import convertASCIIBinaryToText from '../utils/convertASCIIBinaryToText'
+import convertTextToASCIIBinary from '../utils/convertTextToASCIIBinary'
 
 let delayedSetBinary
 let delayedSetText
@@ -23,7 +22,7 @@ const BinaryTextConverter = () => {
   }
 
   useEffect(() => {
-    const newBinary = false // TODO: Implement conversion
+    const newBinary = convertTextToASCIIBinary(text)
     if (newBinary !== false) {
       delayedSetBinary(newBinary)
     }
