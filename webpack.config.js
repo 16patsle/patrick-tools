@@ -1,7 +1,7 @@
 const path = require('path')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
-const ExtractCssChunks = require('extract-css-chunks-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const createConfig = isDevelopment => ({
@@ -29,13 +29,7 @@ const createConfig = isDevelopment => ({
       {
         test: /\.css$/,
         use: [
-          {
-            loader: ExtractCssChunks.loader,
-            options: {
-              esModule: true,
-              hmr: isDevelopment,
-            },
-          },
+          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
         ],
@@ -53,9 +47,10 @@ const createConfig = isDevelopment => ({
     new HtmlWebPackPlugin({
       template: './src/index.html',
     }),
-    new ExtractCssChunks({
-      filename: isDevelopment ? '[name].css' : '[name].[contenthash].css',
-      chunkFilename: isDevelopment ? '[id].css' : '[id].[contenthash].css',
+    !isDevelopment &&
+      new MiniCssExtractPlugin({
+        filename: '[name].[contenthash].css',
+        chunkFilename: '[id].[contenthash].css',
     }),
     //isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
