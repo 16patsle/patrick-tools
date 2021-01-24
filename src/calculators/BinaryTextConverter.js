@@ -13,6 +13,7 @@ const BinaryTextConverter = () => {
   const [binary, setBinary] = useState('')
   const [text, setText] = useState('')
   const [charset, setCharset] = useState('ascii')
+  const [spaces, setSpaces] = useState(true)
 
   if (!delayedSetBinary) {
     delayedSetBinary = debounce(setBinary, 200)
@@ -22,13 +23,13 @@ const BinaryTextConverter = () => {
   }
 
   useEffect(() => {
-    const newBinary = convertTextToASCIIBinary(text)
+    const newBinary = convertTextToASCIIBinary(text, spaces)
     if (newBinary !== false) {
       delayedSetBinary(newBinary)
     }
 
     return delayedSetBinary.cancel
-  }, [text])
+  }, [text, spaces])
 
   useEffect(() => {
     const newText = convertASCIIBinaryToText(binary)
@@ -57,6 +58,9 @@ const BinaryTextConverter = () => {
       <Input value={text} onChange={setText}>
         Text
       </Input>
+      <Checkbox checked={spaces} onChange={setSpaces}>
+        Use space separator
+      </Checkbox>
       <Radio
         name="binary_text_charset"
         value="ascii"
