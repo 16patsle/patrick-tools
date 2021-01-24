@@ -5,8 +5,8 @@ test('only accepts binary as string', t => {
   t.is(convertASCIIBinaryToText('11a'), false)
 })
 
-test('only accepts strings consisting of whole bytes (%8==0)', t => {
-  t.is(convertASCIIBinaryToText('1111111111'), false)
+test('silently ignores superfluous bytes', t => {
+  t.is(convertASCIIBinaryToText('0100000111'), 'A')
 })
 
 test('converts a single binary ASCII character into text', t=> {
