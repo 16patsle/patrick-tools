@@ -55,7 +55,15 @@ const BinaryTextConverter = () => {
       >
         Binary
       </Input>
-      <Input value={text} onChange={setText}>
+      <Input
+        value={text}
+        onChange={setText}
+        onKeyPress={e => {
+          if (charset === 'ascii' && e.key.charCodeAt(0) > 255) {
+            e.preventDefault()
+          }
+        }}
+      >
         Text
       </Input>
       <Checkbox checked={spaces} onChange={setSpaces}>
