@@ -42,6 +42,7 @@ const RomanNumeralConverter = () => {
       <Heading2>Convert numbers to and from Roman numerals</Heading2>
       <Input
         type="number"
+        min="1"
         value={decimal}
         onChange={setDecimal}
         onKeyPress={e => {

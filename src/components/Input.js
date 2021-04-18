@@ -16,6 +16,7 @@ import React from 'react'
  * @property {any} children - Contents of the wrapper label
  * @property {'text'|'number'} [type] - Input element type
  * @property {string} [pattern] - Pattern for input validation
+ * @property {string|number} [min] - Minimum value allowed for number inputs
  * @property {any} value - Value for the input element
  * @property {InputChangeCallback} onChange - Callback when content changes
  * @property {InputKeyPressCallback} [onKeyPress] - Callback for key press, for input filtering
@@ -30,6 +31,7 @@ const Input = ({
   children,
   type = 'text',
   pattern,
+  min,
   value,
   onChange,
   onKeyPress,
@@ -45,6 +47,7 @@ const Input = ({
       <input
           type={type}
           pattern={pattern}
+          min={min}
           value={value}
           onChange={onChange && (e => onChange(e.target.value, e))}
           onKeyPress={onKeyPress}
