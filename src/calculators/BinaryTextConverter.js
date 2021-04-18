@@ -3,6 +3,7 @@ import debounce from 'lodash.debounce'
 import Input from '../components/Input'
 import Checkbox from '../components/Checkbox'
 import Radio from '../components/Radio'
+import Heading2 from '../components/Heading2'
 import convertASCIIBinaryToText from '../utils/convertASCIIBinaryToText'
 import convertTextToASCIIBinary from '../utils/convertTextToASCIIBinary'
 
@@ -42,7 +43,7 @@ const BinaryTextConverter = () => {
 
   return (
     <div className="max-w-md">
-      <h2 className="text-2xl mt-2 mb-3">Convert text to and from binary</h2>
+      <Heading2>Convert text to and from binary</Heading2>
       <Input
         pattern="[01 ]+"
         value={binary}

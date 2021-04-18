@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import debounce from 'lodash.debounce'
 import Input from '../components/Input'
 import Checkbox from '../components/Checkbox'
+import Heading2 from '../components/Heading2'
 import convertBinaryToDecimal from '../utils/convertBinaryToDecimal'
 import convertDecimalToBinary from '../utils/convertDecimalToBinary'
 
@@ -47,7 +48,7 @@ const BinaryDecimalConverter = () => {
 
   return (
     <div className="max-w-md">
-      <h2 className="text-2xl mt-2 mb-3">Convert numbers to and from binary</h2>
+      <Heading2>Convert numbers to and from binary</Heading2>
       <Input
         pattern="[-01]+"
         value={binary}
