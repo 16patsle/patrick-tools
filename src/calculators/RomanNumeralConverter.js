@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce'
 import Input from '../components/Input'
 import Heading2 from '../components/Heading2'
 import convertDecimalToRoman from '../utils/convertDecimalToRoman'
-import convertRomanToDecimal from '../utils/ConvertRomanToDecimal'
+import convertRomanToDecimal from '../utils/convertRomanToDecimal'
 
 let delayedSetDecimal
 let delayedSetRoman
@@ -25,7 +25,7 @@ const RomanNumeralConverter = () => {
       delayedSetDecimal(String(newDecimal))
     }
 
-    return delayedSetRoman.cancel
+    return delayedSetDecimal.cancel
   }, [roman])
 
   useEffect(() => {
