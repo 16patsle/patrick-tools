@@ -2,6 +2,7 @@ import React from 'react'
 
 import BinaryDecimalConverter from './calculators/BinaryDecimalConverter'
 import BinaryTextConverter from './calculators/BinaryTextConverter'
+import KiloPoundConverter from './calculators/KiloPoundConverter'
 import RomanNumeralConverter from './calculators/RomanNumeralConverter'
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
       <BinaryDecimalConverter />
       <BinaryTextConverter />
       <RomanNumeralConverter />
+      <KiloPoundConverter />
     </div>
   )
 }
