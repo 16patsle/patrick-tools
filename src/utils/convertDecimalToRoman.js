@@ -60,11 +60,9 @@ export default function convertDecimalToRoman(decimal) {
     string = handleDigit(rest, map[factor ** i]) + string
   }
 
-  rest = number % 10
-
   // If any more thousands, add the required number of M's
-  if (rest > 0) {
-    for (let i = 0; i < rest; i++) {
+  if (number > 0) {
+    for (let i = 0; i < number; i++) {
       string = 'M' + string
     }
   }
