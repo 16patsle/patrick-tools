@@ -36,7 +36,7 @@ const BinaryDecimalConverter = () => {
       delayedSetDecimal(String(newDecimal))
     }
 
-    return delayedSetBinary.cancel
+    return delayedSetDecimal.cancel
   }, [binary])
 
   useEffect(() => {

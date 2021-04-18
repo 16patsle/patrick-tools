@@ -38,7 +38,7 @@ const BinaryTextConverter = () => {
       delayedSetText(String(newText))
     }
 
-    return delayedSetBinary.cancel
+    return delayedSetText.cancel
   }, [binary])
 
   return (
