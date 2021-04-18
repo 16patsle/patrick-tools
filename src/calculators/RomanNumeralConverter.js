@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import debounce from 'lodash.debounce'
 import Input from '../components/Input'
-import Checkbox from '../components/Checkbox'
 import Heading2 from '../components/Heading2'
-import convertBinaryToDecimal from '../utils/convertBinaryToDecimal'
-import convertDecimalToBinary from '../utils/convertDecimalToBinary'
 import convertDecimalToRoman from '../utils/convertDecimalToRoman'
-convertDecimalToRoman
+import convertRomanToDecimal from '../utils/ConvertRomanToDecimal'
 
 let delayedSetDecimal
 let delayedSetRoman
@@ -23,7 +20,7 @@ const RomanNumeralConverter = () => {
   }
 
   useEffect(() => {
-    const newDecimal = roman === '' ? '' : false // TODO: Implement converter
+    const newDecimal = roman === '' ? '' : convertRomanToDecimal(roman)
     if(newDecimal !== false) {
       delayedSetDecimal(String(newDecimal))
     }
