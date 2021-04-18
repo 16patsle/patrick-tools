@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import debounce from 'lodash.debounce'
+import Big from 'big.js'
 import Input from '../components/Input'
 import Heading2 from '../components/Heading2'
 import convertKiloToPound from '../utils/convertKiloToPound'
@@ -19,31 +20,29 @@ const KiloPoundConverter = () => {
     delayedSetPound = debounce(setPound, 200)
   }
 
-  useEffect(() => {
-    const newDecimal = pound === '' ? '' : convertPoundToKilo(parseFloat(pound))
-    if (newDecimal !== false) {
-      delayedSetKilo(String(newDecimal))
+  const poundChanged = (/** @type {string} */ p) => {
+    setPound(p)
+    const newKilo = p === '' ? '' : convertPoundToKilo(p)
+    if (newKilo !== false) {
+      delayedSetKilo(newKilo)
     }
+  }
 
-    return delayedSetKilo.cancel
-  }, [pound])
-
-  useEffect(() => {
-    const newRoman = kilo === '' ? '' : convertKiloToPound(parseFloat(kilo))
-    if (newRoman !== false) {
-      delayedSetPound(newRoman)
+  const kiloChanged = (/** @type {string} */ k) => {
+    setKilo(k)
+    const newPound = k === '' ? '' : convertKiloToPound(k)
+    if (newPound !== false) {
+      delayedSetPound(newPound)
     }
-
-    return delayedSetPound.cancel
-  }, [kilo])
+  }
 
   return (
     <div className="max-w-md">
       <Heading2>Convert kilograms to and from pounds</Heading2>
-      <Input type="number" min="0" value={kilo} onChange={setKilo}>
+      <Input type="number" min="0" value={kilo} onChange={kiloChanged}>
         Kilograms (kg)
       </Input>
-      <Input type="number" min="0" value={pound} onChange={setPound}>
+      <Input type="number" min="0" value={pound} onChange={poundChanged}>
         Pounds (lb)
       </Input>
     </div>

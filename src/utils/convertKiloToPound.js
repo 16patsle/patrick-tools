@@ -1,13 +1,19 @@
+import Big from 'big.js'
+
+Big.DP = 5
 
 /**
  * Convert kilograms to pounds
- * @param {number} kilo - The kilogram value
- * @returns {number|false} The kilogram value as pound, or false if failed.
+ * @param {Big|number|string} kilo - The kilogram value
+ * @returns {string|false} The kilogram value as pound, or false if failed.
  */
 export default function convertKiloToPound(kilo) {
-  if(typeof kilo !== 'number' || Number.isNaN(kilo)) {
-    return false
+  if (!(kilo instanceof Big)) {
+    try {
+      kilo = new Big(kilo)
+    } catch {
+      return false
+    }
   }
-  const number = kilo * 0.45359237
-  return parseFloat(number.toFixed(8))
+  return new Big(kilo).mul(0.45359237).round(5).toString()
 }

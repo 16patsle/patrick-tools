@@ -14,6 +14,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@tailwindcss/forms": "^0.3.2",
+    "big.js": "^5.2.2",
     "core-js": "^3.10.1",
     "lodash.chunk": "^4.2.0",
     "lodash.debounce": "^4.0.8",
