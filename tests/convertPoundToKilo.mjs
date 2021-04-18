@@ -10,13 +10,13 @@ test('returns false on NaN', t => {
 })
 
 test('returns correct 1 kg for equivalent pound (avoirdupois)', t => {
-  t.is(convertPoundToKilo(0.45359237), 1)
+  t.is(convertPoundToKilo(0.45359237, 8), '1')
 })
 
 test('returns correct 2 kg for equivalent pound (avoirdupois)', t => {
-  t.is(convertPoundToKilo(0.90718474), 2)
+  t.is(convertPoundToKilo(0.90718474, 8), '2')
 })
 
 test('returns correct for 1 lb (avoirdupois) to kg', t => {
-  t.is(convertPoundToKilo(1), 2.20462262)
+  t.is(convertPoundToKilo(1, 8), '2.20462262')
 })
