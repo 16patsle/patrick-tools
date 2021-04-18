@@ -5,6 +5,10 @@ test('returns false on non-number input', t => {
   t.is(convertKiloToPound('numb3r'), false)
 })
 
+test('returns false on NaN', t => {
+  t.is(convertKiloToPound(NaN), false)
+})
+
 test('returns correct for 1 kg to pound (avoirdupois)', t => {
   t.is(convertKiloToPound(1), 0.45359237)
 })
