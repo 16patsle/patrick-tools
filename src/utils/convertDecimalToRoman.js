@@ -23,9 +23,11 @@ function handleDigit(digit, map) {
 }
 
 /**
- * @param {number} decimal
+ * Convert decimal to Roman numeral
+ * @param {string} decimalStr - The string representation of the decimal number.
+ * @returns {string|false} The converted Roman numeral as string, or false if failed.
  */
-export default function convertDecimalToRoman(decimal) {
+export default function convertDecimalToRoman(decimalStr) {
   const map = {
     // digit value
     1: {
@@ -47,9 +49,13 @@ export default function convertDecimalToRoman(decimal) {
   }
 
   let factor = 10
-  let number = decimal
+  let number = parseInt(decimalStr, 10)
   let rest
   let string = ''
+
+  if (Number.isNaN(number)) {
+    return false
+  }
 
   for (let i = 0; i < 3; i++) {
     // First digit
