@@ -4,9 +4,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
-const createConfig = isDevelopment => ({
-  entry: path.resolve(__dirname, 'src/index.js'),
-  //target: isDevelopment ? 'web' : 'browserslist',
+/**
+ * Creates a webpack config.
+ * @param {boolean} isDevelopment
+ * @returns {import('webpack').Configuration}
+ */
+const createConfig = (/** @type {boolean} */ isDevelopment) => ({
+  entry: path.resolve(__dirname, 'src/index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
   },
