@@ -17,13 +17,11 @@ const createConfig = isDevelopment => ({
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          /*
           options: {
             plugins: [
               isDevelopment && require.resolve('react-refresh/babel'),
             ].filter(Boolean),
           },
-          */
         },
       },
       {
@@ -49,7 +47,7 @@ const createConfig = isDevelopment => ({
         filename: '[name].[contenthash].css',
         chunkFilename: '[id].[contenthash].css',
       }),
-    //isDevelopment && new ReactRefreshWebpackPlugin(),
+    isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
 })
 
