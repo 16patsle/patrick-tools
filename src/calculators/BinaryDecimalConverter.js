@@ -1,50 +1,52 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useCallback } from 'react'
 import debounce from 'lodash.debounce'
 import Input from '../components/Input'
 import Checkbox from '../components/Checkbox'
 import Heading2 from '../components/Heading2'
 import convertBinaryToDecimal from '../utils/convertBinaryToDecimal'
 import convertDecimalToBinary from '../utils/convertDecimalToBinary'
-
-let delayedSetBinary
-let delayedSetDecimal
+import { useNonFalseState } from '../utils/useNonFalseState'
 
 const BinaryDecimalConverter = () => {
-  const [binary, setBinary] = useState('')
-  const [decimal, setDecimal] = useState('')
+  const [binary, setBinary] = useNonFalseState('')
+  const [decimal, setDecimal] = useNonFalseState('')
   const [twosComplement, setTwosComplement] = useState(false)
 
-  if (!delayedSetBinary) {
-    delayedSetBinary = debounce(setBinary, 200)
+  const debouncedSetDecimal = useCallback(
+    debounce(
+      b => setDecimal(String(convertBinaryToDecimal(b, twosComplement))),
+      200
+    ),
+    []
+  )
+
+  const calculateFromBinary = (/** @type {string} */ b) => {
+    setBinary(b)
+    debouncedSetDecimal(b)
   }
-  if (!delayedSetDecimal) {
-    delayedSetDecimal = debounce(setDecimal, 200)
+
+  const debouncedSetBinary = useCallback(
+    debounce(d => setBinary(convertDecimalToBinary(d, twosComplement)), 200),
+    []
+  )
+
+  const calculateFromDecimal = (/** @type {string} */ d) => {
+    setDecimal(d)
+    debouncedSetBinary(d)
   }
 
-  useEffect(() => {
-    const newBinary = decimal === '' ? '' : convertDecimalToBinary(decimal, twosComplement)
-    if(newBinary !== false) {
-      delayedSetBinary(newBinary)
-    }
-    
-    return delayedSetBinary.cancel
-  }, [decimal])
+  const debouncedSetTwosComplement = useCallback(
+    debounce(t => {
+      console.log(t)
+      return setBinary(convertDecimalToBinary(decimal, t))
+    }, 200),
+    []
+  )
 
-  useEffect(() => {
-    const newDecimal = binary === '' ? '' : convertBinaryToDecimal(binary, twosComplement)
-    if(newDecimal !== false) {
-      delayedSetDecimal(String(newDecimal))
-    }
-
-    return delayedSetDecimal.cancel
-  }, [binary])
-
-  useEffect(() => {
-    const newBinary = decimal === '' ? '' : convertDecimalToBinary(decimal, twosComplement)
-    if(newBinary !== false) {
-      setBinary(newBinary)
-    }
-  }, [twosComplement])
+  const calculateUpdatedTwosComplement = (/** @type {boolean} */ t) => {
+    setTwosComplement(t)
+    debouncedSetTwosComplement(t)
+  }
 
   return (
     <div className="max-w-md">
@@ -52,7 +54,7 @@ const BinaryDecimalConverter = () => {
       <Input
         pattern="[-01]+"
         value={binary}
-        onChange={setBinary}
+        onChange={calculateFromBinary}
         onKeyPress={e => {
           if (e.key !== '1' && e.key !== '0' && e.key !== '-') {
             e.preventDefault()
@@ -64,7 +66,7 @@ const BinaryDecimalConverter = () => {
       <Input
         type="number"
         value={decimal}
-        onChange={setDecimal}
+        onChange={calculateFromDecimal}
         onKeyPress={e => {
           if (e.key === '.' || e.key === ',') {
             e.preventDefault()
@@ -73,7 +75,7 @@ const BinaryDecimalConverter = () => {
       >
         Decimal
       </Input>
-      <Checkbox checked={twosComplement} onChange={setTwosComplement}>
+      <Checkbox checked={twosComplement} onChange={calculateUpdatedTwosComplement}>
         Use two's complement
       </Checkbox>
     </div>
