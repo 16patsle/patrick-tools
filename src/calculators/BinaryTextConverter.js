@@ -1,45 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import debounce from 'lodash.debounce'
+import React, { useState } from 'react'
 import Input from '../components/Input'
 import Checkbox from '../components/Checkbox'
 import Radio from '../components/Radio'
 import Heading2 from '../components/Heading2'
 import convertASCIIBinaryToText from '../utils/convertASCIIBinaryToText'
 import convertTextToASCIIBinary from '../utils/convertTextToASCIIBinary'
-
-let delayedSetBinary
-let delayedSetText
+import { useConverterState } from '../utils/useConverterState'
 
 const BinaryTextConverter = () => {
-  const [binary, setBinary] = useState('')
-  const [text, setText] = useState('')
+  const [binary, setBinary, recalculateFromBinary] = useConverterState(
+    '',
+    binary => setText(convertASCIIBinaryToText(binary))
+  )
+  const [text, setText, recalculateFromText] = useConverterState(
+    '',
+    (text, spaces) => setBinary(convertTextToASCIIBinary(text, spaces))
+  )
   const [charset, setCharset] = useState('ascii')
   const [spaces, setSpaces] = useState(true)
-
-  if (!delayedSetBinary) {
-    delayedSetBinary = debounce(setBinary, 200)
-  }
-  if (!delayedSetText) {
-    delayedSetText = debounce(setText, 200)
-  }
-
-  useEffect(() => {
-    const newBinary = convertTextToASCIIBinary(text, spaces)
-    if (newBinary !== false) {
-      delayedSetBinary(newBinary)
-    }
-
-    return delayedSetBinary.cancel
-  }, [text, spaces])
-
-  useEffect(() => {
-    const newText = convertASCIIBinaryToText(binary)
-    if (newText !== false) {
-      delayedSetText(String(newText))
-    }
-
-    return delayedSetText.cancel
-  }, [binary])
 
   return (
     <div className="max-w-md">
@@ -47,7 +25,7 @@ const BinaryTextConverter = () => {
       <Input
         pattern="[01 ]+"
         value={binary}
-        onChange={setBinary}
+        onChange={recalculateFromBinary}
         onKeyPress={e => {
           if (e.key !== '1' && e.key !== '0' && e.key !== ' ') {
             e.preventDefault()
@@ -58,7 +36,7 @@ const BinaryTextConverter = () => {
       </Input>
       <Input
         value={text}
-        onChange={setText}
+        onChange={val => recalculateFromText(val, spaces)}
         onKeyPress={e => {
           if (charset === 'ascii' && e.key.charCodeAt(0) > 255) {
             e.preventDefault()
@@ -67,7 +45,10 @@ const BinaryTextConverter = () => {
       >
         Text
       </Input>
-      <Checkbox checked={spaces} onChange={setSpaces}>
+      <Checkbox checked={spaces} onChange={val => {
+        setSpaces(val)
+        recalculateFromText(text, val)
+      }}>
         Use space separator
       </Checkbox>
       <Radio

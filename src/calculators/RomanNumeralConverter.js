@@ -1,41 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import debounce from 'lodash.debounce'
+import React from 'react'
 import Input from '../components/Input'
 import Heading2 from '../components/Heading2'
 import convertDecimalToRoman from '../utils/convertDecimalToRoman'
 import convertRomanToDecimal from '../utils/convertRomanToDecimal'
-
-let delayedSetDecimal
-let delayedSetRoman
+import { useConverterState } from '../utils/useConverterState'
 
 const RomanNumeralConverter = () => {
-  const [decimal, setDecimal] = useState('')
-  const [roman, setRoman] = useState('')
-
-  if (!delayedSetDecimal) {
-    delayedSetDecimal = debounce(setDecimal, 200)
-  }
-  if (!delayedSetRoman) {
-    delayedSetRoman = debounce(setRoman, 200)
-  }
-
-  useEffect(() => {
-    const newDecimal = roman === '' ? '' : convertRomanToDecimal(roman)
-    if(newDecimal !== false) {
-      delayedSetDecimal(String(newDecimal))
-    }
-
-    return delayedSetDecimal.cancel
-  }, [roman])
-
-  useEffect(() => {
-    const newRoman = decimal === '' ? '' : convertDecimalToRoman(decimal)
-    if(newRoman !== false) {
-      delayedSetRoman(newRoman)
-    }
-    
-    return delayedSetRoman.cancel
-  }, [decimal])
+  const [decimal, setDecimal, recalculateFromDecimal] = useConverterState(
+    '',
+    d => setRoman(convertDecimalToRoman(d))
+  )
+  const [roman, setRoman, recalculateFromRoman] = useConverterState('', r =>
+    setDecimal(convertRomanToDecimal(r))
+  )
 
   return (
     <div className="max-w-md">
@@ -44,7 +21,7 @@ const RomanNumeralConverter = () => {
         type="number"
         min="1"
         value={decimal}
-        onChange={setDecimal}
+        onChange={recalculateFromDecimal}
         onKeyPress={e => {
           if (e.key === '.' || e.key === ',') {
             e.preventDefault()
@@ -56,9 +33,11 @@ const RomanNumeralConverter = () => {
       <Input
         pattern="[IVXLCDM]+"
         value={roman}
-        onChange={val => setRoman(val.toUpperCase())}
+        onChange={val => recalculateFromRoman(val.toUpperCase())}
         onKeyPress={e => {
-          if (!['I','V','X','L','C','D','M'].includes(e.key.toUpperCase())) {
+          if (
+            !['I', 'V', 'X', 'L', 'C', 'D', 'M'].includes(e.key.toUpperCase())
+          ) {
             e.preventDefault()
           }
         }}
