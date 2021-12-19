@@ -1,4 +1,4 @@
-import Big, { BigSource } from 'big.js'
+import Big, { type BigSource } from 'big.js'
 
 /**
  * Convert inches to centimeters

@@ -1,7 +1,4 @@
-/**
- * @param {string[]} digits
- */
-const getDecimal = digits => {
+const getDecimal = (digits: string[]) => {
   let sum = 0
   let factor = 1
 

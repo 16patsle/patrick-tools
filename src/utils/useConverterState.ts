@@ -1,6 +1,6 @@
 import { useCallback } from "react"
-import { useDebouncedCallback } from "./useDebounceCallback.js"
-import { useNonFalseState } from "./useNonFalseState.js"
+import { useDebouncedCallback } from "./useDebounceCallback"
+import { useNonFalseState } from "./useNonFalseState"
 
 export const useConverterState = (initialState, callback) => {
   const [value, setValue] = useNonFalseState(initialState)

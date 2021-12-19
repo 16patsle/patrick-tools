@@ -1,4 +1,4 @@
-function handleDigit(digit, map) {
+function handleDigit(digit: number, map: { 1: string; 5: string; 10: string }) {
   let string = ''
 
   if (digit < 4) {
@@ -24,10 +24,12 @@ function handleDigit(digit, map) {
 
 /**
  * Convert decimal to Roman numeral
- * @param {string} decimalStr - The string representation of the decimal number.
- * @returns {string|false} The converted Roman numeral as string, or false if failed.
+ * @param decimalStr - The string representation of the decimal number.
+ * @returns The converted Roman numeral as string, or false if failed.
  */
-export default function convertDecimalToRoman(decimalStr) {
+export default function convertDecimalToRoman(
+  decimalStr: string
+): string | false {
   const map = {
     // digit value
     1: {
@@ -50,7 +52,7 @@ export default function convertDecimalToRoman(decimalStr) {
 
   let factor = 10
   let number = parseInt(decimalStr, 10)
-  let rest
+  let rest: number
   let string = ''
 
   if (Number.isNaN(number)) {

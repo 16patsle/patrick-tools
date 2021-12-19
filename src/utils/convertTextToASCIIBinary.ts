@@ -1,12 +1,12 @@
-import convertDecimalToBinary from './convertDecimalToBinary.js'
+import convertDecimalToBinary from './convertDecimalToBinary'
 
 /**
  * Convert text to ASCII binary
- * @param {string} textStr - The string to convert.
- * @param {boolean} [spaces] - Separate bytes with spaces.
- * @returns {string|false} The converted text, or false if failed.
+ * @param textStr - The string to convert.
+ * @param spaces - Separate bytes with spaces.
+ * @returns The converted text, or false if failed.
  */
-export default function convertTextToASCIIBinary(textStr, spaces = true) {
+export default function convertTextToASCIIBinary(textStr: string, spaces = true): string | false {
   // Split string into characters
   return textStr.split('')
     // Get char code

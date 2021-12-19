@@ -1,12 +1,12 @@
 import chunk from 'lodash.chunk'
-import convertBinaryToDecimal from './convertBinaryToDecimal.js'
+import convertBinaryToDecimal from './convertBinaryToDecimal'
 
 /**
  * Convert ASCII binary to text
- * @param {string} binaryStr - The string representation of the binary text.
- * @returns {string|false} The converted text, or false if failed.
+ * @param binaryStr - The string representation of the binary text.
+ * @returns The converted text, or false if failed.
  */
-export default function convertASCIIBinaryToText(binaryStr) {
+export default function convertASCIIBinaryToText(binaryStr: string): string | false {
   // Remove spaces
   binaryStr = binaryStr.replace(/ /g, '')
 

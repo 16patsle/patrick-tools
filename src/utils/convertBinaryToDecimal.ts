@@ -1,16 +1,16 @@
-import getDecimalFromNegativeBinary from './binary/getDecimalFromNegativeBinary.js'
-import getDecimal from './binary/getDecimal.js'
+import getDecimalFromNegativeBinary from './binary/getDecimalFromNegativeBinary'
+import getDecimal from './binary/getDecimal'
 
 /**
  * Convert binary to decimal number
- * @param {string} binaryStr - The string representation of the binary number.
- * @param {boolean} twosComplement - Whether to treat the first bit as a sign and use two's complement.
- * @returns {number|false} The converted number, or false if failed.
+ * @param binaryStr - The string representation of the binary number.
+ * @param twosComplement - Whether to treat the first bit as a sign and use two's complement.
+ * @returns The converted number, or false if failed.
  */
 export default function convertBinaryToDecimal(
-  binaryStr,
-  twosComplement = false
-) {
+  binaryStr: string,
+  twosComplement: boolean = false
+): number | false {
   if (
     (twosComplement && binaryStr.includes('-')) ||
     !/^[-01]+$/.test(binaryStr)

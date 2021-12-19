@@ -1,9 +1,9 @@
 /**
  * Convert Roman numerals to decimal
- * @param {string} romanStr - The string representation of the Roman numeral.
- * @returns {number|false} The converted decimal number, or false if failed.
+ * @param romanStr - The string representation of the Roman numeral.
+ * @returns The converted decimal number, or false if failed.
  */
-export default function convertRomanToDecimal(romanStr) {
+export default function convertRomanToDecimal(romanStr: string): number | false {
   if (!/^[IVXLCDM]+$/.test(romanStr)) {
     return false
   }
