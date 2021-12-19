@@ -1,5 +1,5 @@
-import getDecimalFromNegativeBinary from './binary/getDecimalFromNegativeBinary'
-import getDecimal from './binary/getDecimal'
+import getDecimalFromNegativeBinary from './binary/getDecimalFromNegativeBinary.js'
+import getDecimal from './binary/getDecimal.js'
 
 /**
  * Convert binary to decimal number

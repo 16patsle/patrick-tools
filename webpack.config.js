@@ -46,6 +46,14 @@ const createConfig = (/** @type {boolean} */ isDevelopment) => ({
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
+    // Very hacky, but it works. I see no other solution right now.
+    alias: {
+      './convertBinaryToDecimal.js$': path.resolve(__dirname, 'src/utils/convertBinaryToDecimal.ts'),
+      './binary/getDecimalFromNegativeBinary.js$': path.resolve(__dirname, 'src/utils/binary/getDecimalFromNegativeBinary.ts'),
+      './binary/getDecimal.js$': path.resolve(__dirname, 'src/utils/binary/getDecimal.ts'),
+      './convertDecimalToBinary.js$': path.resolve(__dirname, 'src/utils/convertDecimalToBinary.ts'),
+      './getDecimal.js$': path.resolve(__dirname, 'src/utils/binary/getDecimal.ts'),
+    }
   },
   plugins: [
     new HtmlWebPackPlugin({

@@ -18,10 +18,12 @@ export default function convertRomanToDecimal(romanStr: string): number | false 
     M: 1000,
   }
 
+  type RomanNumberElement = keyof typeof map
+
   // split array, convert to numbers, reverse to start at right end
   const arr = romanStr
     .split('')
-    .map(val => map[val])
+    .map(val => map[val as RomanNumberElement])
     .reverse()
 
   let lastNumber = 0

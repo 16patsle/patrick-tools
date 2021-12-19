@@ -1,5 +1,5 @@
 import chunk from 'lodash.chunk'
-import convertBinaryToDecimal from './convertBinaryToDecimal'
+import convertBinaryToDecimal from './convertBinaryToDecimal.js'
 
 /**
  * Convert ASCII binary to text

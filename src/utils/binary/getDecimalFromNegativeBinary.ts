@@ -1,4 +1,4 @@
-import getDecimal from './getDecimal'
+import getDecimal from './getDecimal.js'
 
 export const getComplement = (digits: string[]) => digits.map(val => (val == '1' ? '0' : '1'))
 

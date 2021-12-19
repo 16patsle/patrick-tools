@@ -65,7 +65,7 @@ export default function convertDecimalToRoman(
     number = Math.floor(number / 10)
 
     // Prepend roman numeral of the current digit
-    string = handleDigit(rest, map[factor ** i]) + string
+    string = handleDigit(rest, map[factor ** i as 1 | 10 | 100]) + string
   }
 
   // If any more thousands, add the required number of M's

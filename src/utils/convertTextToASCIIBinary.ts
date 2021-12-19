@@ -1,4 +1,4 @@
-import convertDecimalToBinary from './convertDecimalToBinary'
+import convertDecimalToBinary from './convertDecimalToBinary.js'
 
 /**
  * Convert text to ASCII binary

@@ -1,5 +1,5 @@
-import convertBinaryToDecimal from './convertBinaryToDecimal'
-import { getComplement } from './binary/getDecimalFromNegativeBinary'
+import convertBinaryToDecimal from './convertBinaryToDecimal.js'
+import { getComplement } from './binary/getDecimalFromNegativeBinary.js'
 
 const findLargestFittingPowerOfTwo = (number: number) => {
   let factor = 1
