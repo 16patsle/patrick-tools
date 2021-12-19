@@ -1,7 +1,5 @@
 import Big from 'big.js'
 
-Big.DP = 5
-
 /**
  * Convert kilograms to pounds
  * @param {Big|number|string} kilo - The kilogram value
