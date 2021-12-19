@@ -4,37 +4,28 @@ import Checkbox from '../components/Checkbox'
 import Heading2 from '../components/Heading2'
 import convertBinaryToDecimal from '../utils/convertBinaryToDecimal'
 import convertDecimalToBinary from '../utils/convertDecimalToBinary'
-import { useNonFalseState } from '../utils/useNonFalseState'
-import { useDebouncedCallback } from '../utils/useDebounceCallback'
+import { useConverterState } from '../utils/useConverterState'
 
 const BinaryDecimalConverter = () => {
-  const [binary, setBinary] = useNonFalseState('')
-  const debouncedSetBinary = useDebouncedCallback((d, t) =>
-    setBinary(convertDecimalToBinary(d, t))
+  const [binary, setBinary, recalculateFromBinary] = useConverterState(
+    '',
+    (b, t) => setDecimal(String(convertBinaryToDecimal(b, t)))
   )
-  const [decimal, setDecimal] = useNonFalseState('')
-  const debouncedSetDecimal = useDebouncedCallback((b, t) =>
-    setDecimal(String(convertBinaryToDecimal(b, t)))
+  const [decimal, setDecimal, recalculateFromDecimal] = useConverterState(
+    '',
+    (d, t) => setBinary(convertDecimalToBinary(d, t))
   )
   const [twosComplement, setTwosComplement] = useState(false)
 
-  const calculateFromBinary = (/** @type {string} */ b) => {
-    setBinary(b)
-    debouncedSetDecimal(b, twosComplement)
-  }
+  const calculateFromBinary = (/** @type {string} */ b) =>
+    recalculateFromBinary(b, twosComplement)
 
-  const calculateFromDecimal = (/** @type {string} */ d) => {
-    setDecimal(d)
-    debouncedSetBinary(d, twosComplement)
-  }
-
-  const debouncedRecalculateTC = useDebouncedCallback(t =>
-    setBinary(convertDecimalToBinary(decimal, t))
-  )
+  const calculateFromDecimal = (/** @type {string} */ d) =>
+    recalculateFromDecimal(d, twosComplement)
 
   const calculateUpdatedTwosComplement = (/** @type {boolean} */ t) => {
     setTwosComplement(t)
-    debouncedRecalculateTC(t)
+    recalculateFromDecimal(decimal, t)
   }
 
   return (
