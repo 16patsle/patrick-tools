@@ -1,51 +1,40 @@
-import React, { useState, useCallback } from 'react'
-import debounce from 'lodash.debounce'
+import React, { useState } from 'react'
 import Input from '../components/Input'
 import Checkbox from '../components/Checkbox'
 import Heading2 from '../components/Heading2'
 import convertBinaryToDecimal from '../utils/convertBinaryToDecimal'
 import convertDecimalToBinary from '../utils/convertDecimalToBinary'
 import { useNonFalseState } from '../utils/useNonFalseState'
+import { useDebouncedCallback } from '../utils/useDebounceCallback'
 
 const BinaryDecimalConverter = () => {
   const [binary, setBinary] = useNonFalseState('')
-  const [decimal, setDecimal] = useNonFalseState('')
-  const [twosComplement, setTwosComplement] = useState(false)
-
-  const debouncedSetDecimal = useCallback(
-    debounce(
-      b => setDecimal(String(convertBinaryToDecimal(b, twosComplement))),
-      200
-    ),
-    []
+  const debouncedSetBinary = useDebouncedCallback((d, t) =>
+    setBinary(convertDecimalToBinary(d, t))
   )
+  const [decimal, setDecimal] = useNonFalseState('')
+  const debouncedSetDecimal = useDebouncedCallback((b, t) =>
+    setDecimal(String(convertBinaryToDecimal(b, t)))
+  )
+  const [twosComplement, setTwosComplement] = useState(false)
 
   const calculateFromBinary = (/** @type {string} */ b) => {
     setBinary(b)
-    debouncedSetDecimal(b)
+    debouncedSetDecimal(b, twosComplement)
   }
-
-  const debouncedSetBinary = useCallback(
-    debounce(d => setBinary(convertDecimalToBinary(d, twosComplement)), 200),
-    []
-  )
 
   const calculateFromDecimal = (/** @type {string} */ d) => {
     setDecimal(d)
-    debouncedSetBinary(d)
+    debouncedSetBinary(d, twosComplement)
   }
 
-  const debouncedSetTwosComplement = useCallback(
-    debounce(t => {
-      console.log(t)
-      return setBinary(convertDecimalToBinary(decimal, t))
-    }, 200),
-    []
+  const debouncedRecalculateTC = useDebouncedCallback(t =>
+    setBinary(convertDecimalToBinary(decimal, t))
   )
 
   const calculateUpdatedTwosComplement = (/** @type {boolean} */ t) => {
     setTwosComplement(t)
-    debouncedSetTwosComplement(t)
+    debouncedRecalculateTC(t)
   }
 
   return (
@@ -75,7 +64,10 @@ const BinaryDecimalConverter = () => {
       >
         Decimal
       </Input>
-      <Checkbox checked={twosComplement} onChange={calculateUpdatedTwosComplement}>
+      <Checkbox
+        checked={twosComplement}
+        onChange={calculateUpdatedTwosComplement}
+      >
         Use two's complement
       </Checkbox>
     </div>
