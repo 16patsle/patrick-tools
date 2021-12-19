@@ -7,7 +7,7 @@ import {
 
 export const useNonFalseState = <T>(
   initialState: T
-): [T, Dispatch<SetStateAction<T>>] => {
+): [T, Dispatch<SetStateAction<T | false>>] => {
   const [value, setValue] = useState(initialState)
   const newSetValue = useCallback(
     value => {
