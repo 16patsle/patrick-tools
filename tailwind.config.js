@@ -1,14 +1,12 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
-  mode: 'jit',
-  purge: ['./src/**/*.html', './src/**/*.js'],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./src/**/*.html', './src/**/*.js'],
   theme: {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      gray: colors.warmGray,
+      gray: colors.stone,
       red: colors.red,
       yellow: colors.amber,
       green: colors.emerald,
@@ -17,9 +15,6 @@ module.exports = {
       purple: colors.violet,
       pink: colors.pink
     }
-  },
-  variants: {
-    extend: {},
   },
   plugins: [
     require('@tailwindcss/forms'),
