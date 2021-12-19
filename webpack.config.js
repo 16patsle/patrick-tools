@@ -13,13 +13,15 @@ const createConfig = isDevelopment => ({
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
+            cacheDirectory: true,
+            extends: './.babelrc',
             plugins: [
-              isDevelopment && require.resolve('react-refresh/babel'),
+              isDevelopment && 'react-refresh/babel',
             ].filter(Boolean),
           },
         },
@@ -37,6 +39,9 @@ const createConfig = isDevelopment => ({
   optimization: {
     minimize: !isDevelopment,
     minimizer: [`...`, new CssMinimizerPlugin()],
+  },
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx'],
   },
   plugins: [
     new HtmlWebPackPlugin({
