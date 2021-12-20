@@ -47,7 +47,7 @@ export const SvgToPngConverter = () => {
         SVG
       </TextArea>
       {loading && <p>Loading...</p>}
-      {error && <ErrorNotice>{error}</ErrorNotice>}
+      {error && <ErrorNotice><span className="font-semibold">Error:</span> {error}</ErrorNotice>}
       <Button
         onClick={renderSvg}
         disabled={svg.length === 0 || loading || !canvas.current}
