@@ -6,8 +6,13 @@ import convertInchToCentimeter from '../utils/convertInchToCentimeter'
 import { useConverterState } from '../utils/useConverterState'
 
 const CentimeterInchConverter = () => {
-  const [cm, setCm, recalculateFromCm] = useConverterState('', cm => setInch(convertCentimeterToInch(cm)))
-  const [inch, setInch, recalculateFromInch] = useConverterState('', inch => setCm(convertInchToCentimeter(inch)))
+  const [cm, setCm, recalculateFromCm] = useConverterState('', (cm): void =>
+    setInch(convertCentimeterToInch(cm))
+  )
+  const [inch, setInch, recalculateFromInch] = useConverterState(
+    '',
+    (inch): void => setCm(convertInchToCentimeter(inch))
+  )
 
   return (
     <div className="max-w-md">

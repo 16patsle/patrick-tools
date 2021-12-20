@@ -10,11 +10,11 @@ import { useConverterState } from '../utils/useConverterState'
 const BinaryTextConverter = () => {
   const [binary, setBinary, recalculateFromBinary] = useConverterState(
     '',
-    binary => setText(convertASCIIBinaryToText(binary))
+    (binary): void => setText(convertASCIIBinaryToText(binary))
   )
   const [text, setText, recalculateFromText] = useConverterState(
     '',
-    (text, spaces) => setBinary(convertTextToASCIIBinary(text, spaces))
+    (text, spaces): void => setBinary(convertTextToASCIIBinary(text, spaces))
   )
   const [charset, setCharset] = useState('ascii')
   const [spaces, setSpaces] = useState(true)
@@ -45,10 +45,13 @@ const BinaryTextConverter = () => {
       >
         Text
       </Input>
-      <Checkbox checked={spaces} onChange={val => {
-        setSpaces(val)
-        recalculateFromText(text, val)
-      }}>
+      <Checkbox
+        checked={spaces}
+        onChange={val => {
+          setSpaces(val)
+          recalculateFromText(text, val)
+        }}
+      >
         Use space separator
       </Checkbox>
       <Radio

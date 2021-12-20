@@ -6,8 +6,14 @@ import convertPoundToKilo from '../utils/convertPoundToKilo'
 import { useConverterState } from '../utils/useConverterState'
 
 const KiloPoundConverter = () => {
-  const [kilo, setKilo, recalculateFromKilo] = useConverterState('', kilo => setPound(convertKiloToPound(kilo)))
-  const [pound, setPound, recalculateFromPound] = useConverterState('', pound => setKilo(convertPoundToKilo(pound)))
+  const [kilo, setKilo, recalculateFromKilo] = useConverterState(
+    '',
+    (kilo): void => setPound(convertKiloToPound(kilo))
+  )
+  const [pound, setPound, recalculateFromPound] = useConverterState(
+    '',
+    (pound): void => setKilo(convertPoundToKilo(pound))
+  )
 
   return (
     <div className="max-w-md">
@@ -15,7 +21,12 @@ const KiloPoundConverter = () => {
       <Input type="number" min="0" value={kilo} onChange={recalculateFromKilo}>
         Kilograms (kg)
       </Input>
-      <Input type="number" min="0" value={pound} onChange={recalculateFromPound}>
+      <Input
+        type="number"
+        min="0"
+        value={pound}
+        onChange={recalculateFromPound}
+      >
         Pounds (lb)
       </Input>
     </div>

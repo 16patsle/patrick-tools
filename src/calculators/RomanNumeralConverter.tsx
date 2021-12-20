@@ -8,10 +8,11 @@ import { useConverterState } from '../utils/useConverterState'
 const RomanNumeralConverter = () => {
   const [decimal, setDecimal, recalculateFromDecimal] = useConverterState(
     '',
-    d => setRoman(convertDecimalToRoman(d))
+    (d): void => setRoman(convertDecimalToRoman(d))
   )
-  const [roman, setRoman, recalculateFromRoman] = useConverterState('', r =>
-    setDecimal(convertRomanToDecimal(r))
+  const [roman, setRoman, recalculateFromRoman] = useConverterState(
+    '',
+    (r): void => setDecimal(String(convertRomanToDecimal(r)))
   )
 
   return (

@@ -9,21 +9,21 @@ import { useConverterState } from '../utils/useConverterState'
 const BinaryDecimalConverter = () => {
   const [binary, setBinary, recalculateFromBinary] = useConverterState(
     '',
-    (b, t) => setDecimal(String(convertBinaryToDecimal(b, t)))
+    (b, t): void => setDecimal(String(convertBinaryToDecimal(b, t)))
   )
   const [decimal, setDecimal, recalculateFromDecimal] = useConverterState(
     '',
-    (d, t) => setBinary(convertDecimalToBinary(d, t))
+    (d, t): void => setBinary(convertDecimalToBinary(d, t))
   )
   const [twosComplement, setTwosComplement] = useState(false)
 
-  const calculateFromBinary = (/** @type {string} */ b) =>
+  const calculateFromBinary = (b: string) =>
     recalculateFromBinary(b, twosComplement)
 
-  const calculateFromDecimal = (/** @type {string} */ d) =>
+  const calculateFromDecimal = (d: string) =>
     recalculateFromDecimal(d, twosComplement)
 
-  const calculateUpdatedTwosComplement = (/** @type {boolean} */ t) => {
+  const calculateUpdatedTwosComplement = (t: boolean) => {
     setTwosComplement(t)
     recalculateFromDecimal(decimal, t)
   }
