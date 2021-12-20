@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react'
 import type CanvgType from 'canvg'
-import Input from '../components/Input'
 import { Heading2 } from '../components/Heading2'
+import TextArea from '../components/TextArea'
 
 let Canvg: Promise<void> | typeof CanvgType
 
@@ -41,9 +41,9 @@ export const SvgToPngConverter = () => {
   return (
     <div className="max-w-md">
       <Heading2>Convert SVG to PNG</Heading2>
-      <Input type="text" value={svg} onChange={setSvg}>
+      <TextArea value={svg} onChange={setSvg}>
         SVG
-      </Input>
+      </TextArea>
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
       <button onClick={renderSvg} disabled={svg.length === 0 || loading || !canvas.current}>
