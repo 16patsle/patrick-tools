@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react'
 import type CanvgType from 'canvg'
 import { Heading2 } from '../components/Heading2'
 import TextArea from '../components/TextArea'
-import { Button } from '../components/Button'
+import { AnchorButton, Button } from '../components/Button'
 
 let Canvg: Promise<void> | typeof CanvgType
 
@@ -47,11 +47,19 @@ export const SvgToPngConverter = () => {
       </TextArea>
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
-      <Button onClick={renderSvg} disabled={svg.length === 0 || loading || !canvas.current}>
+      <Button
+        onClick={renderSvg}
+        disabled={svg.length === 0 || loading || !canvas.current}
+      >
         Render
       </Button>
       <canvas ref={canvas} hidden />
-      {pngUrl && <img src={pngUrl} />}
+      {pngUrl && (
+        <div className="shadow-md border-gray-200 border-2 rounded-md p-2 pb-0 my-3 flex items-center flex-col">
+          <img src={pngUrl} alt="The generated PNG image" />
+          <AnchorButton href={pngUrl} download>Download</AnchorButton>
+        </div>
+      )}
     </div>
   )
 }
