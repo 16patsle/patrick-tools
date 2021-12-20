@@ -5,6 +5,7 @@ import BinaryTextConverter from './calculators/BinaryTextConverter'
 import CentimeterInchConverter from './calculators/CentimeterInchConverter'
 import KiloPoundConverter from './calculators/KiloPoundConverter'
 import RomanNumeralConverter from './calculators/RomanNumeralConverter'
+import { SvgToPngConverter } from './calculators/SvgToPngConverter'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <RomanNumeralConverter />
       <KiloPoundConverter />
       <CentimeterInchConverter />
+      <SvgToPngConverter />
     </div>
   )
 }
