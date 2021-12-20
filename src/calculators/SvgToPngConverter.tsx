@@ -4,6 +4,7 @@ import { Heading2 } from '../components/Heading2'
 import TextArea from '../components/TextArea'
 import { AnchorButton, Button } from '../components/Button'
 import { ErrorNotice } from '../components/Notice'
+import Radio from '../components/Radio'
 
 let Canvg: Promise<void> | typeof CanvgType
 
@@ -13,6 +14,8 @@ export const SvgToPngConverter = () => {
   const [error, setError] = useState('')
   const canvas = useRef<HTMLCanvasElement>(null)
   const [loading, setLoading] = useState(false)
+  const [inputType, setInputType] = useState<'text' | 'file'>('text')
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   if (svg.length > 0 && !Canvg) {
     setLoading(true)
@@ -40,12 +43,40 @@ export const SvgToPngConverter = () => {
     }
   }, [svg, canvas])
 
+  const updateInputType = (type: string) =>
+    setInputType(type === 'file' ? 'file' : 'text')
+
   return (
     <div className="max-w-md">
       <Heading2>Convert SVG to PNG</Heading2>
-      <TextArea value={svg} onChange={setSvg}>
-        SVG
-      </TextArea>
+      <Radio
+        name="svg_png_input_type"
+        value="text"
+        checkedValue={inputType}
+        onChange={updateInputType}
+      >
+        Input text
+      </Radio>
+      <Radio
+        name="svg_png_input_type"
+        value="file"
+        checkedValue={inputType}
+        onChange={updateInputType}
+      >
+        Upload file
+      </Radio>
+      {inputType === 'text' ? (
+        <TextArea value={svg} onChange={setSvg}>
+          SVG
+        </TextArea>
+      ) : (
+        <input
+          type="file"
+          accept="image/svg+xml"
+          onChange={e => setSelectedFile(e.target.files[0])}
+        />
+      )}
+
       {loading && <p>Loading...</p>}
       {error && (
         <ErrorNotice>
