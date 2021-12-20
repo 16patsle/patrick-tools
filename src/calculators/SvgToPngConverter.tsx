@@ -3,6 +3,7 @@ import type CanvgType from 'canvg'
 import { Heading2 } from '../components/Heading2'
 import TextArea from '../components/TextArea'
 import { AnchorButton, Button } from '../components/Button'
+import { ErrorNotice } from '../components/Notice'
 
 let Canvg: Promise<void> | typeof CanvgType
 
@@ -46,7 +47,7 @@ export const SvgToPngConverter = () => {
         SVG
       </TextArea>
       {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      {error && <ErrorNotice>{error}</ErrorNotice>}
       <Button
         onClick={renderSvg}
         disabled={svg.length === 0 || loading || !canvas.current}
