@@ -5,6 +5,7 @@ import { AnchorButton, Button } from '../components/Button'
 import { ErrorNotice } from '../components/Notice'
 import Radio from '../components/Radio'
 import { convertSvgToPng } from '../utils/convertSvgToPng'
+import { FileInput } from '../components/FileInput'
 
 export const SvgToPngConverter = () => {
   const [svg, setSvg] = useState('')
@@ -25,7 +26,7 @@ export const SvgToPngConverter = () => {
       setConverting(false)
     } catch (e) {
       if(e instanceof Error) {
-      setError(e.message)
+        setError(e.message)
       } else if (typeof e === 'string') {
         setError(e)
       } else {
@@ -61,11 +62,9 @@ export const SvgToPngConverter = () => {
           SVG
         </TextArea>
       ) : (
-        <input
-          type="file"
-          accept="image/svg+xml"
-          onChange={e => setSelectedFile(e.target.files[0])}
-        />
+        <FileInput accept="image/svg+xml" onChange={setSelectedFile}>
+          Select File
+        </FileInput>
       )}
 
       {converting && <p>Converting...</p>}
