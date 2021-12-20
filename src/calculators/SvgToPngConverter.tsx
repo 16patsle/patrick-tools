@@ -6,6 +6,7 @@ import { ErrorNotice } from '../components/Notice'
 import Radio from '../components/Radio'
 import { convertSvgToPng } from '../utils/convertSvgToPng'
 import { FileInput } from '../components/FileInput'
+import { readStringFromFile } from '../utils/readStringFromFile'
 
 export const SvgToPngConverter = () => {
   const [svg, setSvg] = useState('')
@@ -18,14 +19,16 @@ export const SvgToPngConverter = () => {
 
   const renderSvg = useCallback(async () => {
     try {
-      if (!canvas.current) {
+      if (!canvas.current || (inputType === 'file' && !selectedFile)) {
         return
       }
+      const content =
+        inputType === 'text' ? svg : await readStringFromFile(selectedFile!)
       setConverting(true)
-      setPngUrl(await convertSvgToPng(svg, canvas.current))
+      setPngUrl(await convertSvgToPng(content, canvas.current))
       setConverting(false)
     } catch (e) {
-      if(e instanceof Error) {
+      if (e instanceof Error) {
         setError(e.message)
       } else if (typeof e === 'string') {
         setError(e)
@@ -37,6 +40,8 @@ export const SvgToPngConverter = () => {
 
   const updateInputType = (type: string) =>
     setInputType(type === 'file' ? 'file' : 'text')
+
+  const canConvert = inputType === 'text' ? svg.length === 0 : !selectedFile
 
   return (
     <div className="max-w-md">
@@ -75,7 +80,7 @@ export const SvgToPngConverter = () => {
       )}
       <Button
         onClick={renderSvg}
-        disabled={svg.length === 0 || converting || !canvas.current}
+        disabled={canConvert || converting || !canvas.current}
       >
         Render
       </Button>
