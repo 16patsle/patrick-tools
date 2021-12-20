@@ -47,7 +47,11 @@ export const SvgToPngConverter = () => {
         SVG
       </TextArea>
       {loading && <p>Loading...</p>}
-      {error && <ErrorNotice><span className="font-semibold">Error:</span> {error}</ErrorNotice>}
+      {error && (
+        <ErrorNotice>
+          <span className="font-semibold">Error:</span> {error}
+        </ErrorNotice>
+      )}
       <Button
         onClick={renderSvg}
         disabled={svg.length === 0 || loading || !canvas.current}
@@ -58,7 +62,9 @@ export const SvgToPngConverter = () => {
       {pngUrl && (
         <div className="shadow-md border-gray-200 border-2 rounded-md p-2 pb-0 my-3 flex items-center flex-col">
           <img src={pngUrl} alt="The generated PNG image" />
-          <AnchorButton href={pngUrl} download>Download</AnchorButton>
+          <AnchorButton href={pngUrl} download>
+            Download
+          </AnchorButton>
         </div>
       )}
     </div>
