@@ -17,11 +17,20 @@ export const SvgToPngConverter = () => {
 
   const renderSvg = useCallback(async () => {
     try {
+      if (!canvas.current) {
+        return
+      }
       setConverting(true)
       setPngUrl(await convertSvgToPng(svg, canvas.current))
       setConverting(false)
     } catch (e) {
+      if(e instanceof Error) {
       setError(e.message)
+      } else if (typeof e === 'string') {
+        setError(e)
+      } else {
+        setError('Unknown error')
+      }
     }
   }, [svg, canvas])
 
