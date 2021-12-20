@@ -1,6 +1,6 @@
 import React from 'react'
 import Input from '../components/Input'
-import Heading2 from '../components/Heading2'
+import { Heading2 } from '../components/Heading2'
 import convertKiloToPound from '../utils/convertKiloToPound'
 import convertPoundToKilo from '../utils/convertPoundToKilo'
 import { useConverterState } from '../utils/useConverterState'

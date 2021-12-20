@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Input from '../components/Input'
 import Checkbox from '../components/Checkbox'
-import Heading2 from '../components/Heading2'
+import { Heading2 } from '../components/Heading2'
 import convertBinaryToDecimal from '../utils/convertBinaryToDecimal'
 import convertDecimalToBinary from '../utils/convertDecimalToBinary'
 import { useConverterState } from '../utils/useConverterState'

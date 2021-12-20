@@ -1,6 +1,6 @@
 import React from 'react'
 import Input from '../components/Input'
-import Heading2 from '../components/Heading2'
+import { Heading2 } from '../components/Heading2'
 import convertDecimalToRoman from '../utils/convertDecimalToRoman'
 import convertRomanToDecimal from '../utils/convertRomanToDecimal'
 import { useConverterState } from '../utils/useConverterState'
