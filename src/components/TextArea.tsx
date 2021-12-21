@@ -47,7 +47,7 @@ const TextArea = ({
         value={value}
         onChange={onChange && (e => onChange(e.target.value, e))}
         onKeyPress={onKeyPress}
-        className={`w-full shadow-md bg-gray-50 caret-yellow-500 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 border-gray-200 focus:border-gray-200 border-2 rounded-md p-2${
+        className={`w-full shadow-md bg-gray-50 hover:bg-gray-100 caret-yellow-500 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 border-gray-200 focus:border-gray-200 border-2 rounded-md p-2${
           className ? ` ${className}` : ''
         }`}
       ></textarea>
