@@ -12,7 +12,10 @@ type FileInputProps = {
   /**
    * Callback when content changes
    */
-  onChange: (value: File | null, event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (
+    value: File | null,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void
   /**
    * Additional classes
    */
@@ -30,14 +33,18 @@ export const FileInput = ({
       <div className="col-span-1 text-gray-500 uppercase text-sm font-semibold">
         {children}
       </div>
-      <input
-        type="file"
-        accept={accept}
-        onChange={e => onChange(e.target.files?.[0] ?? null, e)}
-        className={`w-full h-9 shadow-md bg-gray-50 caret-yellow-500 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 border-gray-200 focus:border-gray-200 border-2 rounded-md p-2${
+      <div
+        className={`w-full h-auto flex items-center shadow-md bg-gray-50 caret-yellow-500 focus-within:ring-2 focus-within:ring-yellow-500 focus-within:ring-offset-2 border-gray-200 border-2 rounded-md p-2${
           className ? ` ${className}` : ''
         }`}
-      />
+      >
+        <input
+          type="file"
+          accept={accept}
+          onChange={e => onChange(e.target.files?.[0] ?? null, e)}
+          className="focus:outline-none"
+        />
+      </div>
     </label>
   )
 }
