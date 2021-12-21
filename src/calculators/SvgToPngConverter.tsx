@@ -6,7 +6,6 @@ import { ErrorNotice } from '../components/Notice'
 import Radio from '../components/Radio'
 import { convertSvgToPng } from '../utils/convertSvgToPng'
 import { FileInput } from '../components/FileInput'
-import { readStringFromFile } from '../utils/readStringFromFile'
 
 export const SvgToPngConverter = () => {
   const [svg, setSvg] = useState('')
@@ -19,14 +18,19 @@ export const SvgToPngConverter = () => {
 
   const renderSvg = useCallback(async () => {
     try {
-      if (!canvas.current || (inputType === 'file' && !selectedFile)) {
-        return
+      if (!canvas.current) {
+        throw new Error('Canvas is not available')
       }
-      const content =
-        inputType === 'text' ? svg : await readStringFromFile(selectedFile!)
+      let content = svg
+      if (inputType === 'file') {
+        if (!selectedFile) {
+          throw new Error('Could not read file content')
+        }
+        content = await selectedFile.text()
+      }
+
       setConverting(true)
       setPngUrl(await convertSvgToPng(content, canvas.current))
-      setConverting(false)
     } catch (e) {
       if (e instanceof Error) {
         setError(e.message)
@@ -35,11 +39,18 @@ export const SvgToPngConverter = () => {
       } else {
         setError('Unknown error')
       }
+    } finally {
+      setConverting(false)
     }
-  }, [svg, canvas])
+  }, [svg, canvas, selectedFile, inputType])
 
-  const updateInputType = (type: string) =>
+  const updateInputType = (type: string) => {
     setInputType(type === 'file' ? 'file' : 'text')
+    setPngUrl('')
+    setError('')
+    setConverting(false)
+    setSelectedFile(null)
+  }
 
   const canConvert = inputType === 'text' ? svg.length === 0 : !selectedFile
 
