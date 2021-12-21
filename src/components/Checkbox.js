@@ -30,7 +30,7 @@ const Checkbox = ({ children, checked, onChange, className = '' }) => {
           type="checkbox"
           checked={checked}
           onChange={onChange && (e => onChange(e.target.checked, e))}
-          className={`w-6 h-6 shadow-md bg-gray-50 hover:bg-gray-100 text-yellow-500 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 border-gray-200 focus:border-gray-200 border-2 rounded-md p-1${
+          className={`w-6 h-6 shadow-md checked:shadow-yellow-500 bg-gray-50 hover:bg-gray-100 text-yellow-500 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 border-gray-200 focus:border-gray-200 border-2 rounded-md p-1${
             className ? ` ${className}` : ''
           }`}
         />
