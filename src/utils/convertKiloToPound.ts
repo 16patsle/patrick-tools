@@ -6,7 +6,7 @@ import Big, { type BigSource } from 'big.js'
  * @param decimals - Number of decimals
  * @returns The kilogram value as pound, or false if failed.
  */
-export default function convertKiloToPound(kilo: BigSource, decimals: number = 5): string | false {
+export default function convertKiloToPound(kilo: BigSource, decimals = 5) {
   if (!(kilo instanceof Big)) {
     try {
       kilo = new Big(kilo)
