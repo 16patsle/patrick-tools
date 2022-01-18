@@ -1,5 +1,5 @@
 import test from 'ava'
-import convertBinaryToDecimal from '../src/utils/convertBinaryToDecimal.js'
+import convertBinaryToDecimal from '../src/utils/convertBinaryToDecimal'
 
 test('only accepts binary numbers written as strings', t => {
   t.is(convertBinaryToDecimal('11a'), false)

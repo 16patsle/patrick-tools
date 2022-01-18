@@ -1,5 +1,5 @@
 import test from 'ava'
-import convertInchToCentimeter from '../src/utils/convertInchToCentimeter.js'
+import convertInchToCentimeter from '../src/utils/convertInchToCentimeter'
 
 test('returns false on non-number input', t => {
   t.is(convertInchToCentimeter('numb3r'), false)

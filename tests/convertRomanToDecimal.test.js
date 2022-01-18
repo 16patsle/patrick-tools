@@ -1,5 +1,5 @@
 import test from 'ava'
-import convertRomanToDecimal from '../src/utils/convertRomanToDecimal.js'
+import convertRomanToDecimal from '../src/utils/convertRomanToDecimal'
 
 test('handles three, III', t => {
   t.is(convertRomanToDecimal('III'), 3)

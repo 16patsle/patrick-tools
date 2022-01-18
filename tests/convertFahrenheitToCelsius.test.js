@@ -1,5 +1,5 @@
 import test from 'ava'
-import convertFahrenheitToCelsius from '../src/utils/convertFahrenheitToCelsius.js'
+import convertFahrenheitToCelsius from '../src/utils/convertFahrenheitToCelsius'
 
 test('returns false on non-number input', t => {
   t.is(convertFahrenheitToCelsius('numb3r'), false)

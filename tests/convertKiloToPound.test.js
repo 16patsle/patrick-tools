@@ -1,5 +1,5 @@
 import test from 'ava'
-import convertKiloToPound from '../src/utils/convertKiloToPound.js'
+import convertKiloToPound from '../src/utils/convertKiloToPound'
 
 test('returns false on non-number input', t => {
   t.is(convertKiloToPound('numb3r'), false)

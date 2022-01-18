@@ -1,6 +1,5 @@
 import test from 'ava'
-import convertTextToASCIIBinary from '../src/utils/convertTextToASCIIBinary.js'
-
+import convertTextToASCIIBinary from '../src/utils/convertTextToASCIIBinary'
 
 test('silently ignores non-ASCII characters', t => {
   t.is(convertTextToASCIIBinary('A∆'), '01000001')

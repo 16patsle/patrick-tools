@@ -1,5 +1,5 @@
 import test from 'ava'
-import convertASCIIBinaryToText from '../src/utils/convertASCIIBinaryToText.js'
+import convertASCIIBinaryToText from '../src/utils/convertASCIIBinaryToText'
 
 test('only accepts binary as string', t => {
   t.is(convertASCIIBinaryToText('11a'), false)
