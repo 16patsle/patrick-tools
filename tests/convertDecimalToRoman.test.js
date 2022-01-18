@@ -1,42 +1,42 @@
-import test from 'ava'
+import { expect, test } from 'vitest'
 import convertDecimalToRoman from '../src/utils/convertDecimalToRoman'
 
-test('handles three', t => {
-  t.is(convertDecimalToRoman('3'), 'III')
+test('handles three', () => {
+  expect(convertDecimalToRoman('3')).toBe( 'III')
 })
 
-test('handles four', t => {
-  t.is(convertDecimalToRoman('4'), 'IV')
+test('handles four', () => {
+  expect(convertDecimalToRoman('4')).toBe( 'IV')
 })
 
-test('handles eight', t => {
-  t.is(convertDecimalToRoman('8'), 'VIII')
+test('handles eight', () => {
+  expect(convertDecimalToRoman('8')).toBe( 'VIII')
 })
 
-test('handles nine', t => {
-  t.is(convertDecimalToRoman('9'), 'IX')
+test('handles nine', () => {
+  expect(convertDecimalToRoman('9')).toBe( 'IX')
 })
 
-test('handles ten', t => {
-  t.is(convertDecimalToRoman('10'), 'X')
+test('handles ten', () => {
+  expect(convertDecimalToRoman('10')).toBe( 'X')
 })
 
-test('properly converts 542', t => {
-  t.is(convertDecimalToRoman('542'), 'DXLII')
+test('properly converts 542', () => {
+  expect(convertDecimalToRoman('542')).toBe( 'DXLII')
 })
 
-test('properly converts 1111', t => {
-  t.is(convertDecimalToRoman('1111'), 'MCXI')
+test('properly converts 1111', () => {
+  expect(convertDecimalToRoman('1111')).toBe( 'MCXI')
 })
 
-test('properly converts 5786', t => {
-  t.is(convertDecimalToRoman('5786'), 'MMMMMDCCLXXXVI')
+test('properly converts 5786', () => {
+  expect(convertDecimalToRoman('5786')).toBe( 'MMMMMDCCLXXXVI')
 })
 
-test('properly converts 11786', t => {
-  t.is(convertDecimalToRoman('11786'), 'MMMMMMMMMMMDCCLXXXVI')
+test('properly converts 11786', () => {
+  expect(convertDecimalToRoman('11786')).toBe( 'MMMMMMMMMMMDCCLXXXVI')
 })
 
-test('returns false on NaN', t => {
-  t.is(convertDecimalToRoman('numb3r'), false)
+test('returns false on NaN', () => {
+  expect(convertDecimalToRoman('numb3r')).toBe( false)
 })
