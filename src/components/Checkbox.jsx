@@ -1,9 +1,9 @@
-import React from 'react'
+import { ChangeEvent } from 'react'
 
 /**
  * @callback CheckboxChangeCallback
  * @param {boolean} checked - The new checked state
- * @param {React.ChangeEvent<HTMLInputElement>} event - The synthetic React event
+ * @param {ChangeEvent<HTMLInputElement>} event - The synthetic React event
  */
 
 /**

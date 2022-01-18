@@ -1,4 +1,4 @@
-import React from 'react'
+import type { ChangeEvent, KeyboardEvent } from 'react'
 
 type TextAreaProps = {
   /**
@@ -14,12 +14,12 @@ type TextAreaProps = {
    */
   onChange: (
     value: string,
-    event: React.ChangeEvent<HTMLTextAreaElement>
+    event: ChangeEvent<HTMLTextAreaElement>
   ) => void
   /**
    * Callback for key press, for input filtering
    */
-  onKeyPress?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void
+  onKeyPress?: (event: KeyboardEvent<HTMLTextAreaElement>) => void
   /**
    * Additional classes
    */

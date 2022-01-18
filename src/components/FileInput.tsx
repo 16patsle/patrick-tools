@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react'
+import type { ChangeEvent, ReactNode } from 'react'
 
 type FileInputProps = {
   /**
@@ -14,7 +14,7 @@ type FileInputProps = {
    */
   onChange: (
     value: File | null,
-    event: React.ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement>
   ) => void
   /**
    * Additional classes

@@ -1,10 +1,10 @@
-import React, { type FunctionComponent } from 'react'
+import type { FunctionComponent, MouseEvent } from 'react'
 
 type ButtonProps = {
   /**
    * Callback on button click
    */
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void
   /**
    * Is the button disabled
    */
@@ -19,7 +19,7 @@ type AnchorButtonProps = {
   /**
    * Callback on button click
    */
-  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void
   /**
    * Prompt for download on click
    */

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Input from '../components/Input'
 import Checkbox from '../components/Checkbox'
 import Radio from '../components/Radio'

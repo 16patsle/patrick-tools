@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react'
+import type { ChangeEvent, KeyboardEvent, ReactNode } from 'react'
 
 type InputProps = {
   /**
@@ -24,11 +24,11 @@ type InputProps = {
   /**
    * Callback when content changes
    */
-  onChange: (value: string, event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (value: string, event: ChangeEvent<HTMLInputElement>) => void
   /**
    * Callback for key press, for input filtering
    */
-  onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void
+  onKeyPress?: (event: KeyboardEvent<HTMLInputElement>) => void
   /**
    * Additional classes
    */

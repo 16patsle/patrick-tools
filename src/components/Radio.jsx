@@ -1,9 +1,9 @@
-import React from 'react'
+import { ChangeEvent } from 'react'
 
 /**
  * @callback RadioChangeCallback
  * @param {string} value - The new value
- * @param {React.ChangeEvent<HTMLInputElement>} event - The synthetic React event
+ * @param {ChangeEvent<HTMLInputElement>} event - The synthetic React event
  */
 
 /**

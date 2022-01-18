@@ -1,5 +1,3 @@
-import React from 'react'
-
 import BinaryDecimalConverter from './calculators/BinaryDecimalConverter'
 import BinaryTextConverter from './calculators/BinaryTextConverter'
 import CelsiusFahrenheitConverter from './calculators/CelsiusFahrenheitConverter'

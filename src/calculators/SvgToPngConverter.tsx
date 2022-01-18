@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { Heading2 } from '../components/Heading2'
 import TextArea from '../components/TextArea'
 import { AnchorButton, Button } from '../components/Button'
