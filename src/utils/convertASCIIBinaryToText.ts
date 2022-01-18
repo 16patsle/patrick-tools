@@ -6,7 +6,9 @@ import convertBinaryToDecimal from './convertBinaryToDecimal.js'
  * @param binaryStr - The string representation of the binary text.
  * @returns The converted text, or false if failed.
  */
-export default function convertASCIIBinaryToText(binaryStr: string): string | false {
+export default function convertASCIIBinaryToText(
+  binaryStr: string
+): string | false {
   // Remove spaces
   binaryStr = binaryStr.replace(/ /g, '')
 
@@ -16,12 +18,14 @@ export default function convertASCIIBinaryToText(binaryStr: string): string | fa
   }
 
   // Split array into bytes
-  return chunk(binaryStr.split(''), 8)
-    // Remove incomplete bytes
-    .filter(val => val.length === 8)
-    // Join each byte to a string and convert to decimal
-    .map(val => convertBinaryToDecimal(val.join('')))
-    // If not false, get char equivalent
-    .map(val => val !== false && String.fromCharCode(val))
-    .join('')
+  return (
+    chunk(binaryStr.split(''), 8)
+      // Remove incomplete bytes
+      .filter(val => val.length === 8)
+      // Join each byte to a string and convert to decimal
+      .map(val => convertBinaryToDecimal(val.join('')))
+      // If not false, get char equivalent
+      .map(val => val !== false && String.fromCharCode(val))
+      .join('')
+  )
 }

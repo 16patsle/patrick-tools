@@ -9,7 +9,10 @@ const factor = new Big(9).div(5)
  * @param decimals - Number of decimals
  * @returns The celsius value as fahrenheit, or false if failed.
  */
-export default function convertCelsiusToFahrenheit(celsius: BigSource, decimals = 5) {
+export default function convertCelsiusToFahrenheit(
+  celsius: BigSource,
+  decimals = 5
+) {
   if (!(celsius instanceof Big)) {
     try {
       celsius = new Big(celsius)

@@ -10,10 +10,10 @@ const CelsiusFahrenheitConverter = () => {
     '',
     (celsius): void => setFahrenheit(convertCelsiusToFahrenheit(celsius))
   )
-  const [fahrenheit, setFahrenheit, recalculateFromFahrenheit] = useConverterState(
-    '',
-    (fahrenheit): void => setCelsius(convertFahrenheitToCelsius(fahrenheit))
-  )
+  const [fahrenheit, setFahrenheit, recalculateFromFahrenheit] =
+    useConverterState('', (fahrenheit): void =>
+      setCelsius(convertFahrenheitToCelsius(fahrenheit))
+    )
 
   return (
     <div className="max-w-md">

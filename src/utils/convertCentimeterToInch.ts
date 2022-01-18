@@ -6,7 +6,10 @@ import Big, { type BigSource } from 'big.js'
  * @param decimals - Number of decimals
  * @returns The centimeter value as inch, or false if failed.
  */
-export default function convertKiloToPound(cm: BigSource, decimals: number = 5): string | false {
+export default function convertKiloToPound(
+  cm: BigSource,
+  decimals: number = 5
+): string | false {
   if (!(cm instanceof Big)) {
     try {
       cm = new Big(cm)

@@ -3,7 +3,9 @@
  * @param romanStr - The string representation of the Roman numeral.
  * @returns The converted decimal number, or false if failed.
  */
-export default function convertRomanToDecimal(romanStr: string): number | false {
+export default function convertRomanToDecimal(
+  romanStr: string
+): number | false {
   if (!/^[IVXLCDM]+$/.test(romanStr)) {
     return false
   }

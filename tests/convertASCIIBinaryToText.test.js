@@ -10,13 +10,17 @@ test('silently ignores superfluous bytes', () => {
 })
 
 test('converts a single binary ASCII character into text', () => {
-  expect(convertASCIIBinaryToText('01000001')).toBe( 'A')
+  expect(convertASCIIBinaryToText('01000001')).toBe('A')
 })
 
 test('converts a longer binary ASCII string into text', () => {
-  expect(convertASCIIBinaryToText('0100000101000010010000110100010001000101')).toBe( 'ABCDE')
+  expect(
+    convertASCIIBinaryToText('0100000101000010010000110100010001000101')
+  ).toBe('ABCDE')
 })
 
 test('converts a longer binary ASCII string into text, with spaces', () => {
-  expect(convertASCIIBinaryToText('01000001 01000010 01000011 01000100 01000101')).toBe( 'ABCDE')
+  expect(
+    convertASCIIBinaryToText('01000001 01000010 01000011 01000100 01000101')
+  ).toBe('ABCDE')
 })

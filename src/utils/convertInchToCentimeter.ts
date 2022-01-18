@@ -6,7 +6,10 @@ import Big, { type BigSource } from 'big.js'
  * @param decimals - Number of decimals
  * @returns The inch value as centimeter, or false if failed.
  */
-export default function convertInchToCentimeter(inch: BigSource, decimals = 2): string | false {
+export default function convertInchToCentimeter(
+  inch: BigSource,
+  decimals = 2
+): string | false {
   if (!(inch instanceof Big)) {
     try {
       inch = new Big(inch)
