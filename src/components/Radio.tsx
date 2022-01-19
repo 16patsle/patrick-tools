@@ -1,26 +1,43 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, ReactNode } from 'react'
 
-/**
- * @callback RadioChangeCallback
- * @param {string} value - The new value
- * @param {ChangeEvent<HTMLInputElement>} event - The synthetic React event
- */
-
-/**
- * @typedef {object} RadioProps
- * @property {any} children - Contents of the wrapper label
- * @property {string} name - The name of this radio group
- * @property {string} value - Value for the input element
- * @property {string} checkedValue - The current checked value for this radio group
- * @property {RadioChangeCallback} onChange - Callback when content changes
- * @property {string} [className] - Additional classes
- */
+type RadioProps = {
+  /**
+   * Contents of the wrapper label
+   */
+  children: ReactNode
+  /**
+   * The name of this radio group
+   */
+  name: string
+  /**
+   * Value for the input element
+   */
+  value: any
+  /**
+   * The current checked value for this radio group
+   */
+  checkedValue: string
+  /**
+   * Callback when content changes
+   */
+  onChange: (value: string, event: ChangeEvent<HTMLInputElement>) => void
+  /**
+   * Additional classes
+   */
+  className?: string
+}
 
 /**
  * A styled radio element, wrapped in a label
- * @param {RadioProps} props
+ * @param props
  */
-const Radio = ({ children, value, checkedValue, onChange, className = '' }) => {
+const Radio = ({
+  children,
+  value,
+  checkedValue,
+  onChange,
+  className = '',
+}: RadioProps) => {
   return (
     <label className="label-grid radio-checkbox w-max h-9 grid my-2 gap-x-2 items-center">
       <div className="text-gray-500 uppercase text-sm font-semibold">

@@ -1,24 +1,34 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, ReactNode } from 'react'
 
-/**
- * @callback CheckboxChangeCallback
- * @param {boolean} checked - The new checked state
- * @param {ChangeEvent<HTMLInputElement>} event - The synthetic React event
- */
-
-/**
- * @typedef {object} CheckboxProps
- * @property {any} children - Contents of the wrapper label
- * @property {any} checked - Toggle state for the input element
- * @property {CheckboxChangeCallback} onChange - Callback when content changes
- * @property {string} [className] - Additional classes
- */
+type CheckboxProps = {
+  /**
+   * Contents of the wrapper label
+   */
+  children: ReactNode
+  /**
+   * Toggle state for the input element
+   */
+  checked: any
+  /**
+   * Callback when content changes
+   */
+  onChange: (checked: boolean, event: ChangeEvent<HTMLInputElement>) => void
+  /**
+   * Additional classes
+   */
+  className?: string
+}
 
 /**
  * A styled checkbox element, wrapped in a label
- * @param {CheckboxProps} props
+ * @param props
  */
-const Checkbox = ({ children, checked, onChange, className = '' }) => {
+const Checkbox = ({
+  children,
+  checked,
+  onChange,
+  className = '',
+}: CheckboxProps) => {
   return (
     <label className="label-grid radio-checkbox w-max h-9 grid my-2 gap-x-2 items-center">
       <div className="text-gray-500 uppercase text-sm font-semibold">
