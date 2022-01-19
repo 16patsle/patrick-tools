@@ -12,10 +12,7 @@ type TextAreaProps = {
   /**
    * Callback when content changes
    */
-  onChange: (
-    value: string,
-    event: ChangeEvent<HTMLTextAreaElement>
-  ) => void
+  onChange: (value: string, event: ChangeEvent<HTMLTextAreaElement>) => void
   /**
    * Callback for key press, for input filtering
    */

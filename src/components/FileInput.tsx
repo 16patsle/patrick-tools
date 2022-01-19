@@ -12,10 +12,7 @@ type FileInputProps = {
   /**
    * Callback when content changes
    */
-  onChange: (
-    value: File | null,
-    event: ChangeEvent<HTMLInputElement>
-  ) => void
+  onChange: (value: File | null, event: ChangeEvent<HTMLInputElement>) => void
   /**
    * Additional classes
    */
