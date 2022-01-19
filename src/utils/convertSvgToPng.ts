@@ -2,8 +2,11 @@ export const convertSvgToPng = async (
   svg: string,
   canvas: HTMLCanvasElement
 ): Promise<string> => {
-  const { default: Canvg } = await import('canvg')
   const ctx = canvas.getContext('2d')
+  if (!ctx) {
+    throw new Error('Could not get canvas context')
+  }
+  const { default: Canvg } = await import('canvg')
   const v = Canvg.fromString(ctx, svg)
   await v.render()
 
