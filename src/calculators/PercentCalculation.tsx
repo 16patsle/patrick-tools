@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Input from '../components/Input'
 import { Heading2 } from '../components/Heading2'
 import { calculateGrowthFactor } from '../utils/calculateGrowthFactor'
+import { calculatePercentFromGrowthFactor } from '../utils/calculatePercentFromGrowthFactor'
 
 const PercentCalculation = () => {
   const [newValue, setNewValue] = useState('1')
@@ -35,6 +36,9 @@ const PercentCalculation = () => {
       </Input>
       <Input type="number" value={growthFactor} disabled>
         Growth Factor
+      </Input>
+      <Input value={calculatePercentFromGrowthFactor(growthFactor, 2) + ' %'} disabled>
+        Percent
       </Input>
     </div>
   )
