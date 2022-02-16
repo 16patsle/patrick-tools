@@ -3,6 +3,7 @@ import BinaryTextConverter from './calculators/BinaryTextConverter'
 import CelsiusFahrenheitConverter from './calculators/CelsiusFahrenheitConverter'
 import CentimeterInchConverter from './calculators/CentimeterInchConverter'
 import KiloPoundConverter from './calculators/KiloPoundConverter'
+import PercentCalculation from './calculators/PercentCalculation'
 import RomanNumeralConverter from './calculators/RomanNumeralConverter'
 import { SvgToPngConverter } from './calculators/SvgToPngConverter'
 
@@ -16,6 +17,7 @@ const App = () => {
       <KiloPoundConverter />
       <CentimeterInchConverter />
       <CelsiusFahrenheitConverter />
+      <PercentCalculation />
       <SvgToPngConverter />
     </div>
   )

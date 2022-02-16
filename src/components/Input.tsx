@@ -24,7 +24,7 @@ type InputProps = {
   /**
    * Callback when content changes
    */
-  onChange: (value: string, event: ChangeEvent<HTMLInputElement>) => void
+  onChange?: (value: string, event: ChangeEvent<HTMLInputElement>) => void
   /**
    * Callback for key press, for input filtering
    */
@@ -33,6 +33,10 @@ type InputProps = {
    * Additional classes
    */
   className?: string
+  /**
+   * Disabled input
+   */
+  disabled?: boolean
 }
 
 /**
@@ -48,6 +52,7 @@ const Input = ({
   onChange,
   onKeyPress,
   className = '',
+  disabled = false,
 }: InputProps) => {
   return (
     <label className="label-grid grid my-2 gap-x-2 items-center">
@@ -64,6 +69,7 @@ const Input = ({
         className={`w-full h-9 shadow-md bg-gray-50 hover:bg-gray-100 caret-yellow-500 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 border-gray-200 focus:border-gray-200 border-2 rounded-md p-2${
           className ? ` ${className}` : ''
         }`}
+        disabled={disabled}
       />
     </label>
   )
