@@ -1,13 +1,7 @@
 import { useState } from 'react'
 import Input from '../components/Input'
 import { Heading2 } from '../components/Heading2'
-
-const calculateGrowthFactor = (oldValue: string, newValue: string): string => {
-  const oldValueNumber = parseInt(oldValue, 10)
-  const newValueNumber = parseInt(newValue, 10)
-  const growthFactor = newValueNumber / oldValueNumber
-  return growthFactor.toString()
-}
+import { calculateGrowthFactor } from '../utils/calculateGrowthFactor'
 
 const PercentCalculation = () => {
   const [newValue, setNewValue] = useState('1')
@@ -24,7 +18,7 @@ const PercentCalculation = () => {
         value={newValue}
         onChange={val => {
           setNewValue(val)
-          setGrowthFactor(calculateGrowthFactor(oldValue, val))
+          setGrowthFactor(calculateGrowthFactor(oldValue, val) || '0')
         }}
       >
         New Value
@@ -34,7 +28,7 @@ const PercentCalculation = () => {
         value={oldValue}
         onChange={val => {
           setOldValue(val)
-          setGrowthFactor(calculateGrowthFactor(val, newValue))
+          setGrowthFactor(calculateGrowthFactor(val, newValue) || '0')
         }}
       >
         Old value
