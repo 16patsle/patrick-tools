@@ -33,19 +33,19 @@ describe('correctly converts from Celsius to Kelvin', () => {
 
 describe('correctly converts from Celsius to Fahrenheit', () => {
   test('returns correct Fahrenheit for 500°C', () => {
-    expect(convertTemperature(500, 'celsius', 'fahrenheit').toString()).toBe('932')
+    expect(convertTemperature(500, 'celsius', 'fahrenheit', 5).toString()).toBe('932')
   })
 
   test('returns correct Fahrenheit for boiling point of water in Celsius', () => {
-    expect(convertTemperature(100, 'celsius', 'fahrenheit').toString()).toBe('212')
+    expect(convertTemperature(100, 'celsius', 'fahrenheit', 5).toString()).toBe('212')
   })  
 
   test('returns correct Fahrenheit for human body temperature in Celsius', () => {
-    expect(convertTemperature(37, 'celsius', 'fahrenheit').toString()).toBe('98.6')
+    expect(convertTemperature(37, 'celsius', 'fahrenheit', 5).toString()).toBe('98.6')
   })
 
   test('returns correct Fahrenheit for freezing point of water in Celsius', () => {
-    expect(convertTemperature(0, 'celsius', 'fahrenheit').toString()).toBe('32')
+    expect(convertTemperature(0, 'celsius', 'fahrenheit', 5).toString()).toBe('32')
   })
 
   test('returns correct Fahrenheit for Celsius equivalent of 0°F', () => {
@@ -59,15 +59,15 @@ describe('correctly converts from Celsius to Fahrenheit', () => {
 
 describe('correctly converts from Celsius to Rankine', () => {
   test('returns correct Rankine for 500°C', () => {
-    expect(convertTemperature(500, 'celsius', 'rankine').toString()).toBe('1391.67')
+    expect(convertTemperature(500, 'celsius', 'rankine', 5).toString()).toBe('1391.67')
   })
 
   test('returns correct Rankine for boiling point of water in Celsius', () => {
-    expect(convertTemperature(100, 'celsius', 'rankine').toString()).toBe('671.67')
+    expect(convertTemperature(100, 'celsius', 'rankine', 5).toString()).toBe('671.67')
   })
 
   test('returns correct Rankine for freezing point of water in Celsius', () => {
-    expect(convertTemperature(0, 'celsius', 'rankine').toString()).toBe('491.67')
+    expect(convertTemperature(0, 'celsius', 'rankine', 5).toString()).toBe('491.67')
   })
 
   test('returns correct Rankine for absolute zero in Celsius', () => {
@@ -77,7 +77,7 @@ describe('correctly converts from Celsius to Rankine', () => {
 
 describe('correctly converts from Celsius to Delisle', () => {
   test('returns correct Delisle for 500°C', () => {
-    expect(convertTemperature(500, 'celsius', 'delisle').toString()).toBe('-600')
+    expect(convertTemperature(500, 'celsius', 'delisle', 5).toString()).toBe('-600')
   })
 
   test('returns correct Delisle for boiling point of water in Celsius', () => {
@@ -85,17 +85,17 @@ describe('correctly converts from Celsius to Delisle', () => {
   })
 
   test('returns correct Delisle for freezing point of water in Celsius', () => {
-    expect(convertTemperature(0, 'celsius', 'delisle').toString()).toBe('150')
+    expect(convertTemperature(0, 'celsius', 'delisle', 5).toString()).toBe('150')
   })
 
   test('returns correct Delisle for absolute zero in Celsius', () => {
-    expect(convertTemperature(-273.15, 'celsius', 'delisle').toString()).toBe('559.725')
+    expect(convertTemperature(-273.15, 'celsius', 'delisle', 5).toString()).toBe('559.725')
   })
 })
 
 describe('correctly converts from Celsius to Newton', () => {
   test('returns correct Newton for 500°C', () => {
-    expect(convertTemperature(500, 'celsius', 'newton').toString()).toBe('165')
+    expect(convertTemperature(500, 'celsius', 'newton', 5).toString()).toBe('165')
   })
 
   test('returns correct Newton for boiling point of water in Celsius', () => {
@@ -107,7 +107,7 @@ describe('correctly converts from Celsius to Newton', () => {
   })
 
   test('returns correct Newton for absolute zero in Celsius', () => {
-    expect(convertTemperature(-273.15, 'celsius', 'newton').toString()).toBe('-90.1395')
+    expect(convertTemperature(-273.15, 'celsius', 'newton', 5).toString()).toBe('-90.1395')
   })
 })
 
@@ -131,11 +131,11 @@ describe('correctly converts from Celsius to Réaumur', () => {
 
 describe('correctly converts from Celsius to Rømer', () => {
   test('returns correct Rømer for 500°C', () => {
-    expect(convertTemperature(500, 'celsius', 'romer').toString()).toBe('270')
+    expect(convertTemperature(500, 'celsius', 'romer', 5).toString()).toBe('270')
   })
 
   test('returns correct Rømer for boiling point of water in Celsius', () => {
-    expect(convertTemperature(100, 'celsius', 'romer').toString()).toBe('60')
+    expect(convertTemperature(100, 'celsius', 'romer', 5).toString()).toBe('60')
   })
 
   test('returns correct Rømer for freezing point of water in Celsius', () => {
@@ -143,7 +143,7 @@ describe('correctly converts from Celsius to Rømer', () => {
   })
 
   test('returns correct Rømer for absolute zero in Celsius', () => {
-    expect(convertTemperature(-273.15, 'celsius', 'romer').toString()).toBe('-135.90375')
+    expect(convertTemperature(-273.15, 'celsius', 'romer', 5).toString()).toBe('-135.90375')
   })
 })
 
