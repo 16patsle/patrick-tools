@@ -1,32 +1,46 @@
 import Big, { BigSource } from 'big.js'
 
-const kelvinToRankineFactor = new Big(9).div(5)
-const rankineToKelvinFactor = new Big(5).div(9)
 const celsiusOffset = 273.15
 const fahrenheitOffset = 459.67
+
+const toKelvinFactor = {
+  rankine: new Big(5).div(9),
+  delisle: new Big(3).div(2),
+  newton: new Big(33).div(100),
+  reaumur: new Big(4).div(5),
+  romer: new Big(21).div(40),
+}
+
+const fromKelvinFactor = {
+  rankine: new Big(9).div(5),
+  delisle: new Big(2).div(3),
+  newton: new Big(100).div(33),
+  reaumur: new Big(5).div(4),
+  romer: new Big(40).div(21),
+}
 
 const convertToKelvin = {
   kelvin: (value: Big) => value,
   celsius: (value: Big) => value.add(celsiusOffset),
   fahrenheit: (value: Big) =>
-    value.add(fahrenheitOffset).mul(rankineToKelvinFactor),
-  rankine: (value: Big) => value.mul(rankineToKelvinFactor),
-  delisle: (value: Big) => new Big(373.15).sub(value).mul(3 / 2),
-  newton: (value: Big) => value.mul(33 / 100),
-  reaumur: (value: Big) => value.mul(4 / 5),
-  romer: (value: Big) => value.mul(21 / 40),
+    value.add(fahrenheitOffset).mul(toKelvinFactor.rankine),
+  rankine: (value: Big) => value.mul(toKelvinFactor.rankine),
+  delisle: (value: Big) => new Big(373.15).sub(value).mul(toKelvinFactor.delisle),
+  newton: (value: Big) => value.mul(toKelvinFactor.newton),
+  reaumur: (value: Big) => value.mul(toKelvinFactor.reaumur),
+  romer: (value: Big) => value.mul(toKelvinFactor.romer),
 }
 
 const convertFromKelvin = {
   kelvin: (value: Big) => value,
   celsius: (value: Big) => value.sub(celsiusOffset),
   fahrenheit: (value: Big) =>
-    value.mul(kelvinToRankineFactor).sub(fahrenheitOffset),
-  rankine: (value: Big) => value.mul(kelvinToRankineFactor),
-  delisle: (value: Big) => new Big(373.15).sub(value.mul(2 / 3)),
-  newton: (value: Big) => value.mul(100 / 33),
-  reaumur: (value: Big) => value.mul(5 / 4),
-  romer: (value: Big) => value.mul(40 / 21),
+    value.mul(fromKelvinFactor.rankine).sub(fahrenheitOffset),
+  rankine: (value: Big) => value.mul(fromKelvinFactor.rankine),
+  delisle: (value: Big) => new Big(373.15).sub(value.mul(fromKelvinFactor.delisle)),
+  newton: (value: Big) => value.mul(fromKelvinFactor.newton),
+  reaumur: (value: Big) => value.mul(fromKelvinFactor.reaumur),
+  romer: (value: Big) => value.mul(fromKelvinFactor.romer),
 }
 
 type TemperatureUnit = keyof typeof convertToKelvin &
@@ -63,10 +77,8 @@ export const convertTemperature = (
   } else if (from === 'rankine' && to === 'fahrenheit') {
     result = value.add(fahrenheitOffset)
   } else {
-    const fromK = convertToKelvin[from](value)
-    const toK = convertFromKelvin[to](fromK)
-    console.error(value.toString(), fromK.toString(), toK.toString())
-    result = toK
+    const inKelvin = convertToKelvin[from](value)
+    result = convertFromKelvin[to](inKelvin)
   }
 
   if (dp !== false) {
