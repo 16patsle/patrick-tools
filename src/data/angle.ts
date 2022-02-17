@@ -15,13 +15,18 @@ export const angle = [
     symbol: 'grad',
   },
   {
-    name: 'minute of arc',
-    display: 'Minute of arc',
-    symbol: 'moa',
+    name: 'turn',
+    display: 'Turn',
+    symbol: 'tr',
   },
   {
-    name: 'second of arc',
+    name: 'arcmin',
+    display: 'Minute of arc',
+    symbol: '′',
+  },
+  {
+    name: 'arcsec',
     display: 'Second of arc',
-    symbol: 'soa',
+    symbol: '″',
   },
 ]
