@@ -21,6 +21,9 @@ const fromKelvinFactor = {
   romer: new Big(21).div(40),
 }
 
+/**
+ * Functions for converting a temperature value from the specified unit to Kelvin.
+ */
 const convertToKelvin = {
   kelvin: (value: Big) => value,
   celsius: (value: Big) => value.add(celsiusOffset),
@@ -33,6 +36,9 @@ const convertToKelvin = {
   romer: (value: Big) => value.sub(romerOffset).mul(toKelvinFactor.romer).add(celsiusOffset),
 }
 
+/**
+ * Functions for converting a temperature value from Kelvin to a specified unit.
+ */
 const convertFromKelvin = {
   kelvin: (value: Big) => value,
   celsius: (value: Big) => value.sub(celsiusOffset),
