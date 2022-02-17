@@ -6,6 +6,7 @@ import { convertTemperature } from '../utils/convertTemperature'
 import { Select } from '../components/Select'
 
 import { temperature } from '../data/temperature'
+import Big from 'big.js'
 
 const UnitSelect = ({
   unit: [value, setValue],
@@ -25,12 +26,12 @@ const UnitSelect = ({
 
 const TemperatureConverter = () => {
   const [valueFirst, setValueFirst, recalculateFromValueFirst] =
-    useConverterState('', (value, from, to): void =>
-      setValueSecond(convertTemperature(value, from, to))
+    useConverterState(new Big(0), (value, from, to): void =>
+      setValueSecond(convertTemperature(value, from, to, 1))
     )
   const [valueSecond, setValueSecond, recalculateFromValueSecond] =
-    useConverterState('', (value, from, to): void =>
-      setValueFirst(convertTemperature(value, from, to))
+    useConverterState(new Big(0), (value, from, to): void =>
+      setValueFirst(convertTemperature(value, from, to, 1))
     )
 
   const [unitFirst, setUnitFirst] = useState('celsius')
@@ -53,7 +54,9 @@ const TemperatureConverter = () => {
       <Input
         type="number"
         value={valueFirst}
-        onChange={val => recalculateFromValueFirst(val, unitFirst, unitSecond)}
+        onChange={val =>
+          recalculateFromValueFirst(new Big(val || 0), unitFirst, unitSecond)
+        }
       >
         {unitFirstData?.display} ({unitFirstData?.symbol})
       </Input>
@@ -69,7 +72,9 @@ const TemperatureConverter = () => {
       <Input
         type="number"
         value={valueSecond}
-        onChange={val => recalculateFromValueSecond(val, unitSecond, unitFirst)}
+        onChange={val =>
+          recalculateFromValueSecond(new Big(val || 0), unitSecond, unitFirst)
+        }
       >
         {unitSecondData?.display} ({unitSecondData?.symbol})
       </Input>

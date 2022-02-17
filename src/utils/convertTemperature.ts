@@ -92,5 +92,5 @@ export const convertTemperature = (
   if (dp !== false) {
     result = result.round(dp, Big.roundHalfUp)
   }
-  return result.toString()
+  return result
 }
