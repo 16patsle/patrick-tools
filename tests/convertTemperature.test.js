@@ -28,8 +28,8 @@ describe('correctly converts from Celsius to Kelvin', () => {
 })
 
 describe('correctly converts from Celsius to Fahrenheit', () => {
-  test.only('returns correct Fahrenheit for Celsius equivalent of 0°F', () => {
-    expect(convertTemperature('-17.77778', 'celsius', 'fahrenheit')).toBe('0')
+  test('returns correct Fahrenheit for Celsius equivalent of 0°F', () => {
+    expect(convertTemperature('-17.77778', 'celsius', 'fahrenheit', 5)).toBe('0')
   })
 
   test('returns correct Fahrenheit for freezing point of water in Celsius', () => {
