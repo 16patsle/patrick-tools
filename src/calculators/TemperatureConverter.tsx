@@ -2,8 +2,7 @@ import { useState } from 'react'
 import Input from '../components/Input'
 import { Heading2 } from '../components/Heading2'
 import { useConverterState } from '../utils/useConverterState'
-import convertCelsiusToFahrenheit from '../utils/convertCelsiusToFahrenheit'
-import convertFahrenheitToCelsius from '../utils/convertFahrenheitToCelsius'
+import { convertTemperature } from '../utils/convertTemperature'
 import { Select } from '../components/Select'
 
 import { temperature } from '../data/temperature'
@@ -25,34 +24,40 @@ const UnitSelect = ({
 }
 
 const TemperatureConverter = () => {
-  const [celsius, setCelsius, recalculateFromCelsius] = useConverterState(
-    '',
-    (celsius): void => setFahrenheit(convertCelsiusToFahrenheit(celsius))
-  )
-  const [fahrenheit, setFahrenheit, recalculateFromFahrenheit] =
-    useConverterState('', (fahrenheit): void =>
-      setCelsius(convertFahrenheitToCelsius(fahrenheit))
+  const [valueFirst, setValueFirst, recalculateFromValueFirst] =
+    useConverterState('', (value, from, to): void =>
+      setValueSecond(convertTemperature(value, from, to))
+    )
+  const [valueSecond, setValueSecond, recalculateFromValueSecond] =
+    useConverterState('', (value, from, to): void =>
+      setValueFirst(convertTemperature(value, from, to))
     )
 
   const unitFirst = useState('celsius')
   const unitSecond = useState('fahrenheit')
-  const unitFirstData = temperature.find(value=>value.name===unitFirst[0])
-  const unitSecondData = temperature.find(value=>value.name===unitSecond[0])
+  const unitFirstData = temperature.find(value => value.name === unitFirst[0])
+  const unitSecondData = temperature.find(value => value.name === unitSecond[0])
 
   return (
     <div className="max-w-lg">
-      <Heading2>
-        Convert temperature
-      </Heading2>
+      <Heading2>Convert temperature</Heading2>
       <UnitSelect unit={unitFirst} />
-      <Input type="number" value={celsius} onChange={recalculateFromCelsius}>
+      <Input
+        type="number"
+        value={valueFirst}
+        onChange={val =>
+          recalculateFromValueFirst(val, unitFirst[0], unitSecond[0])
+        }
+      >
         {unitFirstData?.display} ({unitFirstData?.symbol})
       </Input>
       <UnitSelect unit={unitSecond} />
       <Input
         type="number"
-        value={fahrenheit}
-        onChange={recalculateFromFahrenheit}
+        value={valueSecond}
+        onChange={val =>
+          recalculateFromValueSecond(val, unitSecond[0], unitFirst[0])
+        }
       >
         {unitSecondData?.display} ({unitSecondData?.symbol})
       </Input>
