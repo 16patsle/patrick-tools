@@ -1,4 +1,5 @@
 import Big, { BigSource } from 'big.js'
+import { convertUtil } from './convertUtil'
 
 const celsiusOffset = 273.15
 const fahrenheitOffset = 459.67
@@ -19,13 +20,14 @@ const factor = {
 const convertToKelvin = {
   kelvin: (value: Big) => value,
   celsius: (value: Big) => value.add(celsiusOffset),
-  fahrenheit: (value: Big) =>
-    value.add(fahrenheitOffset).mul(factor.rankine),
+  fahrenheit: (value: Big) => value.add(fahrenheitOffset).mul(factor.rankine),
   rankine: (value: Big) => value.mul(factor.rankine),
-  delisle: (value: Big) => new Big(delisleOffset).sub(value.mul(factor.delisle)),
+  delisle: (value: Big) =>
+    new Big(delisleOffset).sub(value.mul(factor.delisle)),
   newton: (value: Big) => value.mul(factor.newton).add(celsiusOffset),
   reaumur: (value: Big) => value.mul(factor.reaumur).add(celsiusOffset),
-  romer: (value: Big) => value.sub(romerOffset).mul(factor.romer).add(celsiusOffset),
+  romer: (value: Big) =>
+    value.sub(romerOffset).mul(factor.romer).add(celsiusOffset),
 }
 
 /**
@@ -34,13 +36,14 @@ const convertToKelvin = {
 const convertFromKelvin = {
   kelvin: (value: Big) => value,
   celsius: (value: Big) => value.sub(celsiusOffset),
-  fahrenheit: (value: Big) =>
-    value.div(factor.rankine).sub(fahrenheitOffset),
+  fahrenheit: (value: Big) => value.div(factor.rankine).sub(fahrenheitOffset),
   rankine: (value: Big) => value.div(factor.rankine),
-  delisle: (value: Big) => new Big(delisleOffset).sub(value).div(factor.delisle),
+  delisle: (value: Big) =>
+    new Big(delisleOffset).sub(value).div(factor.delisle),
   newton: (value: Big) => value.sub(celsiusOffset).div(factor.newton),
   reaumur: (value: Big) => value.sub(celsiusOffset).div(factor.reaumur),
-  romer: (value: Big) => value.sub(celsiusOffset).div(factor.romer).add(romerOffset),
+  romer: (value: Big) =>
+    value.sub(celsiusOffset).div(factor.romer).add(romerOffset),
 }
 
 type TemperatureUnit = keyof typeof convertToKelvin &
@@ -59,30 +62,19 @@ export const convertTemperature = (
   from: TemperatureUnit,
   to: TemperatureUnit,
   dp: number | false = false
-) => {
-  if (!(value instanceof Big)) {
-    try {
-      value = new Big(value)
-    } catch {
-      return false
+) =>
+  convertUtil(
+    value,
+    from,
+    to,
+    dp,
+    convertToKelvin,
+    convertFromKelvin,
+    (value, from, to) => {
+      if (from === 'fahrenheit' && to === 'rankine') {
+        return value.add(fahrenheitOffset)
+      } else if (from === 'rankine' && to === 'fahrenheit') {
+        return value.sub(fahrenheitOffset)
+      }
     }
-  }
-  let result: Big
-  if (from === to) {
-    result = value
-  }
-  // Handle separately to avoid crossing boundary between Kelvin/Celsius and Rankine/Fahrenheit
-  else if (from === 'fahrenheit' && to === 'rankine') {
-    result = value.add(fahrenheitOffset)
-  } else if (from === 'rankine' && to === 'fahrenheit') {
-    result = value.sub(fahrenheitOffset)
-  } else {
-    const inKelvin = convertToKelvin[from](value)
-    result = convertFromKelvin[to](inKelvin)
-  }
-
-  if (dp !== false) {
-    result = result.round(dp, Big.roundHalfUp)
-  }
-  return result
-}
+  )

@@ -1,4 +1,5 @@
 import Big, { BigSource } from 'big.js'
+import { convertUtil } from './convertUtil'
 
 const gradianFactor = new Big(9).div(10)
 const turnFactor = 360
@@ -44,23 +45,4 @@ export const convertAngle = (
   from: AngleUnit,
   to: AngleUnit,
   dp: number | false = false
-) => {
-  if (!(value instanceof Big)) {
-    try {
-      value = new Big(value)
-    } catch {
-      return false
-    }
-  }
-  let result: Big
-  if (from === to) {
-    result = value
-  }
-  const inDegrees = convertToDegrees[from](value)
-  result = convertFromDegrees[to](inDegrees)
-
-  if (dp !== false) {
-    result = result.round(dp, Big.roundHalfUp)
-  }
-  return result
-}
+) => convertUtil(value, from, to, dp, convertToDegrees, convertFromDegrees)
