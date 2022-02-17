@@ -75,9 +75,9 @@ export const convertTemperature = (
   }
   // Handle separately to avoid crossing boundary between Kelvin/Celsius and Rankine/Fahrenheit
   else if (from === 'fahrenheit' && to === 'rankine') {
-    result = value.sub(fahrenheitOffset)
-  } else if (from === 'rankine' && to === 'fahrenheit') {
     result = value.add(fahrenheitOffset)
+  } else if (from === 'rankine' && to === 'fahrenheit') {
+    result = value.sub(fahrenheitOffset)
   } else {
     const inKelvin = convertToKelvin[from](value)
     result = convertFromKelvin[to](inKelvin)
