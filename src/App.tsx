@@ -1,3 +1,4 @@
+import AngleConverter from './calculators/AngleConverter'
 import BinaryDecimalConverter from './calculators/BinaryDecimalConverter'
 import BinaryTextConverter from './calculators/BinaryTextConverter'
 import CentimeterInchConverter from './calculators/CentimeterInchConverter'
@@ -17,6 +18,7 @@ const App = () => {
       <KiloPoundConverter />
       <CentimeterInchConverter />
       <TemperatureConverter />
+      <AngleConverter />
       <PercentCalculation />
       <SvgToPngConverter />
     </div>
