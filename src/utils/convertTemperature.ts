@@ -2,21 +2,23 @@ import Big, { BigSource } from 'big.js'
 
 const celsiusOffset = 273.15
 const fahrenheitOffset = 459.67
+const delisleOffset = celsiusOffset + 100
+const romerOffset = 7.5
 
 const toKelvinFactor = {
   rankine: new Big(5).div(9),
-  delisle: new Big(3).div(2),
-  newton: new Big(33).div(100),
-  reaumur: new Big(4).div(5),
-  romer: new Big(21).div(40),
+  delisle: new Big(2).div(3),
+  newton: new Big(100).div(33),
+  reaumur: new Big(5).div(3),
+  romer: new Big(40).div(21),
 }
 
 const fromKelvinFactor = {
   rankine: new Big(9).div(5),
-  delisle: new Big(2).div(3),
-  newton: new Big(100).div(33),
-  reaumur: new Big(5).div(4),
-  romer: new Big(40).div(21),
+  delisle: new Big(3).div(2),
+  newton: new Big(33).div(100),
+  reaumur: new Big(4).div(5),
+  romer: new Big(21).div(40),
 }
 
 const convertToKelvin = {
@@ -25,10 +27,10 @@ const convertToKelvin = {
   fahrenheit: (value: Big) =>
     value.add(fahrenheitOffset).mul(toKelvinFactor.rankine),
   rankine: (value: Big) => value.mul(toKelvinFactor.rankine),
-  delisle: (value: Big) => new Big(373.15).sub(value).mul(toKelvinFactor.delisle),
-  newton: (value: Big) => value.mul(toKelvinFactor.newton),
-  reaumur: (value: Big) => value.mul(toKelvinFactor.reaumur),
-  romer: (value: Big) => value.mul(toKelvinFactor.romer),
+  delisle: (value: Big) => new Big(delisleOffset).sub(value.mul(toKelvinFactor.delisle)),
+  newton: (value: Big) => value.mul(toKelvinFactor.newton).add(celsiusOffset),
+  reaumur: (value: Big) => value.mul(toKelvinFactor.reaumur).add(celsiusOffset),
+  romer: (value: Big) => value.sub(romerOffset).mul(toKelvinFactor.romer).add(celsiusOffset),
 }
 
 const convertFromKelvin = {
@@ -37,10 +39,10 @@ const convertFromKelvin = {
   fahrenheit: (value: Big) =>
     value.mul(fromKelvinFactor.rankine).sub(fahrenheitOffset),
   rankine: (value: Big) => value.mul(fromKelvinFactor.rankine),
-  delisle: (value: Big) => new Big(373.15).sub(value.mul(fromKelvinFactor.delisle)),
-  newton: (value: Big) => value.mul(fromKelvinFactor.newton),
-  reaumur: (value: Big) => value.mul(fromKelvinFactor.reaumur),
-  romer: (value: Big) => value.mul(fromKelvinFactor.romer),
+  delisle: (value: Big) => new Big(delisleOffset).sub(value).mul(fromKelvinFactor.delisle),
+  newton: (value: Big) => value.sub(celsiusOffset).mul(fromKelvinFactor.newton),
+  reaumur: (value: Big) => value.sub(celsiusOffset).mul(fromKelvinFactor.reaumur),
+  romer: (value: Big) => value.sub(celsiusOffset).mul(fromKelvinFactor.romer).add(romerOffset),
 }
 
 type TemperatureUnit = keyof typeof convertToKelvin &
