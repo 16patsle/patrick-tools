@@ -33,31 +33,43 @@ const TemperatureConverter = () => {
       setValueFirst(convertTemperature(value, from, to))
     )
 
-  const unitFirst = useState('celsius')
-  const unitSecond = useState('fahrenheit')
-  const unitFirstData = temperature.find(value => value.name === unitFirst[0])
-  const unitSecondData = temperature.find(value => value.name === unitSecond[0])
+  const [unitFirst, setUnitFirst] = useState('celsius')
+  const [unitSecond, setUnitSecond] = useState('fahrenheit')
+  const unitFirstData = temperature.find(value => value.name === unitFirst)
+  const unitSecondData = temperature.find(value => value.name === unitSecond)
 
   return (
     <div className="max-w-lg">
       <Heading2>Convert temperature</Heading2>
-      <UnitSelect unit={unitFirst} />
+      <UnitSelect
+        unit={[
+          unitFirst,
+          newUnitFirst => {
+            setUnitFirst(newUnitFirst)
+            recalculateFromValueFirst(valueFirst, newUnitFirst, unitSecond)
+          },
+        ]}
+      />
       <Input
         type="number"
         value={valueFirst}
-        onChange={val =>
-          recalculateFromValueFirst(val, unitFirst[0], unitSecond[0])
-        }
+        onChange={val => recalculateFromValueFirst(val, unitFirst, unitSecond)}
       >
         {unitFirstData?.display} ({unitFirstData?.symbol})
       </Input>
-      <UnitSelect unit={unitSecond} />
+      <UnitSelect
+        unit={[
+          unitSecond,
+          newUnitSecond => {
+            setUnitSecond(newUnitSecond)
+            recalculateFromValueFirst(valueFirst, unitFirst, newUnitSecond)
+          },
+        ]}
+      />
       <Input
         type="number"
         value={valueSecond}
-        onChange={val =>
-          recalculateFromValueSecond(val, unitSecond[0], unitFirst[0])
-        }
+        onChange={val => recalculateFromValueSecond(val, unitSecond, unitFirst)}
       >
         {unitSecondData?.display} ({unitSecondData?.symbol})
       </Input>
