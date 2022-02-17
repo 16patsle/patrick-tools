@@ -22,5 +22,10 @@ export const calculateGrowthFactor = (oldValue: BigSource, newValue: BigSource) 
     }
   }
 
+  // Cannot divide by zero
+  if(oldValue.eq(0)) {
+    return false
+  }
+
   return newValue.div(oldValue).toString()
 }

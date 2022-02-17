@@ -9,6 +9,10 @@ test('returns false on NaN', () => {
   expect(calculateGrowthFactor(NaN)).toBe(false)
 })
 
+test('returns false if oldValue is zero', () => {
+  expect(calculateGrowthFactor(0, 62)).toBe(false)
+})
+
 test('returns correct for new 62 old 47 (growth)', () => {
   expect(calculateGrowthFactor(47, 62)).toBe('1.31914893617021276596')
 })
