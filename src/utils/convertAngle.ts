@@ -1,11 +1,14 @@
 import Big, { BigSource } from 'big.js'
 
+const gradianFactor = new Big(9).div(10)
+
 /**
  * Functions for converting an angle value from the specified unit to degrees.
  */
 const convertToDegrees = {
   degree: (value: Big) => value,
   radian: (value: Big) => value.mul(new Big(180).div(Math.PI)),
+  gradian: (value: Big) => value.mul(gradianFactor),
 }
 
 /**
@@ -14,6 +17,7 @@ const convertToDegrees = {
 const convertFromDegrees = {
   degree: (value: Big) => value,
   radian: (value: Big) => value.mul(new Big(Math.PI).div(180)),
+  gradian: (value: Big) => value.div(gradianFactor),
 }
 
 type AngleUnit = keyof typeof convertToDegrees & keyof typeof convertFromDegrees
