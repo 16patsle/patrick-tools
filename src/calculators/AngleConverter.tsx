@@ -7,6 +7,7 @@ const AngleConverter = () => {
   return (
     <SelectConverter
       convertFunction={convertAngle}
+      dp={2}
       options={angle}
       initialUnits={['degree', 'radian']}
       title="Convert angles"

@@ -31,6 +31,7 @@ const UnitSelect = ({
 
 export const SelectConverter = <T extends string>({
   convertFunction,
+  dp = 1,
   options,
   initialUnits: [initialFirstUnit, initialSecondUnit],
   title,
@@ -41,17 +42,18 @@ export const SelectConverter = <T extends string>({
     to: T,
     dp?: number | false
   ): false | Big
+  dp?: number | false
   options: SelectOptions
   initialUnits: [T, T]
   title: string
 }) => {
   const [valueFirst, setValueFirst, recalculateFromValueFirst] =
     useConverterState(new Big(0), (value, from, to): void =>
-      setValueSecond(convertFunction(value, from, to, 1))
+      setValueSecond(convertFunction(value, from, to, dp))
     )
   const [valueSecond, setValueSecond, recalculateFromValueSecond] =
     useConverterState(new Big(0), (value, from, to): void =>
-      setValueFirst(convertFunction(value, from, to, 1))
+      setValueFirst(convertFunction(value, from, to, dp))
     )
 
   const [unitFirst, setUnitFirst] = useState(initialFirstUnit)
