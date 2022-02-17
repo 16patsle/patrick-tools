@@ -146,3 +146,39 @@ describe('correctly converts from Celsius to Rømer', () => {
     expect(convertTemperature(-273.15, 'celsius', 'romer')).toBe('-135.90375')
   })
 })
+
+describe('correctly converts to Kelvin from various units', () => {
+  test('returns correct Kelvin for freezing point of water in Kelvin', () => {
+    expect(convertTemperature(273.15, 'kelvin', 'kelvin', 5)).toBe('273.15')
+  })
+  test('returns correct Kelvin for freezing point of water in Fahrenheit', () => {
+    expect(convertTemperature(32, 'fahrenheit', 'kelvin', 5)).toBe('273.15')
+  })
+  test('returns correct Kelvin for freezing point of water in Rankine', () => {
+    expect(convertTemperature(491.67, 'rankine', 'kelvin', 5)).toBe('273.15')
+  })
+  test('returns correct Kelvin for freezing point of water in Delisle', () => {
+    expect(convertTemperature(150, 'delisle', 'kelvin', 5)).toBe('273.15')
+  })
+  test('returns correct Kelvin for freezing point of water in Newton', () => {
+    expect(convertTemperature(0, 'newton', 'kelvin')).toBe('273.15')
+  })
+  test('returns correct Kelvin for freezing point of water in Réaumur', () => {
+    expect(convertTemperature(0, 'reaumur', 'kelvin')).toBe('273.15')
+  })
+  test('returns correct Kelvin for freezing point of water in Rømer', () => {
+    expect(convertTemperature(7.5, 'romer', 'kelvin')).toBe('273.15')
+  })
+})
+
+describe('correctly converts between various other unit combinations', () => {
+  test('returns correct Celsius for freezing point of water in Kelvin', () => {
+    expect(convertTemperature(273.15, 'kelvin', 'celsius')).toBe('0')
+  })
+  test('returns correct Rankine for freezing point of water in Fahrenheit', () => {
+    expect(convertTemperature(32, 'fahrenheit', 'rankine')).toBe('491.67')
+  })
+  test('returns correct Fahrenheit for freezing point of water in Rankine', () => {
+    expect(convertTemperature(491.67, 'rankine', 'fahrenheit')).toBe('32')
+  })
+})
