@@ -20,7 +20,7 @@ export const Select = ({ children, value, onChange }: SelectProps) => {
     <select
       value={value}
       onChange={onChange && (e => onChange(e.target.value, e))}
-      className="shadow-md bg-gray-50 hover:bg-gray-100 caret-yellow-500 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 border-gray-200 focus:border-gray-200 border-2 rounded-md"
+      className="rounded-md border-2 border-gray-200 bg-gray-50 caret-yellow-500 shadow-md hover:bg-gray-100 focus:border-gray-200 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
     >
       {children}
     </select>

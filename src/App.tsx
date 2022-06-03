@@ -14,7 +14,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="max-w-screen-lg">
-        <h1 className="text-3xl m-3 mt-2 mb-2 text-gray-800">
+        <h1 className="m-3 mt-2 mb-2 text-3xl text-gray-800">
           Patrick's Tools
         </h1>
         <Nav />

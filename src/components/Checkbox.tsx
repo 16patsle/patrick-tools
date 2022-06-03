@@ -30,15 +30,15 @@ const Checkbox = ({
   className = '',
 }: CheckboxProps) => {
   return (
-    <label className="label-grid radio-checkbox w-max h-9 grid my-2 gap-x-2 items-center">
-      <div className="text-gray-500 uppercase text-sm font-semibold">
+    <label className="label-grid radio-checkbox my-2 grid h-9 w-max items-center gap-x-2">
+      <div className="text-sm font-semibold uppercase text-gray-500">
         {children}
       </div>
       <input
         type="checkbox"
         checked={checked}
         onChange={onChange && (e => onChange(e.target.checked, e))}
-        className={`w-6 h-6 shadow-md checked:shadow-yellow-500 bg-gray-50 hover:bg-gray-100 text-yellow-500 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 border-gray-200 focus:border-gray-200 border-2 rounded-md p-1${
+        className={`h-6 w-6 rounded-md border-2 border-gray-200 bg-gray-50 text-yellow-500 shadow-md checked:shadow-yellow-500 hover:bg-gray-100 focus:border-gray-200 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 p-1${
           className ? ` ${className}` : ''
         }`}
       />

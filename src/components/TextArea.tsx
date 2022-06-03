@@ -35,8 +35,8 @@ const TextArea = ({
   className = '',
 }: TextAreaProps) => {
   return (
-    <label className="label-grid grid my-2 gap-x-2 items-center">
-      <div className="col-span-1 text-gray-500 uppercase text-sm font-semibold">
+    <label className="label-grid my-2 grid items-center gap-x-2">
+      <div className="col-span-1 text-sm font-semibold uppercase text-gray-500">
         {children}
       </div>
       <textarea
@@ -44,7 +44,7 @@ const TextArea = ({
         value={value}
         onChange={onChange && (e => onChange(e.target.value, e))}
         onKeyPress={onKeyPress}
-        className={`w-full shadow-md bg-gray-50 hover:bg-gray-100 caret-yellow-500 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 border-gray-200 focus:border-gray-200 border-2 rounded-md p-2${
+        className={`w-full rounded-md border-2 border-gray-200 bg-gray-50 caret-yellow-500 shadow-md hover:bg-gray-100 focus:border-gray-200 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 p-2${
           className ? ` ${className}` : ''
         }`}
       ></textarea>
