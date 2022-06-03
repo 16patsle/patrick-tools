@@ -10,7 +10,7 @@ const WeightConverter = () => {
       dp={2}
       options={weight}
       initialUnits={['kilogram', 'pound']}
-      title="Convert length"
+      title="Convert weight"
     />
   )
 }
