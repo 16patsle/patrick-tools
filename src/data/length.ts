@@ -1,19 +1,19 @@
 export const length = [
   {
-    name: 'inch',
-    symbol: 'in',
+    name: 'picometer',
+    symbol: 'pm',
   },
   {
-    name: 'foot',
-    symbol: 'ft',
+    name: 'angstrom',
+    symbol: 'Å',
   },
   {
-    name: 'yard',
-    symbol: 'yd',
+    name: 'nanometer',
+    symbol: 'nm',
   },
   {
-    name: 'mile',
-    symbol: 'mi',
+    name: 'micrometer',
+    symbol: 'µm',
   },
   {
     name: 'millimeter',
@@ -32,52 +32,88 @@ export const length = [
     symbol: 'km',
   },
   {
-    name: 'angstrom',
-    symbol: 'Å',
+    name: 'gigameter',
+    symbol: 'Gm',
   },
   {
-    name: 'nautical mile',
-    symbol: 'nmi',
+    name: 'inch',
+    symbol: 'in',
   },
   {
-    name: 'light year',
-    symbol: 'ly',
+    name: 'foot',
+    symbol: 'ft',
   },
   {
-    name: 'parsec',
-    symbol: 'pc',
-  },
-  {
-    name: 'astronomical unit',
-    symbol: 'au',
-  },
-  {
-    name: 'light second',
-    symbol: 'ls',
-  },
-  {
-    name: 'light minute',
-    symbol: 'lm',
-  },
-  {
-    name: 'light hour',
-    symbol: 'lh',
-  },
-  {
-    name: 'light day',
-    symbol: 'ld',
-  },
-  {
-    name: 'rod',
-    symbol: 'rd',
+    name: 'yard',
+    symbol: 'yd',
   },
   {
     name: 'chain',
     symbol: 'ch',
   },
   {
+    name: 'rod',
+    symbol: 'rd',
+  },
+  {
+    name: 'link',
+    symbol: 'li',
+  },
+  {
     name: 'furlong',
     symbol: 'fur',
+  },
+  {
+    name: 'mile',
+    symbol: 'mi',
+  },
+  {
+    name: 'nautical mile',
+    symbol: 'nmi',
+  },
+  {
+    name: 'light-second',
+    symbol: 'ls',
+  },
+  {
+    name: 'light-minute',
+    symbol: 'lm',
+  },
+  {
+    name: 'light-hour',
+    symbol: 'lh',
+  },
+  {
+    name: 'light-day',
+    symbol: 'ld',
+  },
+  {
+    name: 'light-week',
+    symbol: 'lw',
+  },
+  {
+    name: 'light-year',
+    symbol: 'ly',
+  },
+  {
+    name: 'astronomical unit',
+    symbol: 'au',
+  },
+  {
+    name: 'parsec',
+    symbol: 'pc',
+  },
+  {
+    name: 'kiloparsec',
+    symbol: 'kpc',
+  },
+  {
+    name: 'megaparsec',
+    symbol: 'Mpc',
+  },
+  {
+    name: 'gigaparsec',
+    symbol: 'Gpc',
   },
   {
     name: 'fathom',
