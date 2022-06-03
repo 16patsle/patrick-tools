@@ -16,7 +16,7 @@ export const weight = [
   },
   {
     name: 'tonne',
-    display: 'Tonne (metric)',
+    display: 'Tonne, metric',
     symbol: 't',
   },
   {
@@ -26,17 +26,17 @@ export const weight = [
   },
   {
     name: 'ounce',
-    display: 'Ounce (avoirdupois)',
+    display: 'Ounce, avoirdupois',
     symbol: 'oz',
   },
   {
     name: 'tonUS',
-    display: 'Short ton (US)',
+    display: 'Short ton, US',
     symbol: 'tn',
   },
   {
     name: 'tonUK',
-    display: 'Long ton (UK)',
+    display: 'Long ton, UK',
     symbol: 'tn',
   },
 ]
