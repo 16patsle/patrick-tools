@@ -6,7 +6,10 @@ import Big, { type BigSource } from 'big.js'
  * @param newValue - The new value
  * @returns THe growth factor, or false if failed.
  */
-export const calculateGrowthFactor = (oldValue: BigSource, newValue: BigSource) => {
+export const calculateGrowthFactor = (
+  oldValue: BigSource,
+  newValue: BigSource
+) => {
   if (!(oldValue instanceof Big)) {
     try {
       oldValue = new Big(oldValue)
@@ -23,7 +26,7 @@ export const calculateGrowthFactor = (oldValue: BigSource, newValue: BigSource) 
   }
 
   // Cannot divide by zero
-  if(oldValue.eq(0)) {
+  if (oldValue.eq(0)) {
     return false
   }
 

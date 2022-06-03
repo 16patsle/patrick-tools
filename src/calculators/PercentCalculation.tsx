@@ -11,9 +11,7 @@ const PercentCalculation = () => {
 
   return (
     <div className="max-w-md">
-      <Heading2>
-        Calculate growth factor and percent increase/decrease
-      </Heading2>
+      <Heading2>Calculate growth factor and percent increase/decrease</Heading2>
       <Input
         type="number"
         value={newValue}
@@ -37,7 +35,10 @@ const PercentCalculation = () => {
       <Input type="number" value={growthFactor} disabled>
         Growth Factor
       </Input>
-      <Input value={calculatePercentFromGrowthFactor(growthFactor, 2) + ' %'} disabled>
+      <Input
+        value={calculatePercentFromGrowthFactor(growthFactor, 2) + ' %'}
+        disabled
+      >
         Percent
       </Input>
     </div>
