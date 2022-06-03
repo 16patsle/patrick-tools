@@ -6,7 +6,7 @@ export const convertSvgToPng = async (
   if (!ctx) {
     throw new Error('Could not get canvas context')
   }
-  const { default: Canvg } = await import('canvg')
+  const { Canvg } = await import('canvg')
   const v = Canvg.fromString(ctx, svg)
   await v.render()
 
