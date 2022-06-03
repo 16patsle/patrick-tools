@@ -2,6 +2,7 @@ import AngleConverter from './calculators/AngleConverter'
 import BinaryDecimalConverter from './calculators/BinaryDecimalConverter'
 import BinaryTextConverter from './calculators/BinaryTextConverter'
 import CentimeterInchConverter from './calculators/CentimeterInchConverter'
+import WeightConverter from './calculators/WeightConverter'
 import KiloPoundConverter from './calculators/KiloPoundConverter'
 import LengthConverter from './calculators/LengthConverter'
 import PercentCalculation from './calculators/PercentCalculation'
@@ -16,6 +17,7 @@ const App = () => {
       <BinaryDecimalConverter />
       <BinaryTextConverter />
       <RomanNumeralConverter />
+      <WeightConverter />
       <KiloPoundConverter />
       <LengthConverter />
       <CentimeterInchConverter />
