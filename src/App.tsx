@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AngleConverter from './calculators/AngleConverter'
 import BinaryDecimalConverter from './calculators/BinaryDecimalConverter'
 import BinaryTextConverter from './calculators/BinaryTextConverter'
@@ -11,21 +12,53 @@ import { Nav } from './components/Nav'
 
 const App = () => {
   return (
-    <div className="max-w-screen-lg">
-      <h1 className="text-3xl m-3 mt-2 mb-2 text-gray-800">Patrick's Tools</h1>
-      <Nav />
-      <div className="ml-3 flex flex-col gap-2">
-        <BinaryDecimalConverter />
-        <BinaryTextConverter />
-        <RomanNumeralConverter />
-        <WeightConverter />
-        <LengthConverter />
-        <TemperatureConverter />
-        <AngleConverter />
-        <PercentCalculation />
-        <SvgToPngConverter />
+    <BrowserRouter>
+      <div className="max-w-screen-lg">
+        <h1 className="text-3xl m-3 mt-2 mb-2 text-gray-800">
+          Patrick's Tools
+        </h1>
+        <Nav />
+        <div className="ml-3 flex flex-col gap-2">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <BinaryDecimalConverter />
+                  <BinaryTextConverter />
+                  <RomanNumeralConverter />
+                  <PercentCalculation />
+                  <SvgToPngConverter />
+                </>
+              }
+            />
+            <Route path="/units/weight" element={<WeightConverter />} />
+            <Route path="/units/length" element={<LengthConverter />} />
+            <Route
+              path="/units/temperature"
+              element={<TemperatureConverter />}
+            />
+            <Route path="/units/angle" element={<AngleConverter />} />
+            <Route
+              path="/all"
+              element={
+                <>
+                  <BinaryDecimalConverter />
+                  <BinaryTextConverter />
+                  <WeightConverter />
+                  <LengthConverter />
+                  <TemperatureConverter />
+                  <AngleConverter />
+                  <RomanNumeralConverter />
+                  <PercentCalculation />
+                  <SvgToPngConverter />
+                </>
+              }
+            />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   )
 }
 
