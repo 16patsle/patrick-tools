@@ -12,8 +12,8 @@ const NavLink = ({
 }) => {
   const match = useMatch(href)
   const className =
-    'active:shadow-lg active:shadow-yellow-500 active:bg-yellow-500 hover:bg-gray-100 uppercase text-center font-semibold text-gray-500 active:text-gray-50 focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 border-transparent hover:border-gray-200 active:border-yellow-500 border-2 rounded-md p-1 px-2'
-    + (match ? ' text-gray-600 font-bold border-b-gray-200' : '')
+    'active:shadow-lg active:shadow-yellow-500 active:bg-yellow-500 hover:bg-gray-100 uppercase text-center font-semibold text-gray-500 active:text-gray-50 focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 border-transparent hover:border-gray-200 active:border-yellow-500 border-2 rounded-md p-1 px-2' +
+    (match ? ' text-gray-600 font-bold border-b-gray-200' : '')
 
   return external ? (
     <a className={className} href={href}>
