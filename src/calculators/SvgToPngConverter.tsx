@@ -96,7 +96,7 @@ export const SvgToPngConverter = () => {
         Upload file
       </Radio>
       {inputType === 'text' ? (
-        <TextArea value={svg} onChange={setSvg}>
+        <TextArea value={svg} onChange={setSvg} className="font-mono">
           SVG
         </TextArea>
       ) : (

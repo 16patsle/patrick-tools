@@ -34,7 +34,7 @@ export const PrettierFormatter = () => {
 
   return (
     <div className="max-w-md">
-      <TextArea value={code} onChange={setCode}>
+      <TextArea value={code} onChange={setCode} className="font-mono">
         Code
       </TextArea>
       <Label text="Language">
