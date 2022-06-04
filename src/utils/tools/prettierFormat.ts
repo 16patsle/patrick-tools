@@ -1,4 +1,7 @@
-export const prettierFormat = (code: string): Promise<string> =>
+export const prettierFormat = (
+  code: string,
+  parser: ParserName
+): Promise<string> =>
   Promise.race([
     new Promise<string>((resolve, reject) => {
       if (!window.Worker) {
@@ -16,11 +19,14 @@ export const prettierFormat = (code: string): Promise<string> =>
       prettierWorker.postMessage({
         type: 'format',
         code,
+        parser,
       })
 
       prettierWorker.onmessage = ({ data }) => {
         if (data.type === 'formatResult') {
           resolve(data.result)
+        } else if (data.type === 'error') {
+          reject(data.error)
         }
       }
     }),
@@ -29,62 +35,15 @@ export const prettierFormat = (code: string): Promise<string> =>
     ),
   ])
 
-export const parsers = [
-  {
-    id: 'babel',
-    name: 'JavaScript',
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
-  },
-  {
-    id: 'babel-ts',
-    name: 'TypeScript',
-    extensions: ['.ts', '.tsx'],
-  },
-  {
-    id: 'css',
-    name: 'CSS',
-    extensions: ['.css'],
-  },
-  {
-    id: 'scss',
-    name: 'SCSS',
-    extensions: ['.scss'],
-  },
-  {
-    id: 'json',
-    name: 'JSON',
-    extensions: ['.json'],
-  },
-  {
-    id: 'graphql',
-    name: 'GraphQL',
-    extensions: ['.graphql'],
-  },
-  {
-    id: 'markdown',
-    name: 'Markdown',
-    extensions: ['.md', '.markdown'],
-  },
-  {
-    id: 'mdx',
-    name: 'MDX',
-    extensions: ['.mdx'],
-  },
-  {
-    id: 'html',
-    name: 'HTML',
-    extensions: ['.html', '.htm'],
-    embedded: ['css', 'babel'],
-  },
-  {
-    id: 'vue',
-    name: 'Vue',
-    extensions: ['.vue'],
-    embedded: ['css', 'scss', 'babel', 'babel-ts'],
-  },
-  {
-    id: 'yaml',
-    name: 'YAML',
-    extensions: ['.yaml', '.yml'],
-  },
-]
+export type ParserName =
+  | 'babel'
+  | 'babel-ts'
+  | 'css'
+  | 'scss'
+  | 'json'
+  | 'graphql'
+  | 'markdown'
+  | 'mdx'
+  | 'html'
+  | 'vue'
+  | 'yaml'

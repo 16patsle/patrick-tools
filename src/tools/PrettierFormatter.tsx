@@ -4,11 +4,12 @@ import { Label } from '../components/Label'
 import { ErrorNotice } from '../components/Notice'
 import { Select } from '../components/Select'
 import TextArea from '../components/TextArea'
-import { parsers, prettierFormat } from '../utils/tools/prettierFormat'
+import { type ParserName, prettierFormat } from '../utils/tools/prettierFormat'
+import { parsers } from '../utils/tools/parsers'
 
 export const PrettierFormatter = () => {
   const [code, setCode] = useState('')
-  const [language, setLanguage] = useState('babel')
+  const [language, setLanguage] = useState<ParserName>('babel')
   const [error, setError] = useState('')
   const [isFormatting, setIsFormatting] = useState(false)
 
@@ -17,7 +18,7 @@ export const PrettierFormatter = () => {
       setIsFormatting(true)
       setError('')
 
-      setCode(await prettierFormat(code))
+      setCode(await prettierFormat(code, language))
     } catch (e) {
       if (e instanceof Error) {
         setError(e.message)
@@ -29,7 +30,7 @@ export const PrettierFormatter = () => {
     } finally {
       setIsFormatting(false)
     }
-  }, [code])
+  }, [code, language])
 
   return (
     <div className="max-w-md">
@@ -39,13 +40,13 @@ export const PrettierFormatter = () => {
       <Label text="Language">
         <Select
           value={language}
-          onChange={value => setLanguage(value)}
+          onChange={value => setLanguage(value as ParserName)}
         >
-          {parsers.map((parser) => (
-              <option key={parser.id} value={parser.id}>
-                {parser.name}
-              </option>
-            ))}
+          {parsers.map(parser => (
+            <option key={parser.id} value={parser.id}>
+              {parser.name}
+            </option>
+          ))}
         </Select>
       </Label>
       {isFormatting && <p>Converting...</p>}
