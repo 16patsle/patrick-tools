@@ -34,12 +34,12 @@ const toBlob = (
     )
   })
 
-const possibleTypes = {
-  'image/png': "PNG",
-  'image/jpeg': "JPEG",
-  'image/webp': "WebP",
-  'image/bmp': "BMP",
-  'image/gif': "GIF",
+export const possibleTypes = {
+  'image/png': 'PNG',
+  'image/jpeg': 'JPEG',
+  'image/webp': 'WebP',
+  'image/bmp': 'BMP',
+  'image/gif': 'GIF',
 }
 
 export type ImageType = keyof typeof possibleTypes

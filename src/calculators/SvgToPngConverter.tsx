@@ -11,6 +11,8 @@ import {
   type ImageType,
 } from '../utils/convertSvgToPng'
 import { FileInput } from '../components/FileInput'
+import { Select } from '../components/Select'
+import { Label } from '../components/Label'
 
 export const SvgToPngConverter = () => {
   const [svg, setSvg] = useState('')
@@ -51,11 +53,11 @@ export const SvgToPngConverter = () => {
     } finally {
       setConverting(false)
     }
-  }, [svg, canvas, selectedFile, inputType])
+  }, [svg, canvas, selectedFile, inputType, outputType])
 
   useEffect(() => {
     const getTypes = async () => {
-      if(canvas.current) {
+      if (canvas.current) {
         const types = await getSupportedTypes(canvas.current)
         setSupportedImageTypes(types)
         console.log(types)
@@ -76,7 +78,7 @@ export const SvgToPngConverter = () => {
 
   return (
     <div className="max-w-md">
-      <Heading2>Convert SVG to PNG</Heading2>
+      <Heading2>Convert SVG to {possibleTypes[outputType]}</Heading2>
       <Radio
         name="svg_png_input_type"
         value="text"
@@ -102,6 +104,22 @@ export const SvgToPngConverter = () => {
           Select File
         </FileInput>
       )}
+      <Label text="File type">
+        <Select
+          value={outputType}
+          onChange={value => setOutputType(value as ImageType)}
+        >
+          {Object.entries(possibleTypes).map(([key, value]) => {
+            const supported = supportedImageTypes.includes(key as ImageType)
+            return (
+              <option key={key} value={key} disabled={!supported}>
+                {value}
+                {!supported && ' (not supported)'}
+              </option>
+            )
+          })}
+        </Select>
+      </Label>
 
       {converting && <p>Converting...</p>}
       {error && (
