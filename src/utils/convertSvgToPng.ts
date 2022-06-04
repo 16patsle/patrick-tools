@@ -32,3 +32,26 @@ const toBlob = (
       quality
     )
   })
+
+const possibleTypes = {
+  'image/png': "PNG",
+  'image/jpeg': "JPEG",
+  'image/webp': "WebP",
+  'image/bmp': "BMP",
+  'image/gif': "GIF",
+}
+
+export type ImageType = keyof typeof possibleTypes
+
+const supportedTypes: ImageType[] = []
+
+export const getSupportedTypes = async (canvas: HTMLCanvasElement) => {
+  if (supportedTypes.length === 0) {
+    for (const type in possibleTypes) {
+      if ((await toBlob(canvas, type)).type === type) {
+        supportedTypes.push(type as ImageType)
+      }
+    }
+  }
+  return supportedTypes
+}
