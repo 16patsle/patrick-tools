@@ -1,4 +1,4 @@
-import chunk from 'lodash.chunk'
+import { chunk } from './chunk.js'
 import convertBinaryToDecimal from './convertBinaryToDecimal.js'
 
 /**
