@@ -64,7 +64,7 @@ export const SelectConverter = <T extends string>({
 
   return (
     <div className="max-w-lg">
-      <Heading2>{title}</Heading2>
+      <Heading2>{title} from {unitFirstData?.display} to {unitSecondData?.display}</Heading2>
       <UnitSelect
         unit={[
           unitFirst,
