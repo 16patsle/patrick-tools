@@ -11,12 +11,10 @@ onmessage = async function ({ data }) {
       let embeddedParsers: Plugin<any>[] = []
       if (parserData?.embedded) {
         for (const embedded of parserData.embedded) {
-          embeddedParsers.push(
-            await loadPlugin(embedded)
-          )
+          embeddedParsers.push(await loadPlugin(embedded))
         }
       }
-  
+
       const result = prettier.format(data.code, {
         parser: data.parser ?? 'babel',
         plugins: [await loadPlugin(parserName), ...embeddedParsers],
