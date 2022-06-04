@@ -1,10 +1,15 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Heading2 } from '../components/Heading2'
 import TextArea from '../components/TextArea'
 import { AnchorButton, Button } from '../components/Button'
 import { ErrorNotice } from '../components/Notice'
 import Radio from '../components/Radio'
-import { convertSvgToPng } from '../utils/convertSvgToPng'
+import {
+  convertSvgToPng,
+  getSupportedTypes,
+  possibleTypes,
+  type ImageType,
+} from '../utils/convertSvgToPng'
 import { FileInput } from '../components/FileInput'
 
 export const SvgToPngConverter = () => {
@@ -15,6 +20,10 @@ export const SvgToPngConverter = () => {
   const [converting, setConverting] = useState(false)
   const [inputType, setInputType] = useState<'text' | 'file'>('text')
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [supportedImageTypes, setSupportedImageTypes] = useState<ImageType[]>([
+    'image/png',
+  ])
+  const [outputType, setOutputType] = useState<ImageType>('image/png')
 
   const renderSvg = useCallback(async () => {
     try {
@@ -30,7 +39,7 @@ export const SvgToPngConverter = () => {
       }
 
       setConverting(true)
-      setPngUrl(await convertSvgToPng(content, canvas.current))
+      setPngUrl(await convertSvgToPng(content, canvas.current, outputType))
     } catch (e) {
       if (e instanceof Error) {
         setError(e.message)
@@ -43,6 +52,17 @@ export const SvgToPngConverter = () => {
       setConverting(false)
     }
   }, [svg, canvas, selectedFile, inputType])
+
+  useEffect(() => {
+    const getTypes = async () => {
+      if(canvas.current) {
+        const types = await getSupportedTypes(canvas.current)
+        setSupportedImageTypes(types)
+        console.log(types)
+      }
+    }
+    getTypes().catch(console.error)
+  }, [canvas])
 
   const updateInputType = (type: string) => {
     setInputType(type === 'file' ? 'file' : 'text')

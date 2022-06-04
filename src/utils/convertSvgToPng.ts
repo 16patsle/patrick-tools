@@ -1,6 +1,7 @@
 export const convertSvgToPng = async (
   svg: string,
-  canvas: HTMLCanvasElement
+  canvas: HTMLCanvasElement,
+  type: ImageType = 'image/png'
 ): Promise<string> => {
   const ctx = canvas.getContext('2d')
   if (!ctx) {
@@ -10,7 +11,7 @@ export const convertSvgToPng = async (
   const v = Canvg.fromString(ctx, svg)
   await v.render()
 
-  return URL.createObjectURL(await toBlob(canvas, 'image/png'))
+  return URL.createObjectURL(await toBlob(canvas, type))
 }
 
 const toBlob = (
