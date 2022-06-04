@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react'
 import { Button } from '../components/Button'
 import { ErrorNotice } from '../components/Notice'
 import TextArea from '../components/TextArea'
+import { prettierFormat } from '../utils/tools/prettierFormat'
 
 export const PrettierFormatter = () => {
   const [code, setCode] = useState('')
@@ -11,27 +12,9 @@ export const PrettierFormatter = () => {
   const formatCode = useCallback(async () => {
     try {
       setIsFormatting(true)
-
-      if(!window.Worker) {
-        throw new Error('Worker is not available')
-      }
-
-      const prettierWorker = new Worker(new URL('../utils/tools/prettierFormatWorker.ts', import.meta.url), {
-        type: 'module',
-      })
-
-      prettierWorker.postMessage({
-        type: 'format',
-        code,
-      })
-
-      prettierWorker.onmessage = ({data}) => {
-        if(data.type === 'formatResult') {
-          setCode(data.result)
-        }
-      }
-      
       setError('')
+
+      setCode(await prettierFormat(code))
     } catch (e) {
       if (e instanceof Error) {
         setError(e.message)
