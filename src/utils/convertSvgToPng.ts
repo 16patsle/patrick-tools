@@ -26,7 +26,6 @@ const toBlob = (
           reject(new Error('Could not convert to image'))
           return
         }
-        console.log(blob.type)
         resolve(blob)
       },
       type,

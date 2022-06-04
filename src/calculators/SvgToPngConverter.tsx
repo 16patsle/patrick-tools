@@ -60,7 +60,6 @@ export const SvgToPngConverter = () => {
       if (canvas.current) {
         const types = await getSupportedTypes(canvas.current)
         setSupportedImageTypes(types)
-        console.log(types)
       }
     }
     getTypes().catch(console.error)
