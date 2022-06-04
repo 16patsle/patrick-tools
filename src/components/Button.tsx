@@ -1,6 +1,7 @@
-import type { FunctionComponent, MouseEvent } from 'react'
+import type { MouseEvent, ReactNode } from 'react'
 
 type ButtonProps = {
+  children?: ReactNode
   /**
    * Callback on button click
    */
@@ -12,6 +13,7 @@ type ButtonProps = {
 }
 
 type AnchorButtonProps = {
+  children?: ReactNode
   /**
    * Output a element with href instead of button
    */
@@ -29,11 +31,7 @@ type AnchorButtonProps = {
 const className =
   'my-3 h-9 w-full rounded-md border-2 border-gray-200 bg-gray-50 p-1 text-center text-sm font-semibold uppercase text-gray-500 shadow-md hover:bg-gray-100 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 active:border-yellow-500 active:bg-yellow-500 active:text-gray-50 active:shadow-lg active:shadow-yellow-500 disabled:bg-gray-100 disabled:text-gray-400'
 
-export const Button: FunctionComponent<ButtonProps> = ({
-  children,
-  onClick,
-  disabled,
-}) => {
+export const Button = ({ children, onClick, disabled }: ButtonProps) => {
   return (
     <button className={className} onClick={onClick} disabled={disabled}>
       {children}
@@ -41,12 +39,12 @@ export const Button: FunctionComponent<ButtonProps> = ({
   )
 }
 
-export const AnchorButton: FunctionComponent<AnchorButtonProps> = ({
+export const AnchorButton = ({
   children,
   href,
   onClick,
   download = false,
-}) => {
+}: AnchorButtonProps) => {
   return (
     <a className={className} href={href} onClick={onClick} download={download}>
       {children}
