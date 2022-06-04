@@ -55,8 +55,8 @@ export const PrettierFormatter = () => {
           <span className="font-semibold">Error:</span> {error}
         </ErrorNotice>
       )}
-      <Button onClick={formatCode} disabled={isFormatting}>
-        Render
+      <Button onClick={formatCode} disabled={isFormatting || code.length === 0}>
+        Format
       </Button>
     </div>
   )
