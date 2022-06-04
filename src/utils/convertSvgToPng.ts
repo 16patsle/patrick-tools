@@ -10,13 +10,25 @@ export const convertSvgToPng = async (
   const v = Canvg.fromString(ctx, svg)
   await v.render()
 
-  return new Promise((resolve, reject) => {
-    canvas.toBlob(blob => {
-      if (!blob) {
-        reject(new Error('Could not convert to image'))
-        return
-      }
-      resolve(URL.createObjectURL(blob))
-    }, 'image/png')
-  })
+  return URL.createObjectURL(await toBlob(canvas, 'image/png'))
 }
+
+const toBlob = (
+  canvas: HTMLCanvasElement,
+  type: string,
+  quality?: number
+): Promise<Blob> =>
+  new Promise((resolve, reject) => {
+    canvas.toBlob(
+      blob => {
+        if (!blob) {
+          reject(new Error('Could not convert to image'))
+          return
+        }
+        console.log(blob.type)
+        resolve(blob)
+      },
+      type,
+      quality
+    )
+  })
