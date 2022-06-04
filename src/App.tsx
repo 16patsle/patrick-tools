@@ -9,6 +9,7 @@ import RomanNumeralConverter from './calculators/RomanNumeralConverter'
 import { SvgToPngConverter } from './calculators/SvgToPngConverter'
 import TemperatureConverter from './calculators/TemperatureConverter'
 import { Nav } from './components/Nav'
+import { PrettierFormatter } from './tools/PrettierFormatter'
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
                   <RomanNumeralConverter />
                   <PercentCalculation />
                   <SvgToPngConverter />
+                  <PrettierFormatter />
                 </>
               }
             />
@@ -52,6 +54,7 @@ const App = () => {
                   <RomanNumeralConverter />
                   <PercentCalculation />
                   <SvgToPngConverter />
+                  <PrettierFormatter />
                 </>
               }
             />
