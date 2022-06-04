@@ -1,4 +1,5 @@
 import { ChangeEvent, ReactNode } from 'react'
+import { Label } from './Label'
 
 type RadioProps = {
   /**
@@ -39,10 +40,7 @@ const Radio = ({
   className = '',
 }: RadioProps) => {
   return (
-    <label className="label-grid radio-checkbox my-2 grid h-9 w-max items-center gap-x-2">
-      <div className="text-sm font-semibold uppercase text-gray-500">
-        {children}
-      </div>
+    <Label className="radio-checkbox h-9 w-max" text={children}>
       <input
         type="radio"
         value={value}
@@ -52,7 +50,7 @@ const Radio = ({
           className ? ` ${className}` : ''
         }`}
       />
-    </label>
+    </Label>
   )
 }
 

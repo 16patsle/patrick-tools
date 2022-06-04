@@ -1,4 +1,5 @@
 import type { ChangeEvent, ReactNode } from 'react'
+import { Label } from './Label'
 
 type FileInputProps = {
   /**
@@ -26,10 +27,7 @@ export const FileInput = ({
   className = '',
 }: FileInputProps) => {
   return (
-    <label className="label-grid my-2 grid items-center gap-x-2">
-      <div className="col-span-1 text-sm font-semibold uppercase text-gray-500">
-        {children}
-      </div>
+    <Label text={children}>
       <input
         type="file"
         accept={accept}
@@ -38,6 +36,6 @@ export const FileInput = ({
           className ? ` ${className}` : ''
         }`}
       />
-    </label>
+    </Label>
   )
 }

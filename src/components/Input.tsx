@@ -1,4 +1,5 @@
 import type { ChangeEvent, KeyboardEvent, ReactNode } from 'react'
+import { Label } from './Label'
 
 type InputProps = {
   /**
@@ -55,10 +56,7 @@ const Input = ({
   disabled = false,
 }: InputProps) => {
   return (
-    <label className="label-grid my-2 grid items-center gap-x-2">
-      <div className="col-span-1 text-sm font-semibold uppercase text-gray-500">
-        {children}
-      </div>
+    <Label text={children}>
       <input
         type={type}
         pattern={pattern}
@@ -71,7 +69,7 @@ const Input = ({
         }`}
         disabled={disabled}
       />
-    </label>
+    </Label>
   )
 }
 

@@ -1,4 +1,5 @@
 import type { ChangeEvent, KeyboardEvent } from 'react'
+import { Label } from './Label'
 
 type TextAreaProps = {
   /**
@@ -35,10 +36,7 @@ const TextArea = ({
   className = '',
 }: TextAreaProps) => {
   return (
-    <label className="label-grid my-2 grid items-center gap-x-2">
-      <div className="col-span-1 text-sm font-semibold uppercase text-gray-500">
-        {children}
-      </div>
+    <Label text={children}>
       <textarea
         rows={10}
         value={value}
@@ -48,7 +46,7 @@ const TextArea = ({
           className ? ` ${className}` : ''
         }`}
       ></textarea>
-    </label>
+    </Label>
   )
 }
 

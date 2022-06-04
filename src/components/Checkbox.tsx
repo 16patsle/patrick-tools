@@ -1,4 +1,5 @@
 import { ChangeEvent, ReactNode } from 'react'
+import { Label } from './Label'
 
 type CheckboxProps = {
   /**
@@ -30,19 +31,14 @@ const Checkbox = ({
   className = '',
 }: CheckboxProps) => {
   return (
-    <label className="label-grid radio-checkbox my-2 grid h-9 w-max items-center gap-x-2">
-      <div className="text-sm font-semibold uppercase text-gray-500">
-        {children}
-      </div>
+    <Label className="radio-checkbox h-9 w-max" text={children}>
       <input
         type="checkbox"
         checked={checked}
         onChange={onChange && (e => onChange(e.target.checked, e))}
-        className={`h-6 w-6 rounded-md border-2 border-gray-200 bg-gray-50 text-yellow-500 shadow-md checked:shadow-yellow-500 hover:bg-gray-100 focus:border-gray-200 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 p-1${
-          className ? ` ${className}` : ''
-        }`}
+        className={`h-6 w-6 rounded-md border-2 border-gray-200 bg-gray-50 p-1 text-yellow-500 shadow-md checked:shadow-yellow-500 hover:bg-gray-100 focus:border-gray-200 focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 ${className}`.trim()}
       />
-    </label>
+    </Label>
   )
 }
 
