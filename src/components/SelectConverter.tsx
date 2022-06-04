@@ -4,6 +4,7 @@ import { Heading2 } from '../components/Heading2'
 import { useConverterState } from '../utils/useConverterState'
 import { Select } from '../components/Select'
 import Big, { BigSource } from 'big.js'
+import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter'
 
 type SelectOptions = {
   name: string
@@ -22,7 +23,7 @@ const UnitSelect = ({
     <Select value={value} onChange={setValue}>
       {options.map(({ name, display, symbol }) => (
         <option key={name} value={name}>
-          {display} ({symbol})
+          {capitalizeFirstLetter(display)} ({symbol})
         </option>
       ))}
     </Select>

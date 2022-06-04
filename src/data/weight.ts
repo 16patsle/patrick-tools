@@ -1,42 +1,42 @@
 export const weight = [
   {
     name: 'milligram',
-    display: 'Milligram',
+    display: 'milligram',
     symbol: 'mg',
   },
   {
     name: 'gram',
-    display: 'Gram',
+    display: 'gram',
     symbol: 'g',
   },
   {
     name: 'kilogram',
-    display: 'Kilogram',
+    display: 'kilogram',
     symbol: 'kg',
   },
   {
     name: 'tonne',
-    display: 'Tonne, metric',
+    display: 'tonne, metric',
     symbol: 't',
   },
   {
     name: 'pound',
-    display: 'Pound',
+    display: 'pound',
     symbol: 'lb',
   },
   {
     name: 'ounce',
-    display: 'Ounce, avoirdupois',
+    display: 'ounce, avoirdupois',
     symbol: 'oz',
   },
   {
     name: 'tonUS',
-    display: 'Short ton, US',
+    display: 'short ton, US',
     symbol: 'tn',
   },
   {
     name: 'tonUK',
-    display: 'Long ton, UK',
+    display: 'long ton, UK',
     symbol: 'tn',
   },
 ]

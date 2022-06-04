@@ -1,32 +1,32 @@
 export const angle = [
   {
     name: 'degree',
-    display: 'Degree',
+    display: 'degree',
     symbol: '°',
   },
   {
     name: 'radian',
-    display: 'Radian',
+    display: 'radian',
     symbol: 'rad',
   },
   {
     name: 'gradian',
-    display: 'Gradian',
+    display: 'gradian',
     symbol: 'grad',
   },
   {
     name: 'turn',
-    display: 'Turn',
+    display: 'turn',
     symbol: 'tr',
   },
   {
     name: 'arcmin',
-    display: 'Minute of arc',
+    display: 'minute of arc',
     symbol: '′',
   },
   {
     name: 'arcsec',
-    display: 'Second of arc',
+    display: 'second of arc',
     symbol: '″',
   },
 ]
