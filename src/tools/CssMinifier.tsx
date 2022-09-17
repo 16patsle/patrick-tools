@@ -36,7 +36,7 @@ export const CssMinifier = () => {
       <TextArea value={code} onChange={setCode} className="font-mono">
         Code
       </TextArea>
-      {isMinifying && <p>Converting...</p>}
+      {isMinifying && <p>Minifying...</p>}
       {error && (
         <ErrorNotice>
           <span className="font-semibold">Error:</span> {error}
