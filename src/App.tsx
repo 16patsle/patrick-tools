@@ -10,6 +10,7 @@ import { SvgToPngConverter } from './calculators/SvgToPngConverter'
 import TemperatureConverter from './calculators/TemperatureConverter'
 import { Nav } from './components/Nav'
 import { PrettierFormatter } from './tools/PrettierFormatter'
+import { CssMinifier } from './tools/CssMinifier'
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
                   <PercentCalculation />
                   <SvgToPngConverter />
                   <PrettierFormatter />
+                  <CssMinifier />
                 </>
               }
             />
@@ -55,6 +57,7 @@ const App = () => {
                   <PercentCalculation />
                   <SvgToPngConverter />
                   <PrettierFormatter />
+                  <CssMinifier />
                 </>
               }
             />
