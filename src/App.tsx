@@ -11,6 +11,7 @@ import TemperatureConverter from './calculators/TemperatureConverter'
 import { Nav } from './components/Nav'
 import { PrettierFormatter } from './tools/PrettierFormatter'
 import { CssMinifier } from './tools/CssMinifier'
+import { EsbuildTransformer } from './tools/EsbuildTransformer'
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
                   <SvgToPngConverter />
                   <PrettierFormatter />
                   <CssMinifier />
+                  <EsbuildTransformer />
                 </>
               }
             />
@@ -58,6 +60,7 @@ const App = () => {
                   <SvgToPngConverter />
                   <PrettierFormatter />
                   <CssMinifier />
+                  <EsbuildTransformer />
                 </>
               }
             />
