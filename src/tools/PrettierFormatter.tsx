@@ -6,6 +6,7 @@ import { Select } from '../components/Select'
 import TextArea from '../components/TextArea'
 import { type ParserName, prettierFormat } from '../utils/tools/prettierFormat'
 import { parsers } from '../utils/tools/parsers'
+import { Heading2 } from '../components/Heading2'
 
 export const PrettierFormatter = () => {
   const [code, setCode] = useState('')
@@ -32,8 +33,11 @@ export const PrettierFormatter = () => {
     }
   }, [code, language])
 
+  const currentLangName = parsers.find(parser => parser.id === language)?.name
+
   return (
     <div className="max-w-md">
+      <Heading2>Format {currentLangName} using Prettier</Heading2>
       <TextArea value={code} onChange={setCode} className="font-mono">
         Code
       </TextArea>
