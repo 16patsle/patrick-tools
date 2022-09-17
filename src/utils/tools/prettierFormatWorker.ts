@@ -1,36 +1,25 @@
 import { Plugin } from 'prettier'
 import prettier from 'prettier/standalone'
+import { listenFromWorker } from './listenFromWorker'
 import { parsers } from './parsers'
+import { type PrettierWorkerData } from './prettierFormat'
 
-onmessage = async function ({ data }) {
-  try {
-    if (data.type === 'format') {
-      const parserName = data.parser ?? 'babel'
-      const parserData = parsers.find(({ id }) => id === parserName)
+listenFromWorker<PrettierWorkerData, string>('format', async data => {
+  const parserName = data.parser ?? 'babel'
+  const parserData = parsers.find(({ id }) => id === parserName)
 
-      let embeddedParsers: Plugin<any>[] = []
-      if (parserData?.embedded) {
-        for (const embedded of parserData.embedded) {
-          embeddedParsers.push(await loadPlugin(embedded))
-        }
-      }
-
-      const result = prettier.format(data.code, {
-        parser: data.parser ?? 'babel',
-        plugins: [await loadPlugin(parserName), ...embeddedParsers],
-      })
-      postMessage({
-        type: 'formatResult',
-        result: result,
-      })
+  let embeddedParsers: Plugin<any>[] = []
+  if (parserData?.embedded) {
+    for (const embedded of parserData.embedded) {
+      embeddedParsers.push(await loadPlugin(embedded))
     }
-  } catch (error) {
-    postMessage({
-      type: 'error',
-      error,
-    })
   }
-}
+
+  return prettier.format(data.code, {
+    parser: data.parser ?? 'babel',
+    plugins: [await loadPlugin(parserName), ...embeddedParsers],
+  })
+})
 
 const loadPlugin = async (name: string): Promise<Plugin<any>> => {
   switch (name) {

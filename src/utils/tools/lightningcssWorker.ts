@@ -1,28 +1,17 @@
 import init, { transform } from 'lightningcss-wasm'
+import { type LightningcssWorkerData } from './lightningcssTransform'
+import { listenFromWorker } from './listenFromWorker'
 
 const encoder = new TextEncoder()
 const decoder = new TextDecoder()
 
-onmessage = async function ({ data }) {
-  try {
-    if (data.type === 'minify') {
-      await init()
+listenFromWorker<LightningcssWorkerData, string>('minify', async data => {
+  await init()
 
-      const result = transform({
-        filename: 'file.css',
-        code: encoder.encode(data.code),
-        minify: true,
-      })
-
-      postMessage({
-        type: 'minifyResult',
-        result: decoder.decode(result.code),
-      })
-    }
-  } catch (error) {
-    postMessage({
-      type: 'error',
-      error,
-    })
-  }
-}
+  const result = transform({
+    filename: 'file.css',
+    code: encoder.encode(data.code),
+    minify: true,
+  })
+  return decoder.decode(result.code)
+})

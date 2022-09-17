@@ -23,7 +23,7 @@ export const runInWorker = <T, R>({
       })
 
       worker.postMessage({
-        type: action,
+        action,
         ...options,
       })
 

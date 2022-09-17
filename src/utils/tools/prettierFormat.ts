@@ -1,10 +1,7 @@
 import { runInWorker } from './runInWorker'
 
-export const prettierFormat = (
-  code: string,
-  parser: ParserName
-): Promise<string> =>
-  runInWorker({
+export const prettierFormat = (code: string, parser: ParserName) =>
+  runInWorker<PrettierWorkerData, string>({
     url: new URL('./prettierFormatWorker.ts', import.meta.url),
     action: 'format',
     options: {
@@ -12,6 +9,11 @@ export const prettierFormat = (
       parser,
     },
   })
+
+export type PrettierWorkerData = {
+  code: string
+  parser: ParserName
+}
 
 export type ParserName =
   | 'babel'
