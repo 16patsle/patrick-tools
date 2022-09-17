@@ -13,7 +13,7 @@ export const runInWorker = <T, R>({
 }: RunInWorkerOptions<T>): Promise<R> =>
   Promise.race([
     new Promise<R>((resolve, reject) => {
-      if (!window.Worker) {
+      if (!globalThis.Worker) {
         reject(new Error('Worker is not available'))
         return
       }
