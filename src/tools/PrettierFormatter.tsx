@@ -5,7 +5,7 @@ import { ErrorNotice } from '../components/Notice'
 import { Select } from '../components/Select'
 import TextArea from '../components/TextArea'
 import { type ParserName, prettierFormat } from '../utils/tools/prettierFormat'
-import { parsers } from '../utils/tools/parsers'
+import { parsers } from '../utils/tools/prettierParsers'
 import { Heading2 } from '../components/Heading2'
 
 export const PrettierFormatter = () => {

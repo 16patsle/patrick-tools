@@ -4,14 +4,16 @@ import { Label } from '../components/Label'
 import { ErrorNotice } from '../components/Notice'
 import { Select } from '../components/Select'
 import TextArea from '../components/TextArea'
-import { type ParserName } from '../utils/tools/prettierFormat'
-import { parsers } from '../utils/tools/parsers'
 import { Heading2 } from '../components/Heading2'
-import { esbuildTransform } from '../utils/tools/esbuildTransform'
+import {
+  esbuildTransform,
+  type LoaderName,
+} from '../utils/tools/esbuildTransform'
+import { loaders } from '../utils/tools/esbuildLoaders'
 
 export const EsbuildTransformer = () => {
   const [code, setCode] = useState('')
-  const [language, setLanguage] = useState<ParserName>('babel')
+  const [language, setLanguage] = useState<LoaderName>('js')
   const [error, setError] = useState('')
   const [isTransforming, setIsTransforming] = useState(false)
 
@@ -20,7 +22,7 @@ export const EsbuildTransformer = () => {
       setIsTransforming(true)
       setError('')
 
-      setCode(await esbuildTransform(code))
+      setCode(await esbuildTransform(code, language))
     } catch (e) {
       if (e instanceof Error) {
         setError(e.message)
@@ -34,7 +36,7 @@ export const EsbuildTransformer = () => {
     }
   }, [code, language])
 
-  const currentLangName = parsers.find(parser => parser.id === language)?.name
+  const currentLangName = loaders.find(loader => loader.id === language)?.name
 
   return (
     <div className="max-w-md">
@@ -45,11 +47,11 @@ export const EsbuildTransformer = () => {
       <Label text="Language">
         <Select
           value={language}
-          onChange={value => setLanguage(value as ParserName)}
+          onChange={value => setLanguage(value as LoaderName)}
         >
-          {parsers.map(parser => (
-            <option key={parser.id} value={parser.id}>
-              {parser.name}
+          {loaders.map(loader => (
+            <option key={loader.id} value={loader.id}>
+              {loader.name}
             </option>
           ))}
         </Select>
@@ -60,8 +62,11 @@ export const EsbuildTransformer = () => {
           <span className="font-semibold">Error:</span> {error}
         </ErrorNotice>
       )}
-      <Button onClick={transformCode} disabled={isTransforming || code.length === 0}>
-        Format
+      <Button
+        onClick={transformCode}
+        disabled={isTransforming || code.length === 0}
+      >
+        Transform
       </Button>
     </div>
   )

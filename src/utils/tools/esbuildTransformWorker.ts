@@ -14,8 +14,14 @@ listenFromWorker<EsbuildWorkerData, string>('transform', async data => {
   })
 
   const result = await esbuild.transform(data.code, {
+    loader: data.loader,
     minify: true,
   })
+
+  if (data.loader === 'json') {
+    // For JSON, esbuild exports it as JavaScript. We don't want that
+    return result.code.replace(/^module.exports=/, '')
+  }
 
   return result.code
 })

@@ -1,7 +1,7 @@
 import { Plugin } from 'prettier'
 import prettier from 'prettier/standalone'
 import { listenFromWorker } from './listenFromWorker'
-import { parsers } from './parsers'
+import { parsers } from './prettierParsers'
 import { type PrettierWorkerData } from './prettierFormat'
 
 listenFromWorker<PrettierWorkerData, string>('format', async data => {
