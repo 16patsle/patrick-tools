@@ -53,7 +53,7 @@ export const PrettierFormatter = () => {
           ))}
         </Select>
       </Label>
-      {isFormatting && <p>Converting...</p>}
+      {isFormatting && <p>Formatting...</p>}
       {error && (
         <ErrorNotice>
           <span className="font-semibold">Error:</span> {error}
