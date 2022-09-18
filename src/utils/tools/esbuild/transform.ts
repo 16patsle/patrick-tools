@@ -8,7 +8,7 @@ type TransformOptions = {
 
 export const esbuildTransform = (
   code: string,
-  { language, jsx }: TransformOptions,
+  { language, jsx, ...options }: TransformOptions,
   statusListener?: StatusListener
 ) => {
   let loader: LoaderName = language
@@ -25,6 +25,7 @@ export const esbuildTransform = (
     options: {
       code,
       loader,
+      ...options,
     },
     statusListener,
   })
@@ -33,6 +34,7 @@ export const esbuildTransform = (
 export type EsbuildWorkerData = {
   code: string
   loader: LoaderName
+  minify?: boolean
 }
 
 export type LoaderName = 'js' | 'jsx' | 'ts' | 'tsx' | 'css' | 'json'

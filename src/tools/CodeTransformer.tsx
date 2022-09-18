@@ -57,13 +57,13 @@ const tools: {
   id: ToolName
   name: string
   packageJson: PackageJson
-  supports?: 'jsx'[]
+  supports?: ('jsx' | 'minify')[]
 }[] = [
   {
     id: 'esbuild',
     name: 'esbuild',
     packageJson: esbuildPackageJson,
-    supports: ['jsx'],
+    supports: ['jsx', 'minify'],
   },
   {
     id: 'lightningcss',
@@ -74,7 +74,7 @@ const tools: {
     id: 'swc',
     name: 'swc',
     packageJson: swcPackageJson,
-    supports: ['jsx'],
+    supports: ['jsx', 'minify'],
   },
   {
     id: 'terser',
@@ -109,7 +109,11 @@ export const CodeTransformer = () => {
 
       switch (tool) {
         case 'esbuild': {
-          result = await esbuildTransform(code, {language, ...options}, setStatus)
+          result = await esbuildTransform(
+            code,
+            { language, ...options },
+            setStatus
+          )
           break
         }
         case 'lightningcss': {
@@ -117,7 +121,7 @@ export const CodeTransformer = () => {
           break
         }
         case 'swc': {
-          result = await swcTransform(code, {language, ...options}, setStatus)
+          result = await swcTransform(code, { language, ...options }, setStatus)
           break
         }
         case 'terser': {
@@ -193,8 +197,19 @@ export const CodeTransformer = () => {
         </Select>
       </Label>
       {currentTool?.supports?.includes('jsx') && (
-        <Checkbox checked={options.jsx} onChange={val => setOptions({...options, jsx: val})}>
+        <Checkbox
+          checked={options.jsx}
+          onChange={val => setOptions({ ...options, jsx: val })}
+        >
           JSX
+        </Checkbox>
+      )}
+      {currentTool?.supports?.includes('minify') && (
+        <Checkbox
+          checked={options.minify}
+          onChange={val => setOptions({ ...options, minify: val })}
+        >
+          Minify
         </Checkbox>
       )}
       {isTransforming && status && <p>{status}</p>}

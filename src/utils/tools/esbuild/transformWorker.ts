@@ -37,7 +37,7 @@ let initialized = false
 
 listenFromWorker<EsbuildWorkerData, string>(
   'transform',
-  async (data, reportStatus) => {
+  async ({ code, loader, minify }, reportStatus) => {
     if (!initialized) {
       reportStatus('Initializing esbuild...')
       await esbuild.initialize({
@@ -48,12 +48,12 @@ listenFromWorker<EsbuildWorkerData, string>(
     }
 
     reportStatus('Transforming code...')
-    const result = await esbuild.transform(data.code, {
-      loader: data.loader,
-      minify: true,
+    const result = await esbuild.transform(code, {
+      loader,
+      minify,
     })
 
-    if (data.loader === 'json') {
+    if (loader === 'json') {
       // For JSON, esbuild exports it as JavaScript. We don't want that
       return result.code.replace(/^module.exports=/, '')
     }

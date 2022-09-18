@@ -6,7 +6,7 @@ let initialized = false
 
 listenFromWorker<SwcWorkerData, string>(
   'transform',
-  async (data, reportStatus) => {
+  async ({ code, parser, jsx, minify }, reportStatus) => {
     if (!initialized) {
       reportStatus('Initializing swc...')
       await initSwc()
@@ -14,14 +14,14 @@ listenFromWorker<SwcWorkerData, string>(
     }
 
     reportStatus('Transforming code...')
-    const result = await transform(data.code, {
+    const result = await transform(code, {
       jsc: {
         parser: {
-          syntax: data.parser,
-          jsx: data.jsx
+          syntax: parser,
+          jsx,
         },
       },
-      minify: true,
+      minify,
     })
 
     return result.code
