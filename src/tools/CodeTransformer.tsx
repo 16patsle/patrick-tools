@@ -6,85 +6,22 @@ import { Select } from '../components/Select'
 import TextArea from '../components/TextArea'
 import { Heading2 } from '../components/Heading2'
 import { esbuildTransform } from '../utils/tools/esbuild/transform'
-import { loaders } from '../utils/tools/esbuild/loaders'
 import {
-  type PackageJson,
   PackageVersionNumber,
 } from '../components/PackageVersionNumber'
 import { minifyCss } from '../utils/tools/lightningcss/transform'
 import { swcTransform } from '../utils/tools/swc/transform'
 import { terserMinify } from '../utils/tools/terser/transform'
-import esbuildPackageJson from 'esbuild-wasm/package.json'
-import lightningcssPackageJson from 'lightningcss-wasm/package.json'
-import swcPackageJson from '@swc/wasm-web/package.json'
-import terserPackageJson from 'terser/package.json'
 import Checkbox from '../components/Checkbox'
+import { languages, type LanguageName } from '../utils/tools/languages'
+import { tools, type ToolName } from '../utils/tools/tools'
 
-const map: Record<LanguageName, ToolName[]> = {
+const toolCompatibility: Record<LanguageName, ToolName[]> = {
   js: ['esbuild', 'swc', 'terser'],
   ts: ['esbuild', 'swc'],
   css: ['lightningcss', 'esbuild'],
   json: ['esbuild'],
 }
-
-export type LanguageName = 'js' | 'ts' | 'css' | 'json'
-type ToolName = 'esbuild' | 'lightningcss' | 'swc' | 'terser'
-
-const languages = [
-  {
-    id: 'js',
-    name: 'JavaScript',
-    extensions: ['.js', '.cjs', '.mjs'],
-  },
-  {
-    id: 'ts',
-    name: 'TypeScript',
-    extensions: ['.ts', '.mts', '.cts'],
-  },
-  {
-    id: 'css',
-    name: 'CSS',
-    extensions: ['.css'],
-  },
-  {
-    id: 'json',
-    name: 'JSON',
-    extensions: ['.json'],
-  },
-]
-
-const tools: {
-  id: ToolName
-  name: string
-  packageJson: PackageJson
-  supports?: ('jsx' | 'minify')[]
-  actionText?: string
-}[] = [
-  {
-    id: 'esbuild',
-    name: 'esbuild',
-    packageJson: esbuildPackageJson,
-    supports: ['jsx', 'minify'],
-  },
-  {
-    id: 'lightningcss',
-    name: 'Lightning CSS',
-    packageJson: lightningcssPackageJson,
-    actionText: 'Minify'
-  },
-  {
-    id: 'swc',
-    name: 'swc',
-    packageJson: swcPackageJson,
-    supports: ['jsx', 'minify'],
-  },
-  {
-    id: 'terser',
-    name: 'terser',
-    packageJson: terserPackageJson,
-    actionText: 'Minify'
-  },
-]
 
 type Options = {
   jsx?: boolean
@@ -150,7 +87,7 @@ export const CodeTransformer = () => {
     }
   }, [code, language, tool, options])
 
-  const currentLangName = loaders.find(loader => loader.id === language)?.name
+  const currentLangName = languages.find(lang => lang.id === language)?.name
   const currentTool = tools.find(t => t.id === tool)
 
   return (
@@ -166,7 +103,7 @@ export const CodeTransformer = () => {
           value={language}
           onChange={value => {
             const compatibleTools = tools.filter(tool =>
-              map[value as LanguageName].includes(tool.id)
+              toolCompatibility[value as LanguageName].includes(tool.id)
             )
             setLanguage(value as LanguageName)
             if (!compatibleTools.find(t => t.id === tool)) {
@@ -191,7 +128,7 @@ export const CodeTransformer = () => {
           }}
         >
           {tools
-            .filter(tool => map[language].includes(tool.id))
+            .filter(tool => toolCompatibility[language].includes(tool.id))
             .map(tool => (
               <option key={tool.id} value={tool.id}>
                 {tool.name}
