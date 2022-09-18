@@ -1,8 +1,8 @@
 import { Plugin } from 'prettier'
 import prettier from 'prettier/standalone'
-import { listenFromWorker } from './listenFromWorker'
-import { parsers } from './prettierParsers'
-import { type PrettierWorkerData } from './prettierFormat'
+import { listenFromWorker } from '../listenFromWorker'
+import { parsers } from './parsers'
+import { type PrettierWorkerData } from './format'
 
 listenFromWorker<PrettierWorkerData, string>('format', async data => {
   const parserName = data.parser ?? 'babel'

@@ -1,14 +1,14 @@
-import { type EsbuildWorkerData } from './esbuildTransform'
-import { listenFromWorker } from './listenFromWorker'
+import { type EsbuildWorkerData } from './transform'
+import { listenFromWorker } from '../listenFromWorker'
 import * as esbuild from 'esbuild-wasm/esm/browser'
 
 // Polyfills for running in vitest. They apparently need to be here
-import { cryptoPolyfill } from '../../../tests/utils/cryptoPolyfill'
-import { performancePolyfill } from '../../../tests/utils/performancePolyfill'
+import { cryptoPolyfill } from '../../../../tests/utils/cryptoPolyfill'
+import { performancePolyfill } from '../../../../tests/utils/performancePolyfill'
 import {
   FastTextDecoder,
   FastTextEncoder,
-} from '../../../tests/utils/textEncoderPolyfill'
+} from '../../../../tests/utils/textEncoderPolyfill'
 
 if (process.env.TEST) {
   if (!self.crypto) {

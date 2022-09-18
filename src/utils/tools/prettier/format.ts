@@ -1,8 +1,8 @@
-import { runInWorker } from './runInWorker'
+import { runInWorker } from '../runInWorker'
 
 export const prettierFormat = (code: string, parser: ParserName) =>
   runInWorker<PrettierWorkerData, string>({
-    url: new URL('./prettierFormatWorker.ts', import.meta.url),
+    url: new URL('./formatWorker.ts', import.meta.url),
     action: 'format',
     options: {
       code,

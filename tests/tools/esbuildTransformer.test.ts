@@ -1,6 +1,6 @@
 import '@vitest/web-worker'
 import { expect, test, vi } from 'vitest'
-const esbuildTransformImport = import('../../src/utils/tools/esbuildTransform')
+const esbuildTransformImport = import('../../src/utils/tools/esbuild/transform')
 
 import fs from 'fs/promises'
 import path from 'path'

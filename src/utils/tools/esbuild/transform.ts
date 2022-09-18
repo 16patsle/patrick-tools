@@ -1,8 +1,8 @@
-import { runInWorker } from './runInWorker'
+import { runInWorker } from '../runInWorker'
 
 export const esbuildTransform = (code: string, loader: LoaderName) =>
   runInWorker<EsbuildWorkerData, string>({
-    url: new URL('./esbuildTransformWorker.ts', import.meta.url),
+    url: new URL('./transformWorker.ts', import.meta.url),
     action: 'transform',
     options: {
       code,

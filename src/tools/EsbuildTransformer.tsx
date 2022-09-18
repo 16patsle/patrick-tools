@@ -8,8 +8,8 @@ import { Heading2 } from '../components/Heading2'
 import {
   esbuildTransform,
   type LoaderName,
-} from '../utils/tools/esbuildTransform'
-import { loaders } from '../utils/tools/esbuildLoaders'
+} from '../utils/tools/esbuild/transform'
+import { loaders } from '../utils/tools/esbuild/loaders'
 import { PackageVersionNumber } from '../components/PackageVersionNumber'
 import esbuildPackageJson from 'esbuild-wasm/package.json'
 

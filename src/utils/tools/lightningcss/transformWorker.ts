@@ -1,6 +1,6 @@
 import init, { transform } from 'lightningcss-wasm'
-import { type LightningcssWorkerData } from './lightningcssTransform'
-import { listenFromWorker } from './listenFromWorker'
+import { type LightningcssWorkerData } from './transform'
+import { listenFromWorker } from '../listenFromWorker'
 
 const encoder = new TextEncoder()
 const decoder = new TextDecoder()
