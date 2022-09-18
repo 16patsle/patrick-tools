@@ -15,13 +15,7 @@ import { terserMinify } from '../utils/tools/terser/transform'
 import Checkbox from '../components/Checkbox'
 import { languages, type LanguageName } from '../utils/tools/languages'
 import { tools, type ToolName } from '../utils/tools/tools'
-
-const toolCompatibility: Record<LanguageName, ToolName[]> = {
-  js: ['esbuild', 'swc', 'terser'],
-  ts: ['esbuild', 'swc'],
-  css: ['lightningcss', 'esbuild'],
-  json: ['esbuild'],
-}
+import { toolCompatibility } from '../utils/tools/toolCompatibility'
 
 type Options = {
   jsx?: boolean
