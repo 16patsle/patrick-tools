@@ -3,13 +3,17 @@ type RunInWorkerOptions<T extends {}> = {
   action: string
   options: T
   timeout?: number
+  statusListener?: StatusListener
 }
+
+export type StatusListener = (message: string) => void
 
 export const runInWorker = <T, R>({
   url,
   action,
   options,
   timeout = 10000,
+  statusListener
 }: RunInWorkerOptions<T>): Promise<R> =>
   Promise.race([
     new Promise<R>((resolve, reject) => {
@@ -30,6 +34,8 @@ export const runInWorker = <T, R>({
       worker.onmessage = ({ data }) => {
         if (data.type === `${action}Result`) {
           resolve(data.result)
+        } else if (data.type === 'status' && statusListener) {
+          statusListener(data.message)
         } else if (data.type === 'error') {
           reject(data.error)
         }

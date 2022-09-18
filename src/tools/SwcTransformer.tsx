@@ -17,6 +17,7 @@ export const SwcTransformer = () => {
   const [code, setCode] = useState('')
   const [language, setLanguage] = useState<ParserName>('ecmascript')
   const [error, setError] = useState('')
+  const [status, setStatus] = useState('')
   const [isTransforming, setIsTransforming] = useState(false)
 
   const transformCode = useCallback(async () => {
@@ -24,7 +25,7 @@ export const SwcTransformer = () => {
       setIsTransforming(true)
       setError('')
 
-      setCode(await swcTransform(code, language))
+      setCode(await swcTransform(code, language, setStatus))
     } catch (e) {
       if (e instanceof Error) {
         setError(e.message)
@@ -58,7 +59,7 @@ export const SwcTransformer = () => {
           ))}
         </Select>
       </Label>
-      {isTransforming && <p>Transforming...</p>}
+      {isTransforming && status && <p>{status}</p>}
       {error && (
         <ErrorNotice>
           <span className="font-semibold">Error:</span> {error}
