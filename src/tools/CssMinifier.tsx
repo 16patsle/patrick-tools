@@ -10,6 +10,7 @@ import lightningcssPackageJson from 'lightningcss-wasm/package.json'
 export const CssMinifier = () => {
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
+  const [status, setStatus] = useState('')
   const [isMinifying, setIsMinifying] = useState(false)
 
   const minifyCode = useCallback(async () => {
@@ -17,7 +18,7 @@ export const CssMinifier = () => {
       setIsMinifying(true)
       setError('')
 
-      setCode(await minifyCss(code))
+      setCode(await minifyCss(code, setStatus))
     } catch (e) {
       console.error(e)
       if (e instanceof Error) {
@@ -38,7 +39,7 @@ export const CssMinifier = () => {
       <TextArea value={code} onChange={setCode} className="font-mono">
         Code
       </TextArea>
-      {isMinifying && <p>Minifying...</p>}
+      {isMinifying && status && <p>{status}</p>}
       {error && (
         <ErrorNotice>
           <span className="font-semibold">Error:</span> {error}

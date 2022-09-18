@@ -1,6 +1,10 @@
 import { runInWorker, type StatusListener } from '../runInWorker'
 
-export const swcTransform = (code: string, parser: ParserName, statusListener?: StatusListener) =>
+export const swcTransform = (
+  code: string,
+  parser: ParserName,
+  statusListener?: StatusListener
+) =>
   runInWorker<SwcWorkerData, string>({
     url: new URL('./transformWorker.ts', import.meta.url),
     action: 'transform',
@@ -8,7 +12,7 @@ export const swcTransform = (code: string, parser: ParserName, statusListener?: 
       code,
       parser,
     },
-    statusListener
+    statusListener,
   })
 
 export type SwcWorkerData = {

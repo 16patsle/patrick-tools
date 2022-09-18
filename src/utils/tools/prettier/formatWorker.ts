@@ -4,22 +4,28 @@ import { listenFromWorker } from '../listenFromWorker'
 import { parsers } from './parsers'
 import { type PrettierWorkerData } from './format'
 
-listenFromWorker<PrettierWorkerData, string>('format', async data => {
-  const parserName = data.parser ?? 'babel'
-  const parserData = parsers.find(({ id }) => id === parserName)
+listenFromWorker<PrettierWorkerData, string>(
+  'format',
+  async (data, reportStatus) => {
+    const parserName = data.parser ?? 'babel'
+    const parserData = parsers.find(({ id }) => id === parserName)
 
-  let embeddedParsers: Plugin<any>[] = []
-  if (parserData?.embedded) {
-    for (const embedded of parserData.embedded) {
-      embeddedParsers.push(await loadPlugin(embedded))
+    let embeddedParsers: Plugin<any>[] = []
+    if (parserData?.embedded) {
+      for (const embedded of parserData.embedded) {
+        reportStatus(`Loading plugin '${embedded}'...`)
+        embeddedParsers.push(await loadPlugin(embedded))
+      }
     }
-  }
 
-  return prettier.format(data.code, {
-    parser: data.parser ?? 'babel',
-    plugins: [await loadPlugin(parserName), ...embeddedParsers],
-  })
-})
+    reportStatus('Formatting code...')
+
+    return prettier.format(data.code, {
+      parser: data.parser ?? 'babel',
+      plugins: [await loadPlugin(parserName), ...embeddedParsers],
+    })
+  }
+)
 
 const loadPlugin = async (name: string): Promise<Plugin<any>> => {
   switch (name) {

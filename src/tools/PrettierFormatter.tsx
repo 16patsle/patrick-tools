@@ -14,6 +14,7 @@ export const PrettierFormatter = () => {
   const [code, setCode] = useState('')
   const [language, setLanguage] = useState<ParserName>('babel')
   const [error, setError] = useState('')
+  const [status, setStatus] = useState('')
   const [isFormatting, setIsFormatting] = useState(false)
 
   const formatCode = useCallback(async () => {
@@ -21,7 +22,7 @@ export const PrettierFormatter = () => {
       setIsFormatting(true)
       setError('')
 
-      setCode(await prettierFormat(code, language))
+      setCode(await prettierFormat(code, language, setStatus))
     } catch (e) {
       if (e instanceof Error) {
         setError(e.message)
@@ -55,7 +56,7 @@ export const PrettierFormatter = () => {
           ))}
         </Select>
       </Label>
-      {isFormatting && <p>Formatting...</p>}
+      {isFormatting && status && <p>{status}</p>}
       {error && (
         <ErrorNotice>
           <span className="font-semibold">Error:</span> {error}

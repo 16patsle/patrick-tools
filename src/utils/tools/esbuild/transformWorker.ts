@@ -33,21 +33,31 @@ const wasmURL = new URL(
   import.meta.url
 ).href
 
-listenFromWorker<EsbuildWorkerData, string>('transform', async data => {
-  await esbuild.initialize({
-    wasmURL,
-    worker: false,
-  })
+let initialized = false
 
-  const result = await esbuild.transform(data.code, {
-    loader: data.loader,
-    minify: true,
-  })
+listenFromWorker<EsbuildWorkerData, string>(
+  'transform',
+  async (data, reportStatus) => {
+    if (!initialized) {
+      reportStatus('Initializing esbuild...')
+      await esbuild.initialize({
+        wasmURL,
+        worker: false,
+      })
+      initialized = true
+    }
 
-  if (data.loader === 'json') {
-    // For JSON, esbuild exports it as JavaScript. We don't want that
-    return result.code.replace(/^module.exports=/, '')
+    reportStatus('Transforming code...')
+    const result = await esbuild.transform(data.code, {
+      loader: data.loader,
+      minify: true,
+    })
+
+    if (data.loader === 'json') {
+      // For JSON, esbuild exports it as JavaScript. We don't want that
+      return result.code.replace(/^module.exports=/, '')
+    }
+
+    return result.code
   }
-
-  return result.code
-})
+)

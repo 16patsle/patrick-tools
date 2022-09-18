@@ -5,10 +5,7 @@ import { ErrorNotice } from '../components/Notice'
 import { Select } from '../components/Select'
 import TextArea from '../components/TextArea'
 import { Heading2 } from '../components/Heading2'
-import {
-  swcTransform,
-  type ParserName,
-} from '../utils/tools/swc/transform'
+import { swcTransform, type ParserName } from '../utils/tools/swc/transform'
 import { parsers } from '../utils/tools/swc/parsers'
 import { PackageVersionNumber } from '../components/PackageVersionNumber'
 import swcPackageJson from '@swc/wasm-web/package.json'

@@ -13,7 +13,7 @@ export const runInWorker = <T, R>({
   action,
   options,
   timeout = 10000,
-  statusListener
+  statusListener,
 }: RunInWorkerOptions<T>): Promise<R> =>
   Promise.race([
     new Promise<R>((resolve, reject) => {
@@ -21,6 +21,8 @@ export const runInWorker = <T, R>({
         reject(new Error('Worker is not available'))
         return
       }
+
+      statusListener?.('Loading worker...')
 
       const worker = new Worker(url, {
         type: 'module',

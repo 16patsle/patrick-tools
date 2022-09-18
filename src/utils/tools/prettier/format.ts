@@ -1,6 +1,10 @@
-import { runInWorker } from '../runInWorker'
+import { runInWorker, type StatusListener } from '../runInWorker'
 
-export const prettierFormat = (code: string, parser: ParserName) =>
+export const prettierFormat = (
+  code: string,
+  parser: ParserName,
+  statusListener?: StatusListener
+) =>
   runInWorker<PrettierWorkerData, string>({
     url: new URL('./formatWorker.ts', import.meta.url),
     action: 'format',
@@ -8,6 +12,7 @@ export const prettierFormat = (code: string, parser: ParserName) =>
       code,
       parser,
     },
+    statusListener,
   })
 
 export type PrettierWorkerData = {

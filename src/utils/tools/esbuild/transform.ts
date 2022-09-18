@@ -1,6 +1,10 @@
-import { runInWorker } from '../runInWorker'
+import { runInWorker, type StatusListener } from '../runInWorker'
 
-export const esbuildTransform = (code: string, loader: LoaderName) =>
+export const esbuildTransform = (
+  code: string,
+  loader: LoaderName,
+  statusListener?: StatusListener
+) =>
   runInWorker<EsbuildWorkerData, string>({
     url: new URL('./transformWorker.ts', import.meta.url),
     action: 'transform',
@@ -8,6 +12,7 @@ export const esbuildTransform = (code: string, loader: LoaderName) =>
       code,
       loader,
     },
+    statusListener,
   })
 
 export type EsbuildWorkerData = {
