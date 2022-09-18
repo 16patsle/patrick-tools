@@ -10,7 +10,7 @@ import {
   FastTextEncoder,
 } from '../../../../tests/utils/textEncoderPolyfill'
 
-if (process.env.TEST) {
+if (typeof process !== 'undefined' && process.env.TEST) {
   if (!self.crypto) {
     // @ts-expect-error
     self.crypto = cryptoPolyfill
