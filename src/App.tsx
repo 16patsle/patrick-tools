@@ -14,6 +14,7 @@ import { CssMinifier } from './tools/CssMinifier'
 import { EsbuildTransformer } from './tools/EsbuildTransformer'
 import { SwcTransformer } from './tools/SwcTransformer'
 import { TerserTransformer } from './tools/TerserTransformer'
+import { CodeTransformer } from './tools/CodeTransformer'
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
                   <EsbuildTransformer />
                   <SwcTransformer />
                   <TerserTransformer />
+                  <CodeTransformer />
                 </>
               }
             />
@@ -67,6 +69,7 @@ const App = () => {
                   <EsbuildTransformer />
                   <SwcTransformer />
                   <TerserTransformer />
+                  <CodeTransformer />
                 </>
               }
             />
