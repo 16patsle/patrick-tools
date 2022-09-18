@@ -58,6 +58,7 @@ const tools: {
   name: string
   packageJson: PackageJson
   supports?: ('jsx' | 'minify')[]
+  actionText?: string
 }[] = [
   {
     id: 'esbuild',
@@ -69,6 +70,7 @@ const tools: {
     id: 'lightningcss',
     name: 'Lightning CSS',
     packageJson: lightningcssPackageJson,
+    actionText: 'Minify'
   },
   {
     id: 'swc',
@@ -80,6 +82,7 @@ const tools: {
     id: 'terser',
     name: 'terser',
     packageJson: terserPackageJson,
+    actionText: 'Minify'
   },
 ]
 
@@ -153,7 +156,7 @@ export const CodeTransformer = () => {
   return (
     <div className="max-w-md">
       <Heading2>
-        Transform {currentLangName} using {currentTool?.name}
+      {currentTool?.actionText ?? 'Transform'} {currentLangName} using {currentTool?.name}
       </Heading2>
       <TextArea value={code} onChange={setCode} className="font-mono">
         Code
@@ -222,7 +225,7 @@ export const CodeTransformer = () => {
         onClick={transformCode}
         disabled={isTransforming || code.length === 0}
       >
-        Transform
+        {currentTool?.actionText ?? 'Transform'}
       </Button>
       {currentTool && (
         <PackageVersionNumber packageJson={currentTool.packageJson} />
