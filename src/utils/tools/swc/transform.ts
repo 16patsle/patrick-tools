@@ -1,4 +1,4 @@
-import { type LanguageName } from '../../../tools/CodeTransformer'
+import { type LanguageName } from '../languages'
 import { runInWorker, type StatusListener } from '../runInWorker'
 
 type TransformOptions = {

@@ -1,11 +1,20 @@
+import { type LanguageName } from '../languages'
 import { runInWorker, type StatusListener } from '../runInWorker'
 
 export const prettierFormat = (
   code: string,
-  parser: ParserName,
+  language: LanguageName,
   statusListener?: StatusListener
-) =>
-  runInWorker<PrettierWorkerData, string>({
+) => {
+  let parser: ParserName
+  if (language === 'js') {
+    parser = 'babel'
+  } else if (language === 'ts') {
+    parser = 'babel-ts'
+  } else {
+    parser = language
+  }
+  return runInWorker<PrettierWorkerData, string>({
     url: new URL('./formatWorker.ts', import.meta.url),
     action: 'format',
     options: {
@@ -14,6 +23,7 @@ export const prettierFormat = (
     },
     statusListener,
   })
+}
 
 export type PrettierWorkerData = {
   code: string

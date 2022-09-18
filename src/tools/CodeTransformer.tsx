@@ -5,14 +5,13 @@ import { ErrorNotice } from '../components/Notice'
 import { Select } from '../components/Select'
 import TextArea from '../components/TextArea'
 import { Heading2 } from '../components/Heading2'
+import Checkbox from '../components/Checkbox'
 import { esbuildTransform } from '../utils/tools/esbuild/transform'
-import {
-  PackageVersionNumber,
-} from '../components/PackageVersionNumber'
+import { PackageVersionNumber } from '../components/PackageVersionNumber'
 import { minifyCss } from '../utils/tools/lightningcss/transform'
 import { swcTransform } from '../utils/tools/swc/transform'
 import { terserMinify } from '../utils/tools/terser/transform'
-import Checkbox from '../components/Checkbox'
+import { prettierFormat } from '../utils/tools/prettier/format'
 import { languages, type LanguageName } from '../utils/tools/languages'
 import { tools, type ToolName } from '../utils/tools/tools'
 import { toolCompatibility } from '../utils/tools/toolCompatibility'
@@ -62,6 +61,10 @@ export const CodeTransformer = () => {
           result = await terserMinify(code, setStatus)
           break
         }
+        case 'prettier': {
+          result = await prettierFormat(code, language, setStatus)
+          break
+        }
         default: {
           throw Error('No tool selected')
         }
@@ -87,7 +90,8 @@ export const CodeTransformer = () => {
   return (
     <div className="max-w-md">
       <Heading2>
-      {currentTool?.actionText ?? 'Transform'} {currentLangName} using {currentTool?.name}
+        {currentTool?.actionText ?? 'Transform'} {currentLangName} using{' '}
+        {currentTool?.name}
       </Heading2>
       <TextArea value={code} onChange={setCode} className="font-mono">
         Code

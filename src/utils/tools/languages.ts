@@ -1,29 +1,63 @@
-export type LanguageName = 'js' | 'ts' | 'css' | 'json'
+export type LanguageName =
+  | 'js'
+  | 'ts'
+  | 'css'
+  | 'scss'
+  | 'json'
+  | 'graphql'
+  | 'markdown'
+  | 'mdx'
+  | 'html'
+  | 'vue'
+  | 'yaml'
 export type Language = {
   id: LanguageName
   name: string
-  extensions: string[]
 }
 
 export const languages: Language[] = [
   {
     id: 'js',
     name: 'JavaScript',
-    extensions: ['.js', '.cjs', '.mjs'],
   },
   {
     id: 'ts',
     name: 'TypeScript',
-    extensions: ['.ts', '.mts', '.cts'],
   },
   {
     id: 'css',
     name: 'CSS',
-    extensions: ['.css'],
+  },
+  {
+    id: 'scss',
+    name: 'SCSS',
   },
   {
     id: 'json',
     name: 'JSON',
-    extensions: ['.json'],
+  },
+  {
+    id: 'graphql',
+    name: 'GraphQL',
+  },
+  {
+    id: 'markdown',
+    name: 'Markdown',
+  },
+  {
+    id: 'mdx',
+    name: 'MDX',
+  },
+  {
+    id: 'html',
+    name: 'HTML',
+  },
+  {
+    id: 'vue',
+    name: 'Vue',
+  },
+  {
+    id: 'yaml',
+    name: 'YAML',
   },
 ]

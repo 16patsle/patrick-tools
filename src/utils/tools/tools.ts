@@ -1,12 +1,16 @@
-import {
-  type PackageJson,
-} from '../../components/PackageVersionNumber'
+import { type PackageJson } from '../../components/PackageVersionNumber'
 import esbuildPackageJson from 'esbuild-wasm/package.json'
 import lightningcssPackageJson from 'lightningcss-wasm/package.json'
 import swcPackageJson from '@swc/wasm-web/package.json'
 import terserPackageJson from 'terser/package.json'
+import prettierPackageJson from 'prettier/package.json'
 
-export type ToolName = 'esbuild' | 'lightningcss' | 'swc' | 'terser'
+export type ToolName =
+  | 'esbuild'
+  | 'lightningcss'
+  | 'swc'
+  | 'terser'
+  | 'prettier'
 export type Tool = {
   id: ToolName
   name: string
@@ -26,7 +30,7 @@ export const tools: Tool[] = [
     id: 'lightningcss',
     name: 'Lightning CSS',
     packageJson: lightningcssPackageJson,
-    actionText: 'Minify'
+    actionText: 'Minify',
   },
   {
     id: 'swc',
@@ -38,6 +42,12 @@ export const tools: Tool[] = [
     id: 'terser',
     name: 'terser',
     packageJson: terserPackageJson,
-    actionText: 'Minify'
+    actionText: 'Minify',
+  },
+  {
+    id: 'prettier',
+    name: 'Prettier',
+    packageJson: prettierPackageJson,
+    actionText: 'Format',
   },
 ]

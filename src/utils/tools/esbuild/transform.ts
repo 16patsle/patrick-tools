@@ -1,4 +1,4 @@
-import { type LanguageName } from '../../../tools/CodeTransformer'
+import { type LanguageName } from '../languages'
 import { runInWorker, type StatusListener } from '../runInWorker'
 
 type TransformOptions = {
@@ -6,11 +6,18 @@ type TransformOptions = {
   jsx?: boolean
 }
 
+const allowedLanguages = ['js', 'jsx', 'ts', 'tsx', 'css', 'json']
+const isAllowedLanguage = (language: string): language is LoaderName =>
+  allowedLanguages.includes(language)
+
 export const esbuildTransform = (
   code: string,
   { language, jsx, ...options }: TransformOptions,
   statusListener?: StatusListener
 ) => {
+  if (!isAllowedLanguage(language)) {
+    throw new Error('Unsupported language')
+  }
   let loader: LoaderName = language
   if (jsx) {
     if (language === 'js') {
