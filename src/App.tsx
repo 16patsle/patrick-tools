@@ -10,10 +10,6 @@ import { SvgToPngConverter } from './calculators/SvgToPngConverter'
 import TemperatureConverter from './calculators/TemperatureConverter'
 import { Nav } from './components/Nav'
 import { PrettierFormatter } from './tools/PrettierFormatter'
-import { CssMinifier } from './tools/CssMinifier'
-import { EsbuildTransformer } from './tools/EsbuildTransformer'
-import { SwcTransformer } from './tools/SwcTransformer'
-import { TerserTransformer } from './tools/TerserTransformer'
 import { CodeTransformer } from './tools/CodeTransformer'
 
 const App = () => {
@@ -36,10 +32,6 @@ const App = () => {
                   <PercentCalculation />
                   <SvgToPngConverter />
                   <PrettierFormatter />
-                  <CssMinifier />
-                  <EsbuildTransformer />
-                  <SwcTransformer />
-                  <TerserTransformer />
                   <CodeTransformer />
                 </>
               }
@@ -65,10 +57,6 @@ const App = () => {
                   <PercentCalculation />
                   <SvgToPngConverter />
                   <PrettierFormatter />
-                  <CssMinifier />
-                  <EsbuildTransformer />
-                  <SwcTransformer />
-                  <TerserTransformer />
                   <CodeTransformer />
                 </>
               }
