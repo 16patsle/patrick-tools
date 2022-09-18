@@ -2,9 +2,11 @@ type PackageJson = {
   name: string
   version: string
   homepage?: string
-  repository?: {
-    url?: string
-  }
+  repository?:
+    | {
+        url?: string
+      }
+    | string
 }
 
 export const PackageVersionNumber = ({
@@ -12,10 +14,21 @@ export const PackageVersionNumber = ({
 }: {
   packageJson: PackageJson
 }) => {
-  const url =
-    packageJson.homepage ??
-    packageJson.repository?.url ??
-    `https://npm.im/${packageJson.name}`
+  let url = `https://npm.im/${packageJson.name}`
+  if (packageJson.homepage) {
+    url = packageJson.homepage
+  } else if (packageJson.repository) {
+    let repoUrl
+    if (typeof packageJson.repository === 'string') {
+      repoUrl = packageJson.repository
+    } else if (packageJson.repository.url) {
+      repoUrl = packageJson.repository.url
+    }
+
+    if (repoUrl?.startsWith('https://') || repoUrl?.startsWith('http://')) {
+      url = repoUrl
+    }
+  }
 
   return (
     <div className=" mb-1 text-right text-sm text-gray-500">
