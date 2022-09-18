@@ -134,7 +134,7 @@ export const SvgToPngConverter = () => {
       >
         Render
       </Button>
-      <canvas ref={canvas} hidden />
+      <canvas ref={canvas} hidden className="hidden" />
       {pngUrl && (
         <div className="my-3 flex flex-col items-center rounded-md border-2 border-gray-200 p-2 pb-0 shadow-md">
           <img src={pngUrl} alt="The generated PNG image" />
