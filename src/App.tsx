@@ -13,6 +13,7 @@ import { PrettierFormatter } from './tools/PrettierFormatter'
 import { CssMinifier } from './tools/CssMinifier'
 import { EsbuildTransformer } from './tools/EsbuildTransformer'
 import { SwcTransformer } from './tools/SwcTransformer'
+import { TerserTransformer } from './tools/TerserTransformer'
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
                   <CssMinifier />
                   <EsbuildTransformer />
                   <SwcTransformer />
+                  <TerserTransformer />
                 </>
               }
             />
@@ -64,6 +66,7 @@ const App = () => {
                   <CssMinifier />
                   <EsbuildTransformer />
                   <SwcTransformer />
+                  <TerserTransformer />
                 </>
               }
             />
