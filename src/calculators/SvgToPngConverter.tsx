@@ -13,6 +13,8 @@ import {
 import { FileInput } from '../components/FileInput'
 import { Select } from '../components/Select'
 import { Label } from '../components/Label'
+import { PackageVersionNumber } from '../components/PackageVersionNumber'
+import canvgPackageJson from '../../node_modules/canvg/package.json'
 
 export const SvgToPngConverter = () => {
   const [svg, setSvg] = useState('')
@@ -141,6 +143,7 @@ export const SvgToPngConverter = () => {
           </AnchorButton>
         </div>
       )}
+      <PackageVersionNumber packageJson={canvgPackageJson} />
     </div>
   )
 }

@@ -2,8 +2,10 @@ import { useCallback, useState } from 'react'
 import { Button } from '../components/Button'
 import { Heading2 } from '../components/Heading2'
 import { ErrorNotice } from '../components/Notice'
+import { PackageVersionNumber } from '../components/PackageVersionNumber'
 import TextArea from '../components/TextArea'
 import { minifyCss } from '../utils/tools/lightningcssTransform'
+import lightningcssPackageJson from 'lightningcss-wasm/package.json'
 
 export const CssMinifier = () => {
   const [code, setCode] = useState('')
@@ -45,6 +47,7 @@ export const CssMinifier = () => {
       <Button onClick={minifyCode} disabled={isMinifying || code.length === 0}>
         Minify
       </Button>
+      <PackageVersionNumber packageJson={lightningcssPackageJson} />
     </div>
   )
 }

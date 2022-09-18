@@ -10,6 +10,8 @@ import {
   type LoaderName,
 } from '../utils/tools/esbuildTransform'
 import { loaders } from '../utils/tools/esbuildLoaders'
+import { PackageVersionNumber } from '../components/PackageVersionNumber'
+import esbuildPackageJson from 'esbuild-wasm/package.json'
 
 export const EsbuildTransformer = () => {
   const [code, setCode] = useState('')
@@ -68,6 +70,7 @@ export const EsbuildTransformer = () => {
       >
         Transform
       </Button>
+      <PackageVersionNumber packageJson={esbuildPackageJson} />
     </div>
   )
 }

@@ -7,6 +7,8 @@ import TextArea from '../components/TextArea'
 import { type ParserName, prettierFormat } from '../utils/tools/prettierFormat'
 import { parsers } from '../utils/tools/prettierParsers'
 import { Heading2 } from '../components/Heading2'
+import { PackageVersionNumber } from '../components/PackageVersionNumber'
+import prettierPackageJson from 'prettier/package.json'
 
 export const PrettierFormatter = () => {
   const [code, setCode] = useState('')
@@ -62,6 +64,7 @@ export const PrettierFormatter = () => {
       <Button onClick={formatCode} disabled={isFormatting || code.length === 0}>
         Format
       </Button>
+      <PackageVersionNumber packageJson={prettierPackageJson} />
     </div>
   )
 }
