@@ -8,6 +8,8 @@ type RunInWorkerOptions<T extends {}> = {
 
 export type StatusListener = (message: string) => void
 
+const workerMap: Record<string, { worker: Worker; busy: boolean }> = {}
+
 export const runInWorker = <T, R>({
   url,
   action,
@@ -22,11 +24,27 @@ export const runInWorker = <T, R>({
         return
       }
 
-      statusListener?.('Loading worker...')
+      const workerKey = `${action}+${url.href}`
+      let worker: Worker
 
-      const worker = new Worker(url, {
-        type: 'module',
-      })
+      if (workerMap[workerKey]) {
+        if (workerMap[workerKey].busy) {
+          reject(new Error('Worker is already working'))
+          return
+        }
+        // We have an existing, non-busy worker
+        worker = workerMap[workerKey].worker
+      } else {
+        // We need to initialize the worker
+        statusListener?.('Loading worker...')
+        worker = new Worker(url, {
+          type: 'module',
+        })
+        workerMap[workerKey] = {
+          worker,
+          busy: true,
+        }
+      }
 
       worker.postMessage({
         action,
@@ -35,10 +53,12 @@ export const runInWorker = <T, R>({
 
       worker.onmessage = ({ data }) => {
         if (data.type === `${action}Result`) {
+          workerMap[workerKey].busy = false
           resolve(data.result)
         } else if (data.type === 'status' && statusListener) {
           statusListener(data.message)
         } else if (data.type === 'error') {
+          workerMap[workerKey].busy = false
           reject(data.error)
         }
       }
