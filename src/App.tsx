@@ -12,6 +12,7 @@ import { Nav } from './components/Nav'
 import { PrettierFormatter } from './tools/PrettierFormatter'
 import { CssMinifier } from './tools/CssMinifier'
 import { EsbuildTransformer } from './tools/EsbuildTransformer'
+import { SwcTransformer } from './tools/SwcTransformer'
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
                   <PrettierFormatter />
                   <CssMinifier />
                   <EsbuildTransformer />
+                  <SwcTransformer />
                 </>
               }
             />
@@ -61,6 +63,7 @@ const App = () => {
                   <PrettierFormatter />
                   <CssMinifier />
                   <EsbuildTransformer />
+                  <SwcTransformer />
                 </>
               }
             />

@@ -6,7 +6,7 @@ import legacy from '@vitejs/plugin-legacy'
 // https://vitejs.dev/config/
 export default defineConfig({
   optimizeDeps: {
-    exclude: ['lightningcss-wasm'],
+    exclude: ['lightningcss-wasm', '@swc/wasm-web'],
   },
   plugins: [react(), legacy()],
   test: {
