@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "format": "prettier --write .",
+    "format": "prettier --write . --cache",
     "test": "vitest run --coverage"
   },
   "author": "Patrick Sletvold <patricksletvold@hotmail.com>",
