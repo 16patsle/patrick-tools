@@ -18,6 +18,7 @@ listenFromWorker<SwcWorkerData, string>(
       jsc: {
         parser: {
           syntax: data.parser,
+          jsx: data.jsx
         },
       },
       minify: true,

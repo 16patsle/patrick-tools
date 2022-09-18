@@ -5,10 +5,7 @@ import { ErrorNotice } from '../components/Notice'
 import { Select } from '../components/Select'
 import TextArea from '../components/TextArea'
 import { Heading2 } from '../components/Heading2'
-import {
-  esbuildTransform,
-  type LoaderName,
-} from '../utils/tools/esbuild/transform'
+import { esbuildTransform } from '../utils/tools/esbuild/transform'
 import { loaders } from '../utils/tools/esbuild/loaders'
 import {
   type PackageJson,
@@ -21,23 +18,52 @@ import esbuildPackageJson from 'esbuild-wasm/package.json'
 import lightningcssPackageJson from 'lightningcss-wasm/package.json'
 import swcPackageJson from '@swc/wasm-web/package.json'
 import terserPackageJson from 'terser/package.json'
+import Checkbox from '../components/Checkbox'
 
-const map: Record<LoaderName, ToolName[]> = {
+const map: Record<LanguageName, ToolName[]> = {
   js: ['esbuild', 'swc', 'terser'],
-  jsx: ['esbuild'],
   ts: ['esbuild', 'swc'],
-  tsx: ['esbuild'],
   css: ['lightningcss', 'esbuild'],
   json: ['esbuild'],
 }
 
+export type LanguageName = 'js' | 'ts' | 'css' | 'json'
 type ToolName = 'esbuild' | 'lightningcss' | 'swc' | 'terser'
 
-const tools: { id: ToolName; name: string; packageJson: PackageJson }[] = [
+const languages = [
+  {
+    id: 'js',
+    name: 'JavaScript',
+    extensions: ['.js', '.cjs', '.mjs'],
+  },
+  {
+    id: 'ts',
+    name: 'TypeScript',
+    extensions: ['.ts', '.mts', '.cts'],
+  },
+  {
+    id: 'css',
+    name: 'CSS',
+    extensions: ['.css'],
+  },
+  {
+    id: 'json',
+    name: 'JSON',
+    extensions: ['.json'],
+  },
+]
+
+const tools: {
+  id: ToolName
+  name: string
+  packageJson: PackageJson
+  supports?: 'jsx'[]
+}[] = [
   {
     id: 'esbuild',
     name: 'esbuild',
     packageJson: esbuildPackageJson,
+    supports: ['jsx'],
   },
   {
     id: 'lightningcss',
@@ -48,6 +74,7 @@ const tools: { id: ToolName; name: string; packageJson: PackageJson }[] = [
     id: 'swc',
     name: 'swc',
     packageJson: swcPackageJson,
+    supports: ['jsx'],
   },
   {
     id: 'terser',
@@ -56,12 +83,21 @@ const tools: { id: ToolName; name: string; packageJson: PackageJson }[] = [
   },
 ]
 
+type Options = {
+  jsx?: boolean
+  minify?: boolean
+}
+
 export const CodeTransformer = () => {
   const [code, setCode] = useState('')
-  const [language, setLanguage] = useState<LoaderName>('js')
+  const [language, setLanguage] = useState<LanguageName>('js')
   const [tool, setTool] = useState<ToolName>('esbuild')
   const [error, setError] = useState('')
   const [status, setStatus] = useState('')
+  const [options, setOptions] = useState<Options>({
+    jsx: false,
+    minify: false,
+  })
   const [isTransforming, setIsTransforming] = useState(false)
 
   const transformCode = useCallback(async () => {
@@ -72,21 +108,25 @@ export const CodeTransformer = () => {
       let result = code
 
       switch (tool) {
-        case 'esbuild':
-          result = await esbuildTransform(code, language, setStatus)
+        case 'esbuild': {
+          result = await esbuildTransform(code, {language, ...options}, setStatus)
           break
-        case 'lightningcss':
+        }
+        case 'lightningcss': {
           result = await minifyCss(code, setStatus)
           break
-        case 'swc':
-          const lang = language === 'ts' ? 'typescript' : 'ecmascript'
-          result = await swcTransform(code, lang, setStatus)
+        }
+        case 'swc': {
+          result = await swcTransform(code, {language, ...options}, setStatus)
           break
-        case 'terser':
+        }
+        case 'terser': {
           result = await terserMinify(code, setStatus)
           break
-        default:
+        }
+        default: {
           throw Error('No tool selected')
+        }
       }
 
       setCode(result)
@@ -101,7 +141,7 @@ export const CodeTransformer = () => {
     } finally {
       setIsTransforming(false)
     }
-  }, [code, language, tool])
+  }, [code, language, tool, options])
 
   const currentLangName = loaders.find(loader => loader.id === language)?.name
   const currentTool = tools.find(t => t.id === tool)
@@ -119,23 +159,30 @@ export const CodeTransformer = () => {
           value={language}
           onChange={value => {
             const compatibleTools = tools.filter(tool =>
-              map[value as LoaderName].includes(tool.id)
+              map[value as LanguageName].includes(tool.id)
             )
-            setLanguage(value as LoaderName)
+            setLanguage(value as LanguageName)
             if (!compatibleTools.find(t => t.id === tool)) {
               setTool(compatibleTools[0].id)
             }
+            setError('')
           }}
         >
-          {loaders.map(loader => (
-            <option key={loader.id} value={loader.id}>
-              {loader.name}
+          {languages.map(language => (
+            <option key={language.id} value={language.id}>
+              {language.name}
             </option>
           ))}
         </Select>
       </Label>
       <Label text="Tool">
-        <Select value={tool} onChange={value => setTool(value as ToolName)}>
+        <Select
+          value={tool}
+          onChange={value => {
+            setTool(value as ToolName)
+            setError('')
+          }}
+        >
           {tools
             .filter(tool => map[language].includes(tool.id))
             .map(tool => (
@@ -145,6 +192,11 @@ export const CodeTransformer = () => {
             ))}
         </Select>
       </Label>
+      {currentTool?.supports?.includes('jsx') && (
+        <Checkbox checked={options.jsx} onChange={val => setOptions({...options, jsx: val})}>
+          JSX
+        </Checkbox>
+      )}
       {isTransforming && status && <p>{status}</p>}
       {error && (
         <ErrorNotice>
